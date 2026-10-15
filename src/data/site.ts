@@ -17,22 +17,19 @@ export const site = {
   indexable: false,
 };
 
-// Top bar links, left to right. Keep it short: four links fit on a phone.
-// "Contact" jumps to the footer of the current page.
+// Top bar links, left to right. Keep it short so it fits on a phone.
 export const nav = [
   { label: 'Work', href: '/#work' },
-  { label: 'XR', href: '/#xr' },
-  { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Apps', href: '/#apps' },
+  { label: 'Info', href: '/info' },
 ];
 
 export const reel = {
   vimeo: '1216889002',
-  // Direct MP4 of the reel. In Vimeo: the video's settings, ⋯ menu, Video file
-  // links, then Copy link on the 1080p version. When set, the hero plays this
-  // file itself, so Play reel works with sound in every browser and no Vimeo
-  // controls ever show. When empty, the hero shows the Vimeo loop and Play reel
-  // opens the reel on vimeo.com.
+  // Optional direct MP4 of the reel. In Vimeo: the video's settings, ⋯ menu,
+  // Video file links, then Copy link on the 1080p version. When set, the hero
+  // plays this file instead of the Vimeo loop, which lets Play reel have sound
+  // on iPhones too. When empty, Play reel unmutes the Vimeo loop (desktop only).
   file: '',
   poster: '', // optional still shown while the file loads, e.g. '/img/reel-poster.jpg'
   title: 'Santizo Reel 2026',

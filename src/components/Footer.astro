@@ -5,14 +5,16 @@ import SectionHead from './SectionHead.astro';
 import Clock from './Clock.astro';
 
 interface Props {
+  /** Section number in the "(04) Contact" label, to follow the page's own sections */
+  num?: string;
   /** Override the "Tools" column (project pages link back to all work) */
   tools?: FooterLink[];
 }
-const { tools = footer.tools } = Astro.props;
+const { num = '04', tools = footer.tools } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <footer id="contact" class="wrap">
-  <SectionHead num="04" title="Contact">
+  <SectionHead num={num} title="Contact">
     <span slot="aside" class="mono cap muted">{site.city} <Clock /></span>
   </SectionHead>
   <p class="pitch">{footer.headline}</p>

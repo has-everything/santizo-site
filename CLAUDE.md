@@ -1,22 +1,23 @@
 # santizo-site: santizo.com, version B
 
-The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, expertise, contact, plus project pages (HAS Lathe first).
+The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; an Info page (about and expertise); and project pages (HAS Lathe first).
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
-Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then, the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar that inverts over what is behind it, and a quieter Play reel link.
+Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then, the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar (Work, Apps, Info) that inverts over what is behind it, a quieter Play reel link, and the ruled Apps list.
 
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
   - `site.ts`: name, email, top bar links, reel, intro copy, footer links, and `indexable` (keep false while this is version B)
   - `work.ts`: featured work (order = layout) and the XR clips
-  - `expertise.ts`: the six expertise cards
+  - `expertise.ts`: the six expertise cards (shown on Info)
+  - `apps.ts`: the Apps list on the home page
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, or `{ art: 'lathe' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `apps/has-lathe.astro` (project page), `404.astro`
+- `src/pages/`: one file per URL. `index.astro` (home), `info.astro` (about, expertise), `apps/has-lathe.astro` (project page), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
 - `src/components/`
-  - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Expertise`
+  - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Apps`
   - `project/`: project-page pieces: `SpecList`, `PillLink`, `Figure`, `NextProject`
   - `art/`: the HAS Lathe line drawings, all generated from one profile in `src/lib/lathe.ts`
   - shared: `Header` (fixed top bar; `overlay` on the home page, where it floats on the reel, otherwise it adds a spacer), `Footer`, `Section`, `SectionHead`, `WorkTile`, `Media`, `NumberedGrid`, `Clock`
@@ -42,9 +43,13 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - **Prefer simple over optimal**: no extra config, infra, or dependencies unless there is a user-visible problem.
 - Theme: day by default; `?theme=night` in the URL; the footer toggle remembers the choice in `localStorage` under `santizo-theme`.
 - Vimeo clips are muted background loops (`background=1`). Work tiles link to the clip on vimeo.com.
-- **Play reel stays on the site** once `reel.file` in `src/data/site.ts` holds a direct MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link). The hero then plays that file in a plain `<video>`: Play reel restarts it with sound and the button becomes Stop; Stop, the end of the reel, or scrolling away returns to the silent loop. No Vimeo controls ever show. While `reel.file` is empty, the hero shows the Vimeo loop and Play reel links to Vimeo.
-- Why not the Vimeo embed: Safari and iPhones only let an embedded (cross-origin) player make sound after a tap inside the player itself, which means Vimeo's controls. Don't go back to unmuting the embed through the Player API.
-- Top bar: four links max (Work, XR, About, Contact) so it fits on a phone. It has no background, by design: page content scrolls under it.
+- **Play reel stays on the site**: it restarts the reel from the top with sound and the button becomes Stop; Stop, the end of the reel, or scrolling away returns to the silent loop. Two drivers in `src/scripts/reel.ts`:
+  - Vimeo loop (default): unmuted through the Player API, lazy-loaded `@vimeo/player`. Works in desktop browsers (owner-tested). iPhones refuse sound started from the page on a cross-origin embed; there the hero just stays on the silent loop.
+  - Direct file: when `reel.file` in `src/data/site.ts` holds an MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link), the hero plays it in a plain `<video>` and sound works everywhere, iPhones included.
+- **Never show Vimeo's controls** on the hero (owner's call), and don't add timers or checks that swap the player: an earlier 6-second check misfired on a working embed and restarted the reel.
+- The end of the reel is detected from `timeupdate` jumping back to the start, because background embeds loop.
+- Top bar: Work (`/#work`), Apps (`/#apps`), Info (`/info`). Keep it short so it fits on a phone. It has no background, by design: page content scrolls under it.
+- The footer's "(04) Contact" number follows each page's own sections (`<Footer num="02" />` on Info).
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 
 ## Run it

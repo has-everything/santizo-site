@@ -1,0 +1,46 @@
+---
+// Info: who, where, and what I do (the expertise grid lives here, not on home).
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import SectionHead from '../components/SectionHead.astro';
+import NumberedGrid from '../components/NumberedGrid.astro';
+import SpecList from '../components/project/SpecList.astro';
+import { site, intro } from '../data/site';
+import { expertise } from '../data/expertise';
+---
+<Base title="Info · Santizo" description={site.description}>
+  <Header />
+
+  <Section label="Info" space="sm">
+    <h1>Info</h1>
+    <div class="about">
+      <p class="lead">{intro.lead}</p>
+      <div class="side">
+        <p class="muted">{intro.body}</p>
+        <SpecList specs={[
+          ['Based in', site.region],
+          ['Practice', site.practice],
+          ['Experience', expertise.aside],
+          ['Email', site.email],
+        ]} />
+      </div>
+    </div>
+  </Section>
+
+  <Section id="expertise" label="Expertise">
+    <SectionHead num="01" title="Expertise" aside={expertise.aside} />
+    <NumberedGrid items={expertise.items} />
+  </Section>
+
+  <Footer num="02" />
+</Base>
+
+<style>
+  h1 { margin: 0 0 clamp(40px, 5vw, 72px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
+  .about { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
+  .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
+  .side { flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .side p { margin: 0; font-size: 17px; line-height: 1.6; }
+</style>

@@ -1,7 +1,7 @@
 ---
-// Full-screen reel. With a direct file (reel.file in src/data/site.ts), Play
-// reel plays it with sound right here (src/scripts/reel.ts). Without one, the
-// hero shows the Vimeo loop and Play reel links to the reel on Vimeo.
+// Full-screen reel: the Vimeo loop, or a direct file when reel.file is set in
+// src/data/site.ts. Play reel / Stop live in src/scripts/reel.ts. Without
+// JavaScript, Play reel links to the reel on Vimeo.
 import { reel } from '../../data/site';
 import type { Media as MediaType } from '../../data/media';
 import Media from '../Media.astro';

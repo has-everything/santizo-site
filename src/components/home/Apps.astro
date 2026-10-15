@@ -1,0 +1,31 @@
+---
+// (03) Apps: a ruled list, one row per app (from the XK design).
+import { apps } from '../../data/apps';
+import Section from '../Section.astro';
+import SectionHead from '../SectionHead.astro';
+---
+<Section id="apps" label="Apps">
+  <SectionHead num="03" title="Apps" aside={apps.aside} gap="md" />
+  <ul class="plain list">
+    {apps.items.map((a) => (
+      <li>
+        <a href={a.href}>
+          <span class="nm">{a.name}</span>
+          <span class="ds">{a.blurb}</span>
+          <span class="go mono cap">{a.cta}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .list a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; padding: 22px 0; border-top: 1px solid var(--rule); }
+  .list li:last-child a { border-bottom: 1px solid var(--rule); }
+  .nm { flex: 1 1 280px; font-size: clamp(24px, 2.6vw, 36px); letter-spacing: -0.025em; font-weight: 500; }
+  .ds { flex: 2 1 280px; color: var(--muted); font-size: 16px; transition: color .3s; }
+  .go { flex: 0 0 auto; color: var(--muted); transition: color .3s; }
+  .list a:hover .ds, .list a:hover .go { color: var(--ink); }
+  /* Same width on every row so the descriptions line up */
+  @media (min-width: 900px) { .go { min-width: 11em; text-align: right; } }
+</style>
