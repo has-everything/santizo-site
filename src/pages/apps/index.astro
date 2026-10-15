@@ -30,7 +30,7 @@ const count = String(tools.length).padStart(2, '0');
 
   <Section label="All apps" space="md">
     <SectionHead num="01" title="The tools" aside={count} />
-    <div class="grid">
+    <div class="grid-3">
       {tools.map((t) => <WorkTile item={t} size="cell" ratio="16 / 10" />)}
     </div>
   </Section>
@@ -47,5 +47,4 @@ const count = String(tools.length).padStart(2, '0');
   .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(28px, 3.4vw, 52px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 500; max-width: 18ch; }
   .side { flex: 2 1 340px; min-width: 0; max-width: 52ch; display: flex; flex-direction: column; gap: 18px; }
   .side p { margin: 0; font-size: 17px; line-height: 1.6; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 56px 24px; }
 </style>

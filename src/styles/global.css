@@ -18,8 +18,12 @@
   --font-sans: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 
-  --gutter: clamp(16px, 2.4vw, 32px);
-  --max: 1440px;
+  /* Wide layout (field.io-like): media runs the full window width with thin
+     margins and tight gaps; text keeps its own reading-width limits. For the
+     old centered column, set --max back to 1440px. */
+  --gutter: clamp(12px, 1.6vw, 24px);
+  --max: 100%;
+  --tile-gap: clamp(10px, 1.2vw, 20px);
   --space-xl: clamp(96px, 11vw, 160px);
   --space-lg: clamp(80px, 9vw, 140px);
   --space-md: clamp(80px, 9vw, 128px);
@@ -65,6 +69,12 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
 
 /* Page container: centered, max width, side gutters */
 .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); box-sizing: border-box; }
+
+/* Media grids with a fixed column count, so big screens get bigger tiles, not more of them */
+.grid-2, .grid-3 { display: grid; grid-template-columns: 1fr; gap: 56px var(--tile-gap); }
+@media (min-width: 900px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 640px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ---------- Links ---------- */
 

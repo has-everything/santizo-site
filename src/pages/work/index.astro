@@ -23,14 +23,14 @@ const count = (n: number) => String(n).padStart(2, '0');
 
   <Section id="motion" label={groups.motion.label} space="md">
     <SectionHead num={groups.motion.num} title={groups.motion.label} aside={count(motion.length)} />
-    <div class="grid">
+    <div class="grid-2">
       {motion.map((p) => <WorkTile item={tile(p)} size="cell" />)}
     </div>
   </Section>
 
   <Section id="xr" label={groups.xr.label}>
     <SectionHead num={groups.xr.num} title={groups.xr.label} aside={count(xr.length)} />
-    <div class="grid">
+    <div class="grid-2">
       {xr.map((p) => <WorkTile item={tile(p)} size="cell" />)}
     </div>
   </Section>
@@ -41,6 +41,4 @@ const count = (n: number) => String(n).padStart(2, '0');
 <style>
   h1 { margin: 0 0 clamp(24px, 3vw, 40px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
   .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
-  /* Both groups: wide 16:9 tiles, two per row (one on phones) */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 56px 24px; }
 </style>

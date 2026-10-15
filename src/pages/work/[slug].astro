@@ -35,8 +35,8 @@ const specs: [string, string][] = [
     <span class="mono cap muted">Work / {group.label}</span>
   </div>
 
-  <section aria-label="Video" class="wrap">
-    <VideoPlayer video={p.video} title={p.title} />
+  <section aria-label="Video" class="screen">
+    <div class="fit"><VideoPlayer video={p.video} title={p.title} /></div>
   </section>
 
   <Section label="Overview" space="sm">
@@ -65,6 +65,10 @@ const specs: [string, string][] = [
 </Base>
 
 <style>
+  /* The video runs edge to edge on a black band, sized so the whole player
+     fits on screen under the top bar and the crumbs */
+  .screen { background: #000000; }
+  .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
 
   .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
