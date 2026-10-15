@@ -84,8 +84,8 @@ export const featured: WorkItem[] = [
   },
 ];
 
-// (02) XR and interaction: two wide clips side by side (the rest are on /work).
+// (02) XR and interaction: three wide clips in a row (the rest are on /work).
 export const xr = {
   statement: 'Hands as the controller: gesture, pinch and twist.',
-  clips: ['3d-calculator', 'pinch-twist'].map((s) => tile(project(s), { withTag: false })),
+  clips: ['wrist-interaction', '3d-calculator', 'pinch-twist'].map((s) => tile(project(s), { withTag: false })),
 };

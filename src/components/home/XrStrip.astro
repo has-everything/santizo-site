@@ -1,7 +1,6 @@
 ---
-// (02) XR and interaction: a statement and two wide clips side by side, laid
-// out like Featured work. The full list is on /work. Pick the clips in
-// src/data/work.ts (xr.clips).
+// (02) XR and interaction: a statement and three wide clips in a row. The
+// full list is on /work. Pick the clips in src/data/work.ts (xr.clips).
 import { xr } from '../../data/work';
 import Section from '../Section.astro';
 import SectionHead from '../SectionHead.astro';
@@ -10,12 +9,14 @@ import WorkTile from '../WorkTile.astro';
 <Section id="xr" label="XR and interaction">
   <SectionHead num="02" title="XR and interaction" aside="All XR →" asideHref="/work#xr" />
   <p class="statement">{xr.statement}</p>
-  <div class="grid-2 pair">
+  <div class="trio">
     {xr.clips.map((clip) => <WorkTile item={clip} size="cell" />)}
   </div>
 </Section>
 
 <style>
   .statement { margin: 0 0 48px; font-size: clamp(28px, 3vw, 44px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 500; max-width: 22ch; }
-  .pair { row-gap: 64px; }
+  /* One per row on phones, three across from 760px (no 2 + 1 step on tablets) */
+  .trio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px var(--tile-gap); }
+  @media (min-width: 760px) { .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 </style>

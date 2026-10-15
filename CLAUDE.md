@@ -39,7 +39,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 
 **Change the apps on /apps**: edit `tools` in `src/data/apps.ts`. Card images are the has.tools card captures (`has-tools-website/img/<slug>-card.png`, 800x500) saved as WebP in `public/img/apps/<slug>.webp`. Cards link to the has.tools showcase page (`https://has.tools/tools/<slug>.html`), except HAS Lathe, which has its own page here. Left out on purpose: HAS Frame Extract and HAS Frames (2D utilities, weakest fit for a 3D motion portfolio).
 
-**Change the XR clips on the home page**: the home XR section shows two wide clips side by side; pick them by slug in `xr.clips` in `src/data/work.ts` (currently 3D Calculator and Pinch Twist, which match the statement). All XR clips are on `/work`.
+**Change the XR clips on the home page**: the home XR section shows three wide clips in a row (one per row on phones); pick them by slug in `xr.clips` in `src/data/work.ts` (currently Wrist Interaction, 3D Calculator and Pinch Twist: Vimeo loops that match the statement). All XR clips are on `/work`.
 
 **Add a project page**: copy `src/pages/apps/has-lathe.astro` to a new file (its path is its URL), change the copy and figures, then point the work item's `href` at it.
 
