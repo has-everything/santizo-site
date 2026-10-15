@@ -1,7 +1,7 @@
 ---
 // Burning Man: the owner's photographs from Black Rock City (SantizoOS's
-// burning_man_pics), one after another, each as large as the screen allows,
-// so nothing needs a click to be seen. The list lives in src/data/photos.ts.
+// burning_man_pics), one after another, all at the same width (the column,
+// up to 1200px), so nothing needs a click to be seen. The list lives in src/data/photos.ts.
 // /photos redirects here (astro.config.mjs).
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
@@ -24,7 +24,7 @@ const { photos } = burningMan;
     <SectionHead num="01" title="Photographs" aside={String(photos.length).padStart(2, '0')} />
     <div class="stack">
       {photos.map((ph, i) => (
-        <img class="rv" src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} style={`--ar: ${(ph.w / ph.h).toFixed(4)}; --w: ${ph.w}px`} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" />
+        <img class="rv" src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} style={`--ar: ${(ph.w / ph.h).toFixed(4)}`} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" />
       ))}
     </div>
   </Section>
@@ -36,16 +36,10 @@ const { photos } = burningMan;
   h1 { margin: 0 0 clamp(24px, 3vw, 40px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
   .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
 
-  /* One photo per row, centered. Each is as big as the screen allows: never
-     wider than the column or its real pixel width (--w), never taller than the
-     window minus the top bar, so a whole portrait fits on screen at once.
-     The size comes from the photo's shape (--ar), so its space is reserved
-     before it loads and the page doesn't jump while scrolling. */
+  /* One photo per row, centered, every photo the same width: the column, up
+     to 1200px (the photos' real width, so none are upscaled). Height follows
+     each photo's shape (--ar), which also reserves its space before it loads
+     so the page doesn't jump while scrolling. */
   .stack { display: flex; flex-direction: column; align-items: center; gap: clamp(32px, 6vw, 96px); }
-  .stack img {
-    display: block; height: auto; aspect-ratio: var(--ar);
-    width: min(100%, var(--w), calc((100vh - 120px) * var(--ar)));
-    width: min(100%, var(--w), calc((100svh - 120px) * var(--ar)));
-    background: var(--raised);
-  }
+  .stack img { display: block; width: min(100%, 1200px); height: auto; aspect-ratio: var(--ar); background: var(--raised); }
 </style>

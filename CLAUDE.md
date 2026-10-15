@@ -15,7 +15,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - `expertise.ts`: the six expertise cards (shown on Info)
   - `apps.ts`: the Apps page: `appsIntro` (why the tools exist) and `tools` (the nine apps, grid order, each with a `note` saying what problem it answers), plus the short Apps list on the home page (`apps`). The why copy is condensed from the owner's own words on has.tools (About and Learn sections, and the first paragraph of each `tools/<slug>.html`); keep it in his voice and check new lines against those sources
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (the photos one per row, each as large as the screen allows, no click needed; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro`
+- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (the photos one per row, all the same width: the column, up to 1200px; no click needed; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
 - `src/components/`
   - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Apps`
@@ -31,7 +31,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 
 **Add a video project**: add an entry to `projects` in `src/data/work.ts` (`slug` becomes `/work/<slug>`; `video` is `{ vimeo: id }` or `{ youtube: id }`). It appears on `/work` in its group and gets its own page automatically. Give it a write-up with `story: ['paragraph', ...]` and a `year`; both show only when set. No project has a write-up yet: the owner has not written them, so never invent stories, years, clients or credits.
 
-**Add photos**: save as WebP in `public/img/photos/` and add `{ src, w, h, alt }` to `src/data/photos.ts` (w/h are the real pixel size: they size each photo before it loads, and cap it at its real width so it is never upscaled). The originals are 1200px wide; larger exports would look sharper on big retina screens.
+**Add photos**: save as WebP in `public/img/photos/` and add `{ src, w, h, alt }` to `src/data/photos.ts` (w/h are the real pixel size: they reserve each photo's space before it loads). Every photo shows at the same width, up to 1200px, so export new ones at least 1200px wide or they get upscaled; larger exports would look sharper on big retina screens.
 
 **Add or reorder featured work**: edit `featured` in `src/data/work.ts`. The first item runs full width; the rest pair up in rows that alternate wide/narrow and narrow/wide.
 
