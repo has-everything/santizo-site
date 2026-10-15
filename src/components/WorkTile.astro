@@ -1,13 +1,13 @@
 ---
 // A linked clip with its caption. `size` sets the flex share in a row:
-// full (whole row), wide (7 parts), narrow (5 parts), card (XR strip),
-// cell (sized by a parent grid, e.g. the Apps page).
+// full (whole row), wide (7 parts), narrow (5 parts), or cell (sized by a
+// parent grid: the Apps page, /work, the home XR pair).
 import type { WorkItem } from '../data/work';
 import Media from './Media.astro';
 
 interface Props {
   item: WorkItem;
-  size?: 'full' | 'wide' | 'narrow' | 'card' | 'cell';
+  size?: 'full' | 'wide' | 'narrow' | 'cell';
   ratio?: string;
   reveal?: boolean;
 }
@@ -27,7 +27,6 @@ const { item, size = 'full', ratio = '16 / 9', reveal = true } = Astro.props;
 <style>
   .wide { flex: 7 1 520px; min-width: 0; }
   .narrow { flex: 5 1 360px; min-width: 0; }
-  .card { flex: 1 0 260px; min-width: 0; }
 
   .frame { position: relative; background: #000000; overflow: hidden; }
 

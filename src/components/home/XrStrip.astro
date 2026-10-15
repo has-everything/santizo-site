@@ -1,24 +1,21 @@
 ---
-// (02) XR and interaction: a statement and a strip of portrait clips.
+// (02) XR and interaction: a statement and two wide clips side by side, laid
+// out like Featured work. The full list is on /work. Pick the clips in
+// src/data/work.ts (xr.clips).
 import { xr } from '../../data/work';
+import Section from '../Section.astro';
 import SectionHead from '../SectionHead.astro';
 import WorkTile from '../WorkTile.astro';
-
-const count = `${String(xr.clips.length).padStart(2, '0')} clips`;
 ---
-<section id="xr" aria-label="XR and interaction" class="band">
-  <div class="wrap inner">
-    <SectionHead num="02" title="XR and interaction" aside={count} />
-    <p class="statement">{xr.statement}</p>
-    <div class="strip rv">
-      {xr.clips.map((clip) => <WorkTile item={clip} size="card" ratio="4 / 5" reveal={false} />)}
-    </div>
+<Section id="xr" label="XR and interaction">
+  <SectionHead num="02" title="XR and interaction" aside="All XR →" asideHref="/work#xr" />
+  <p class="statement">{xr.statement}</p>
+  <div class="pair">
+    {xr.clips.map((clip) => <WorkTile item={clip} size="cell" />)}
   </div>
-</section>
+</Section>
 
 <style>
-  .band { background: var(--raised); margin-top: var(--space-xl); }
-  .inner { padding-top: 96px; padding-bottom: 96px; }
   .statement { margin: 0 0 48px; font-size: clamp(28px, 3vw, 44px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 500; max-width: 22ch; }
-  .strip { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 8px; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 64px 24px; }
 </style>
