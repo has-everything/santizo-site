@@ -20,7 +20,7 @@ export const site = {
 // Top bar links, left to right. Keep it short so it fits on a phone.
 export const nav = [
   { label: 'Work', href: '/#work' },
-  { label: 'Apps', href: '/#apps' },
+  { label: 'Apps', href: '/apps' },
   { label: 'Info', href: '/info' },
 ];
 
@@ -54,8 +54,8 @@ export const footer = {
     { label: 'LinkedIn ↗', href: 'https://www.linkedin.com/in/santizo/' },
   ] as FooterLink[],
   tools: [
-    { label: 'has.tools ↗', href: 'https://www.has.tools' },
-    { label: 'HAS Lathe', href: '/apps/has-lathe' },
+    { label: 'has.tools ↗', href: 'https://has.tools' },
+    { label: 'All apps', href: '/apps' },
   ] as FooterLink[],
   // Boring mode lives on the current site (version A).
   boring: { label: 'Boring mode', href: 'https://santizo.com/boring.html' },

@@ -1,11 +1,12 @@
 ---
-// (03) Apps: a ruled list, one row per app (from the XK design).
+// (03) Apps: a ruled list, one row per app (from the XK design). The full
+// grid of apps is its own page, src/pages/apps/index.astro.
 import { apps } from '../../data/apps';
 import Section from '../Section.astro';
 import SectionHead from '../SectionHead.astro';
 ---
 <Section id="apps" label="Apps">
-  <SectionHead num="03" title="Apps" aside={apps.aside} gap="md" />
+  <SectionHead num="03" title="Apps" aside="All apps →" asideHref="/apps" gap="md" />
   <ul class="plain list">
     {apps.items.map((a) => (
       <li>

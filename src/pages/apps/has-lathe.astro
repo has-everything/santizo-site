@@ -16,7 +16,7 @@ import LatheClay from '../../components/art/LatheClay.astro';
 import LathePresets from '../../components/art/LathePresets.astro';
 import { featured } from '../../data/work';
 
-const appUrl = 'https://www.has.tools';
+const appUrl = 'https://has.tools/apps/lathe/';
 const next = featured.find((w) => w.title === 'HAS LP-19')!;
 
 const features = [
@@ -32,7 +32,7 @@ const features = [
   <Header />
 
   <div class="crumbs">
-    <a href="/#work" class="mono cap hl hl-44">← All work</a>
+    <a href="/apps" class="mono cap hl hl-44">← All apps</a>
     <span class="mono cap muted">Apps / HAS Lathe</span>
   </div>
 
@@ -123,7 +123,7 @@ const features = [
   <NextProject item={next} />
 
   <Footer tools={[
-    { label: 'has.tools ↗', href: 'https://www.has.tools' },
+    { label: 'has.tools ↗', href: 'https://has.tools' },
     { label: 'All work', href: '/#work' },
   ]} />
 </Base>

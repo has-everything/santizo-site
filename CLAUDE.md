@@ -1,6 +1,6 @@
 # santizo-site: santizo.com, version B
 
-The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; an Info page (about and expertise); and project pages (HAS Lathe first).
+The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; an Apps page (nine has.tools apps); an Info page (about and expertise); and project pages (HAS Lathe first).
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
@@ -12,9 +12,9 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - `site.ts`: name, email, top bar links, reel, intro copy, footer links, and `indexable` (keep false while this is version B)
   - `work.ts`: featured work (order = layout) and the XR clips
   - `expertise.ts`: the six expertise cards (shown on Info)
-  - `apps.ts`: the Apps list on the home page
-  - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, or `{ art: 'lathe' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `info.astro` (about, expertise), `apps/has-lathe.astro` (project page), `404.astro`
+  - `apps.ts`: the nine apps on the Apps page (`tools`, order = grid order) and the short Apps list on the home page (`apps`)
+  - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
+- `src/pages/`: one file per URL. `index.astro` (home), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `info.astro` (about, expertise), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
 - `src/components/`
   - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Apps`
@@ -30,6 +30,8 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 **Add or reorder featured work**: edit `featured` in `src/data/work.ts`. The first item runs full width; the rest pair up in rows that alternate wide/narrow and narrow/wide.
 
 **Swap a Vimeo loop for a self-hosted clip**: put the file in `public/video/` (and a poster in `public/img/`), then change that item's `media` to `{ video: '/video/name.mp4', poster: '/img/name.jpg' }`. `*.mp4` is gitignored by default (mirrors santizo-os); remove that line from `.gitignore` to commit clips, or host them elsewhere.
+
+**Change the apps on /apps**: edit `tools` in `src/data/apps.ts`. Card images are the has.tools card captures (`has-tools-website/img/<slug>-card.png`, 800x500) saved as WebP in `public/img/apps/<slug>.webp`. Cards link to the has.tools showcase page (`https://has.tools/tools/<slug>.html`), except HAS Lathe, which has its own page here. Left out on purpose: HAS Frame Extract and HAS Frames (2D utilities, weakest fit for a 3D motion portfolio).
 
 **Add an XR clip**: add an entry to `xr.clips` in `src/data/work.ts`. The "04 clips" label counts itself.
 
@@ -48,7 +50,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - Direct file: when `reel.file` in `src/data/site.ts` holds an MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link), the hero plays it in a plain `<video>` and sound works everywhere, iPhones included.
 - **Never show Vimeo's controls** on the hero (owner's call), and don't add timers or checks that swap the player: an earlier 6-second check misfired on a working embed and restarted the reel.
 - The end of the reel is detected from `timeupdate` jumping back to the start, because background embeds loop.
-- Top bar: Work (`/#work`), Apps (`/#apps`), Info (`/info`). Keep it short so it fits on a phone. It has no background, by design: page content scrolls under it.
+- Top bar: Work (`/#work`), Apps (`/apps`), Info (`/info`). Keep it short so it fits on a phone. It has no background, by design: page content scrolls under it.
 - The footer's "(04) Contact" number follows each page's own sections (`<Footer num="02" />` on Info).
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 

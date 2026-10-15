@@ -28,3 +28,6 @@ const Art = 'art' in media ? ART[media.art] : null;
   </video>
 )}
 {Art && <Art class={zoom ? 'art' : undefined} />}
+{'img' in media && (
+  <img class:list={['fill', { art: zoom }]} src={media.img} alt={`${title} screenshot`} loading="lazy" decoding="async" />
+)}
