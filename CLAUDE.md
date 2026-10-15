@@ -4,12 +4,12 @@ The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-scr
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
-Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. The one deliberate change: the Lathe page nav now matches the home nav ("xr", with "work" active).
+Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then, the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar that inverts over what is behind it, and a quieter Play reel link.
 
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
-  - `site.ts`: name, email, nav, reel, intro copy, footer links, and `indexable` (keep false while this is version B)
+  - `site.ts`: name, email, top bar links, reel, intro copy, footer links, and `indexable` (keep false while this is version B)
   - `work.ts`: featured work (order = layout) and the XR clips
   - `expertise.ts`: the six expertise cards
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, or `{ art: 'lathe' }`
@@ -19,9 +19,10 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Expertise`
   - `project/`: project-page pieces: `SpecList`, `PillLink`, `Figure`, `NextProject`
   - `art/`: the HAS Lathe line drawings, all generated from one profile in `src/lib/lathe.ts`
-  - shared: `Header` (overlay or page variant), `Footer`, `Section`, `SectionHead`, `WorkTile`, `Media`, `NumberedGrid`, `Clock`
+  - shared: `Header` (fixed top bar; `overlay` on the home page, where it floats on the reel, otherwise it adds a spacer), `Footer`, `Section`, `SectionHead`, `WorkTile`, `Media`, `NumberedGrid`, `Clock`
 - `src/styles/global.css`: tokens (colors, fonts, spacing), theme, shared utilities, tile hover, line-art classes, motion. Component layout lives in each component's `<style>`.
 - `src/scripts/site.ts`: theme toggle, Los Angeles clock, scroll reveal (`.rv`)
+- `src/scripts/reel.ts`: Play reel sound on the home hero (see Conventions). Loads `@vimeo/player` only when clicked.
 
 ## Common tasks
 
@@ -40,7 +41,9 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - **No em dashes** anywhere in copy. Use commas, colons, or the middot ` · `.
 - **Prefer simple over optimal**: no extra config, infra, or dependencies unless there is a user-visible problem.
 - Theme: day by default; `?theme=night` in the URL; the footer toggle remembers the choice in `localStorage` under `santizo-theme`.
-- Vimeo clips are muted background loops (`background=1`). The "Play reel" pill and every tile link to the clip on vimeo.com.
+- Vimeo clips are muted background loops (`background=1`). Work tiles link to the clip on vimeo.com.
+- **Play reel stays on the site**: it restarts the hero loop from the top with sound, and the button becomes "Mute" (scrolling the hero out of view also mutes). If the browser blocks sound started that way (iPhones do), the hero swaps to Vimeo's own player in place, where one tap plays with sound; "Close reel" or Esc returns to the silent loop. Without JavaScript it links to Vimeo.
+- Top bar: four links max (Work, XR, About, Contact) so it fits on a phone. It has no background, by design: page content scrolls under it.
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 
 ## Run it

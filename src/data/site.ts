@@ -17,21 +17,13 @@ export const site = {
   indexable: false,
 };
 
-export type NavKey = 'work' | 'xr' | 'expertise' | 'about' | 'tools' | 'contact';
-export interface NavLink { key: NavKey; label: string; href: string }
-
-// Two columns, as in the design. "contact" jumps to the footer of the current page.
-export const nav: NavLink[][] = [
-  [
-    { key: 'work', label: 'work', href: '/#work' },
-    { key: 'xr', label: 'xr', href: '/#xr' },
-    { key: 'expertise', label: 'expertise', href: '/#expertise' },
-  ],
-  [
-    { key: 'about', label: 'about', href: '/#about' },
-    { key: 'tools', label: 'has.tools ↗', href: 'https://www.has.tools' },
-    { key: 'contact', label: 'contact', href: '#contact' },
-  ],
+// Top bar links, left to right. Keep it short: four links fit on a phone.
+// "Contact" jumps to the footer of the current page.
+export const nav = [
+  { label: 'Work', href: '/#work' },
+  { label: 'XR', href: '/#xr' },
+  { label: 'About', href: '/#about' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export const reel = {

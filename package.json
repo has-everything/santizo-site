@@ -9,6 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@vimeo/player": "^2.30.4",
     "astro": "^7.4.0"
   },
   "engines": {

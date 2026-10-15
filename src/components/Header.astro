@@ -1,57 +1,40 @@
 ---
-// Logo, two-column nav, and the Los Angeles clock.
-// overlay: white, positioned over the home showreel. page: on the page background.
-import { site, nav, type NavKey } from '../data/site';
-import Clock from './Clock.astro';
+// Fixed top bar: logo left, nav right. White with mix-blend-mode: difference,
+// so it reads black on light backgrounds and white over video.
+// overlay: the page starts with a full-bleed hero (home), so the bar floats on
+// it. Otherwise a spacer keeps the page content clear of the bar.
+import { site, nav } from '../data/site';
 
-interface Props {
-  variant?: 'overlay' | 'page';
-  active?: NavKey;
-}
-const { variant = 'page', active } = Astro.props;
-const overlay = variant === 'overlay';
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
 ---
-<header class={variant} id={overlay ? undefined : 'top'}>
-  <div class="lead">
-    <a href={overlay ? '#top' : '/'} aria-label={`${site.name}, home`} class="logo">santizo</a>
-    <nav aria-label="Main">
-      {nav.map((col) => (
-        <ul class="plain">
-          {col.map((l) => (
-            <li>
-              <a class:list={['nv', { on: l.key === active }]} href={l.href} aria-current={l.key === active ? 'true' : undefined}>
-                <span class:list={['mk', { on: l.key === active }]}></span>{l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      ))}
-    </nav>
-  </div>
-  <p class="mono cap clock">{site.city} <Clock /></p>
+<header class="top">
+  <a class="brand" href={overlay ? '#top' : '/'} aria-label={`${site.name}, home`}>santizo</a>
+  <nav aria-label="Main">
+    <ul class="plain">
+      {nav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </nav>
 </header>
+{!overlay && <div id="top" class="spacer" aria-hidden="true"></div>}
 
 <style>
-  header {
-    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start;
-    gap: 20px 48px; padding: 24px var(--gutter);
+  .top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    padding: 20px var(--gutter);
+    color: #ffffff; mix-blend-mode: difference;
   }
-  .overlay { position: absolute; top: 0; left: 0; right: 0; z-index: 5; color: #ffffff; }
+  .brand { font-size: 22px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
+  ul { display: flex; gap: clamp(20px, 3vw, 40px); font-size: 15px; }
+  nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  nav a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 
-  .lead { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px clamp(32px, 9vw, 168px); }
-  .logo { font-size: 26px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
-  nav { display: flex; flex-wrap: wrap; gap: 0 56px; font-size: 15px; line-height: 1.4; }
+  /* Same height as the bar: 20 + 44 + 20 */
+  .spacer { height: 84px; }
 
-  .nv { display: inline-flex; align-items: center; min-height: 28px; transition: color .3s; color: var(--muted); }
-  .nv:hover, .nv.on { color: var(--ink); }
-  .overlay .nv { color: rgba(255, 255, 255, .72); }
-  .overlay .nv:hover { color: #ffffff; }
-
-  .mk { display: inline-block; width: 8px; height: 1px; background: currentColor; margin-right: 9px; }
-  .mk.on { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 11px; }
-
-  .clock { margin: 4px 0 0; color: var(--muted); }
-  .overlay .clock { color: rgba(255, 255, 255, .75); }
-
-  @media (max-width: 760px) { .nv { min-height: 44px; } }
+  @media (max-width: 760px) {
+    .top { padding-top: 12px; }
+    .spacer { height: 76px; }
+  }
 </style>
