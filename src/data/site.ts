@@ -21,6 +21,7 @@ export const site = {
 export const nav = [
   { label: 'Work', href: '/work' },
   { label: 'Apps', href: '/apps' },
+  { label: 'Burning Man', href: '/burning-man' },
   { label: 'Info', href: '/info' },
 ];
 

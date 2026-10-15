@@ -1,7 +1,8 @@
 ---
-// Photos: the Burning Man set, in justified rows that keep each photo's shape.
-// Click a photo to view it full screen (src/scripts/lightbox.ts). The list
-// lives in src/data/photos.ts.
+// Burning Man: the owner's photographs from Black Rock City (SantizoOS's
+// burning_man_pics), in justified rows that keep each photo's shape. Click a
+// photo to view it full screen (src/scripts/lightbox.ts). The list lives in
+// src/data/photos.ts. /photos redirects here (astro.config.mjs).
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -11,16 +12,16 @@ import { burningMan } from '../data/photos';
 
 const { photos } = burningMan;
 ---
-<Base title="Photos · Santizo" description="Burning Man photographs by Hector Augusto Santizo. Black Rock City, five years of dust and light.">
+<Base title="Burning Man · Santizo" description="Burning Man photographs by Hector Augusto Santizo. Black Rock City, five years of dust and light.">
   <Header />
 
-  <Section label="Photos" space="sm">
-    <h1>Photos</h1>
+  <Section label={burningMan.title} space="sm">
+    <h1>{burningMan.title}</h1>
     <p class="lead">{burningMan.lead}</p>
   </Section>
 
-  <Section label={burningMan.title} space="md">
-    <SectionHead num="01" title={burningMan.title} aside={String(photos.length).padStart(2, '0')} />
+  <Section label="Photographs" space="md">
+    <SectionHead num="01" title="Photographs" aside={String(photos.length).padStart(2, '0')} />
     <div class="gallery" data-gallery>
       {photos.map((ph, i) => (
         <a href={ph.src} style={`--ar: ${(ph.w / ph.h).toFixed(4)}`}>

@@ -1,6 +1,6 @@
 # santizo-site: santizo.com, version B
 
-The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; a Work page with a page per video (15); an Apps page (nine has.tools apps); a Photos page (Burning Man); an Info page (about, expertise, manifesto); and the HAS Lathe project page.
+The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; a Work page with a page per video (15); an Apps page (nine has.tools apps); a Burning Man page (photos); an Info page (about, expertise, manifesto); and the HAS Lathe project page.
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
@@ -10,12 +10,12 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 
 - `src/data/`: **the content.** Edit these to change the site.
   - `site.ts`: name, email, top bar links, reel, intro copy, manifesto, footer links, and `indexable` (keep false while this is version B)
-  - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order
+  - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order (its `burning_man_pics` folder, santizo-os `img/hector_santizo_burning_man_002..019.jpg`)
   - `work.ts`: `projects` (every video: slug, title, blurb, focus, group, Vimeo or YouTube id, optional `year` and `story`), plus the home page's `featured` work (order = layout) and XR strip, built from those projects
   - `expertise.ts`: the six expertise cards (shown on Info)
   - `apps.ts`: the Apps page: `appsIntro` (why the tools exist) and `tools` (the nine apps, grid order, each with a `note` saying what problem it answers), plus the short Apps list on the home page (`apps`). The why copy is condensed from the owner's own words on has.tools (About and Learn sections, and the first paragraph of each `tools/<slug>.html`); keep it in his voice and check new lines against those sources
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `photos.astro`, `info.astro` (about, expertise, manifesto), `404.astro`
+- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (photos; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
 - `src/components/`
   - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Apps`
@@ -25,7 +25,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - `src/styles/global.css`: tokens (colors, fonts, spacing), theme, shared utilities, tile hover, line-art classes, motion. Component layout lives in each component's `<style>`.
 - `src/scripts/site.ts`: theme toggle, Los Angeles clock, scroll reveal (`.rv`)
 - `src/scripts/reel.ts`: Play reel / Stop on the home hero (see Conventions)
-- `src/scripts/lightbox.ts`: the Photos viewer (click, arrows, swipe, Esc)
+- `src/scripts/lightbox.ts`: the Burning Man photo viewer (click, arrows, swipe, Esc)
 - `public/img/photos/`, `public/img/apps/`: WebP images (photos 1200px wide, from SantizoOS `img/`)
 
 ## Common tasks
@@ -57,7 +57,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - Direct file: when `reel.file` in `src/data/site.ts` holds an MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link), the hero plays it in a plain `<video>` and sound works everywhere, iPhones included.
 - **Never show Vimeo's controls** on the hero (owner's call), and don't add timers or checks that swap the player: an earlier 6-second check misfired on a working embed and restarted the reel.
 - The end of the reel is detected from `timeupdate` jumping back to the start, because background embeds loop.
-- Top bar: Work (`/work`), Apps (`/apps`), Info (`/info`). Photos is linked from the footer and from Info. Keep it short so it fits on a phone. It has no background, by design: page content scrolls under it.
+- Top bar: Work (`/work`), Apps (`/apps`), Burning Man (`/burning-man`), Info (`/info`). Checked to stay on one line from 320px up: labels never wrap, and gaps tighten below 400px (and the text drops to 14px below 350px). Re-check narrow widths before adding a fifth link. It has no background, by design: page content scrolls under it.
 - The footer's "(04) Contact" number follows each page's own sections (`<Footer num="02" />` on Info).
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 

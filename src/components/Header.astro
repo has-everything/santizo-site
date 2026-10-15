@@ -27,7 +27,7 @@ const { overlay = false } = Astro.props;
   }
   .brand { font-size: 22px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
   ul { display: flex; gap: clamp(20px, 3vw, 40px); font-size: 15px; }
-  nav a { display: inline-flex; align-items: center; min-height: 44px; }
+  nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; }
   nav a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 
   /* Same height as the bar: 20 + 44 + 20 */
@@ -36,5 +36,14 @@ const { overlay = false } = Astro.props;
   @media (max-width: 760px) {
     .top { padding-top: 12px; }
     .spacer { height: 76px; }
+  }
+  /* Small phones: tighter spacing so the four links stay on one line */
+  @media (max-width: 400px) {
+    .top { gap: 16px; }
+    ul { gap: 16px; }
+  }
+  @media (max-width: 350px) {
+    .top { gap: 12px; }
+    ul { gap: 12px; font-size: 14px; }
   }
 </style>
