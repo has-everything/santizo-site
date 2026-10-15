@@ -4,7 +4,7 @@ The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-scr
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
-Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then, the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar (Work, Apps, Info) that inverts over what is behind it, a quieter Play reel link, and the ruled Apps list.
+Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then the layout was widened (see Wide layout under Conventions), and the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar (Work, Apps, Info) that inverts over what is behind it, a quieter Play reel link, and the ruled Apps list.
 
 ## Structure
 
@@ -48,6 +48,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 ## Conventions
 
 - **No em dashes** anywhere in copy. Use commas, colons, or the middot ` · `.
+- **Wide layout** (field.io-like, owner's call, Oct 2026): media fills the window instead of a centered 1440px column (`--max: 100%`), with thin margins (`--gutter`, up to 24px) and tight gaps between tiles (`--tile-gap`), all in `:root` of `global.css`. Media grids use `.grid-2` / `.grid-3` (fixed column counts, so big screens get bigger tiles, not more of them). Text keeps its own `ch` reading widths. Project videos sit edge to edge on a black band, sized to fit the screen under the top bar. Burning Man photos stay capped at 1200px (their real size). To go back to the centered column, set `--max: 1440px`.
 - **Prefer simple over optimal**: no extra config, infra, or dependencies unless there is a user-visible problem.
 - Theme: day by default; `?theme=night` in the URL; the footer toggle remembers the choice in `localStorage` under `santizo-theme`.
 - Tiles show Vimeo clips as muted background loops (`background=1`) and YouTube videos as their thumbnail; every tile opens its project page on this site, where `VideoPlayer` plays it with sound and controls.
