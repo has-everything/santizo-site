@@ -28,6 +28,13 @@ export const nav = [
 
 export const reel = {
   vimeo: '1216889002',
+  // Direct MP4 of the reel. In Vimeo: the video's settings, ⋯ menu, Video file
+  // links, then Copy link on the 1080p version. When set, the hero plays this
+  // file itself, so Play reel works with sound in every browser and no Vimeo
+  // controls ever show. When empty, the hero shows the Vimeo loop and Play reel
+  // opens the reel on vimeo.com.
+  file: '',
+  poster: '', // optional still shown while the file loads, e.g. '/img/reel-poster.jpg'
   title: 'Santizo Reel 2026',
   credits: 'Art direction · Sim · Lighting',
   href: 'https://vimeo.com/1216889002',

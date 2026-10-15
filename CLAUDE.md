@@ -22,7 +22,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - shared: `Header` (fixed top bar; `overlay` on the home page, where it floats on the reel, otherwise it adds a spacer), `Footer`, `Section`, `SectionHead`, `WorkTile`, `Media`, `NumberedGrid`, `Clock`
 - `src/styles/global.css`: tokens (colors, fonts, spacing), theme, shared utilities, tile hover, line-art classes, motion. Component layout lives in each component's `<style>`.
 - `src/scripts/site.ts`: theme toggle, Los Angeles clock, scroll reveal (`.rv`)
-- `src/scripts/reel.ts`: Play reel sound on the home hero (see Conventions). Loads `@vimeo/player` only when clicked.
+- `src/scripts/reel.ts`: Play reel / Stop on the home hero (see Conventions)
 
 ## Common tasks
 
@@ -42,7 +42,8 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - **Prefer simple over optimal**: no extra config, infra, or dependencies unless there is a user-visible problem.
 - Theme: day by default; `?theme=night` in the URL; the footer toggle remembers the choice in `localStorage` under `santizo-theme`.
 - Vimeo clips are muted background loops (`background=1`). Work tiles link to the clip on vimeo.com.
-- **Play reel stays on the site**: it restarts the hero loop from the top with sound, and the button becomes "Mute" (scrolling the hero out of view also mutes). If the browser blocks sound started that way (iPhones do), the hero swaps to Vimeo's own player in place, where one tap plays with sound; "Close reel" or Esc returns to the silent loop. Without JavaScript it links to Vimeo.
+- **Play reel stays on the site** once `reel.file` in `src/data/site.ts` holds a direct MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link). The hero then plays that file in a plain `<video>`: Play reel restarts it with sound and the button becomes Stop; Stop, the end of the reel, or scrolling away returns to the silent loop. No Vimeo controls ever show. While `reel.file` is empty, the hero shows the Vimeo loop and Play reel links to Vimeo.
+- Why not the Vimeo embed: Safari and iPhones only let an embedded (cross-origin) player make sound after a tap inside the player itself, which means Vimeo's controls. Don't go back to unmuting the embed through the Player API.
 - Top bar: four links max (Work, XR, About, Contact) so it fits on a phone. It has no background, by design: page content scrolls under it.
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 

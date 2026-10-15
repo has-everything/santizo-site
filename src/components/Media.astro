@@ -24,7 +24,7 @@ const Art = 'art' in media ? ART[media.art] : null;
 )}
 {'video' in media && (
   <video class:list={['fill', { art: zoom }]} autoplay muted loop playsinline preload="metadata" poster={media.poster} aria-label={title}>
-    <source src={media.video} type="video/mp4" />
+    <source src={media.video} type={/\.webm(\?|$)/.test(media.video) ? 'video/webm' : 'video/mp4'} />
   </video>
 )}
 {Art && <Art class={zoom ? 'art' : undefined} />}
