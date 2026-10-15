@@ -15,7 +15,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - `expertise.ts`: the six expertise cards (shown on Info)
   - `apps.ts`: the Apps page: `appsIntro` (why the tools exist) and `tools` (the nine apps, grid order, each with a `note` saying what problem it answers), plus the short Apps list on the home page (`apps`). The why copy is condensed from the owner's own words on has.tools (About and Learn sections, and the first paragraph of each `tools/<slug>.html`); keep it in his voice and check new lines against those sources
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (photos; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro`
+- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (the photos one per row, each as large as the screen allows, no click needed; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
 - `src/components/`
   - `home/`: the home sections in page order: `Showreel`, `Intro`, `FeaturedWork`, `XrStrip`, `Apps`
@@ -25,14 +25,13 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - `src/styles/global.css`: tokens (colors, fonts, spacing), theme, shared utilities, tile hover, line-art classes, motion. Component layout lives in each component's `<style>`.
 - `src/scripts/site.ts`: theme toggle, Los Angeles clock, scroll reveal (`.rv`)
 - `src/scripts/reel.ts`: Play reel / Stop on the home hero (see Conventions)
-- `src/scripts/lightbox.ts`: the Burning Man photo viewer (click, arrows, swipe, Esc)
 - `public/img/photos/`, `public/img/apps/`: WebP images (photos 1200px wide, from SantizoOS `img/`)
 
 ## Common tasks
 
 **Add a video project**: add an entry to `projects` in `src/data/work.ts` (`slug` becomes `/work/<slug>`; `video` is `{ vimeo: id }` or `{ youtube: id }`). It appears on `/work` in its group and gets its own page automatically. Give it a write-up with `story: ['paragraph', ...]` and a `year`; both show only when set. No project has a write-up yet: the owner has not written them, so never invent stories, years, clients or credits.
 
-**Add photos**: save as WebP in `public/img/photos/` and add `{ src, w, h, alt }` to `src/data/photos.ts` (w/h are the real pixel size; they keep the photo's shape in the rows).
+**Add photos**: save as WebP in `public/img/photos/` and add `{ src, w, h, alt }` to `src/data/photos.ts` (w/h are the real pixel size: they size each photo before it loads, and cap it at its real width so it is never upscaled). The originals are 1200px wide; larger exports would look sharper on big retina screens.
 
 **Add or reorder featured work**: edit `featured` in `src/data/work.ts`. The first item runs full width; the rest pair up in rows that alternate wide/narrow and narrow/wide.
 
