@@ -22,7 +22,9 @@ const { overlay = false } = Astro.props;
   .top {
     position: fixed; top: 0; left: 0; right: 0; z-index: 20;
     display: flex; justify-content: space-between; align-items: center; gap: 24px;
-    padding: 20px var(--gutter);
+    /* Logo and menu sit a little inside the media edges: the gutter plus an
+       inset that grows from 0 on phones to 24px on wide screens */
+    padding: 20px calc(var(--gutter) + clamp(0px, 2.5vw - 8px, 24px));
     color: #ffffff; mix-blend-mode: difference;
   }
   .brand { font-size: 22px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }

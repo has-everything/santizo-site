@@ -57,7 +57,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - Direct file: when `reel.file` in `src/data/site.ts` holds an MP4 of the reel (Vimeo: video settings, ⋯ menu, Video file links, Copy link), the hero plays it in a plain `<video>` and sound works everywhere, iPhones included.
 - **Never show Vimeo's controls** on the hero (owner's call), and don't add timers or checks that swap the player: an earlier 6-second check misfired on a working embed and restarted the reel.
 - The end of the reel is detected from `timeupdate` jumping back to the start, because background embeds loop.
-- Top bar: Work (`/work`), Apps (`/apps`), Burning Man (`/burning-man`), Info (`/info`). Checked to stay on one line from 320px up: labels never wrap, and gaps tighten below 400px (and the text drops to 14px below 350px). Re-check narrow widths before adding a fifth link. It has no background, by design: page content scrolls under it.
+- Top bar: Work (`/work`), Apps (`/apps`), Burning Man (`/burning-man`), Info (`/info`). Checked to stay on one line from 320px up: labels never wrap, and gaps tighten below 400px (and the text drops to 14px below 350px). Re-check narrow widths before adding a fifth link. The bar sits inset from the media edges (gutter plus 0 to 24px, growing with screen width) so the logo and menu don't line up flush with the videos. It has no background, by design: page content scrolls under it.
 - The footer's "(04) Contact" number follows each page's own sections (`<Footer num="02" />` on Info).
 - Placeholder art: the HAS Lathe figures print `[Video] ...` / `[Still] ...` labels until real captures replace them.
 
