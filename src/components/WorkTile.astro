@@ -21,6 +21,7 @@ const { item, size = 'full', ratio = '16 / 9', reveal = true } = Astro.props;
     <p><span class="tname">{item.title}</span> <span class="muted">{item.blurb}</span></p>
     {item.tag && <span class="mono cap muted tag">{item.tag}</span>}
   </div>
+  {item.note && <p class="note">{item.note}</p>}
 </a>
 
 <style>
@@ -34,4 +35,5 @@ const { item, size = 'full', ratio = '16 / 9', reveal = true } = Astro.props;
   .caption p { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em; }
   .full .caption p { font-size: 20px; }
   .tag { white-space: nowrap; }
+  .note { margin: 8px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); max-width: 48ch; }
 </style>

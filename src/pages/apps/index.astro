@@ -1,6 +1,7 @@
 ---
-// Apps: nine of the free tools from has.tools, as a grid of preview cards.
-// Pick and order them in src/data/apps.ts.
+// Apps: why the tools exist, then nine of them from has.tools as a grid of
+// preview cards, each with the problem it answers. Copy and order live in
+// src/data/apps.ts.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -8,19 +9,21 @@ import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import WorkTile from '../../components/WorkTile.astro';
 import PillLink from '../../components/project/PillLink.astro';
-import { tools } from '../../data/apps';
+import { tools, appsIntro } from '../../data/apps';
 
 const count = String(tools.length).padStart(2, '0');
 ---
 <Base title="Apps · Santizo" description="Free creative tools by Hector Augusto Santizo for motion designers, 3D artists and creative coders. They run in the browser.">
   <Header />
 
-  <Section label="Apps" space="sm">
+  <Section label="Why these apps exist" space="sm">
     <h1>Apps</h1>
     <div class="intro">
-      <p class="lead">Free creative tools for motion designers, 3D artists and creative coders. They all run in the browser, with nothing to install.</p>
-      <div class="cta">
-        <PillLink href="https://has.tools">Visit has.tools ↗</PillLink>
+      <p class="lead">{appsIntro.lead}</p>
+      <div class="side">
+        <p>{appsIntro.body}</p>
+        <p class="muted">{appsIntro.aside}</p>
+        <div><PillLink href="https://has.tools">Visit has.tools ↗</PillLink></div>
       </div>
     </div>
   </Section>
@@ -40,7 +43,9 @@ const count = String(tools.length).padStart(2, '0');
 
 <style>
   h1 { margin: 0 0 clamp(40px, 5vw, 72px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
-  .intro { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 32px 24px; }
-  .lead { flex: 1 1 520px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 30ch; }
+  .intro { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
+  .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(28px, 3.4vw, 52px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 500; max-width: 18ch; }
+  .side { flex: 2 1 340px; min-width: 0; max-width: 52ch; display: flex; flex-direction: column; gap: 18px; }
+  .side p { margin: 0; font-size: 17px; line-height: 1.6; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 56px 24px; }
 </style>

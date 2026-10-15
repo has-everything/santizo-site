@@ -4,6 +4,7 @@ export interface WorkItem {
   title: string;
   blurb: string; // muted text after the title
   tag?: string;  // small mono label on the right
+  note?: string; // optional line under the caption (the Apps page uses it for why each app exists)
   href: string;
   media: Media;
 }

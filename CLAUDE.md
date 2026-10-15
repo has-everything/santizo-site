@@ -12,7 +12,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
   - `site.ts`: name, email, top bar links, reel, intro copy, footer links, and `indexable` (keep false while this is version B)
   - `work.ts`: featured work (order = layout) and the XR clips
   - `expertise.ts`: the six expertise cards (shown on Info)
-  - `apps.ts`: the nine apps on the Apps page (`tools`, order = grid order) and the short Apps list on the home page (`apps`)
+  - `apps.ts`: the Apps page: `appsIntro` (why the tools exist) and `tools` (the nine apps, grid order, each with a `note` saying what problem it answers), plus the short Apps list on the home page (`apps`). The why copy is condensed from the owner's own words on has.tools (About and Learn sections, and the first paragraph of each `tools/<slug>.html`); keep it in his voice and check new lines against those sources
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
 - `src/pages/`: one file per URL. `index.astro` (home), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `info.astro` (about, expertise), `404.astro`
 - `src/layouts/Base.astro`: `<head>`, fonts, no-flash theme script, noindex/canonical, Vercel Web Analytics
