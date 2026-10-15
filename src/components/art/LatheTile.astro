@@ -1,0 +1,11 @@
+---
+// HAS Lathe tile art (16:9): the vessel on black.
+import LatheVessel from './LatheVessel.astro';
+
+interface Props { class?: string }
+const { class: cls } = Astro.props;
+---
+<svg class:list={['fill', cls]} viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <LatheVessel cx={800} />
+  <line class="lnS" x1="300" y1="752" x2="1300" y2="752" />
+</svg>

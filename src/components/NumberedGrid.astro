@@ -1,0 +1,33 @@
+---
+// Numbered cards in a wrapping grid (Expertise, "What it does").
+// Numbers come from the order: 01, 02, ...
+interface Item { title: string; body: string; meta?: string }
+interface Props {
+  items: Item[];
+  /** Cap the body text width (used on project pages) */
+  narrow?: boolean;
+}
+const { items, narrow = false } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+<div class="grid">
+  {items.map((it, i) => (
+    <div class="cell">
+      <p class="mono cap-sm muted num">{pad(i + 1)}</p>
+      <h3>{it.title}</h3>
+      <p class:list={['body', { narrow, last: !it.meta }]}>{it.body}</p>
+      {it.meta && <p class="mono cap meta">{it.meta}</p>}
+    </div>
+  ))}
+</div>
+
+<style>
+  .grid { display: flex; flex-wrap: wrap; gap: 48px 24px; }
+  .cell { flex: 1 1 380px; min-width: 0; border-top: 1px solid var(--rule); padding-top: 18px; }
+  .num { margin: 0 0 14px; }
+  h3 { margin: 0 0 8px; font-size: 24px; line-height: 1.2; font-weight: 500; letter-spacing: -0.012em; }
+  .body { margin: 0 0 10px; font-size: 16px; line-height: 1.55; color: var(--muted); }
+  .body.last { margin-bottom: 0; }
+  .body.narrow { max-width: 40ch; }
+  .meta { margin: 0; }
+</style>

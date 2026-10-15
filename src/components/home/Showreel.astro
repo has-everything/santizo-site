@@ -1,0 +1,54 @@
+---
+// Full-screen reel with the white header over it and a "Play reel" pill.
+import { reel } from '../../data/site';
+import Header from '../Header.astro';
+import Media from '../Media.astro';
+---
+<section id="top" aria-label="Showreel" class="reel-hero">
+  <Media media={{ vimeo: reel.vimeo }} title={reel.title} zoom={false} />
+  <div class="shade-top" aria-hidden="true"></div>
+
+  <Header variant="overlay" active="work" />
+
+  <div class="bar">
+    <div>
+      <p class="title">{reel.title}</p>
+      <p class="mono cap credits">{reel.credits}</p>
+    </div>
+    <a class="play" href={reel.href}>
+      <span class="dot"><span class="tri"></span></span>
+      Play reel
+    </a>
+  </div>
+  <span class="cue" aria-hidden="true"></span>
+</section>
+
+<style>
+  .reel-hero { position: relative; height: 100vh; height: 100svh; min-height: 520px; background: #000000; overflow: hidden; }
+  .shade-top { position: absolute; top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)); }
+
+  .bar {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px;
+    padding: 160px var(--gutter) 28px; color: #ffffff;
+    background: linear-gradient(to top, rgba(0, 0, 0, .6), rgba(0, 0, 0, 0));
+  }
+  .title { margin: 0; font-size: clamp(22px, 2.2vw, 30px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .credits { margin: 8px 0 0; color: rgba(255, 255, 255, .7); }
+
+  .play {
+    display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 22px 6px 6px;
+    border-radius: 999px; border: 1px solid rgba(255, 255, 255, .5); background: rgba(0, 0, 0, .35);
+    color: #ffffff; font-size: 15px; transition: border-color .3s, background .3s;
+  }
+  .play:hover { border-color: #ffffff; background: rgba(0, 0, 0, .55); }
+  .dot { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
+  .tri { width: 0; height: 0; border-left: 10px solid #0b0b0c; border-top: 6px solid transparent; border-bottom: 6px solid transparent; margin-left: 3px; }
+
+  /* Scroll cue */
+  .cue { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); width: 1px; height: 44px; background: rgba(255, 255, 255, .35); overflow: hidden; }
+  .cue::after { content: ""; position: absolute; left: 0; top: -44px; width: 1px; height: 44px; background: #ffffff; animation: cue 2.4s cubic-bezier(.6, 0, .2, 1) infinite; }
+  @keyframes cue { to { top: 44px; } }
+  @media (max-width: 760px) { .cue { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .cue::after { animation: none; } }
+</style>

@@ -1,0 +1,35 @@
+---
+// Numbered figure: black frame holding media or art (default slot), and a
+// "Fig. 01" caption. `placeholder` prints a label on the frame until the
+// real clip or still exists.
+interface Props {
+  num: string;
+  caption: string;
+  ratio?: string;
+  placeholder?: string;
+  id?: string;
+  /** flex share when figures sit side by side */
+  half?: boolean;
+}
+const { num, caption, ratio = '16 / 9', placeholder, id, half = false } = Astro.props;
+---
+<figure id={id} class:list={['rv', { half }]}>
+  <div class="frame" style={`aspect-ratio: ${ratio}`}>
+    <slot />
+    {placeholder && <span class="mono cap-sm ph">{placeholder}</span>}
+  </div>
+  <figcaption>
+    <span class="mono cap-sm muted fig">Fig. {num}</span>
+    <span class="text">{caption}</span>
+  </figcaption>
+</figure>
+
+<style>
+  figure { margin: 0; }
+  .half { flex: 1 1 420px; min-width: 0; }
+  .frame { position: relative; background: #000000; overflow: hidden; }
+  figcaption { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; }
+  .fig { line-height: 20px; }
+  .text { flex: 1 1 320px; min-width: 0; font-size: 14px; line-height: 20px; color: var(--muted); }
+  .half .text { flex: 0 1 auto; }
+</style>

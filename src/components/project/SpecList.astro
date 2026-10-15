@@ -1,0 +1,21 @@
+---
+// Ruled key/value list for a project's facts (Type, Year, Runs, ...).
+interface Props { specs: [string, string][] }
+const { specs } = Astro.props;
+---
+<dl>
+  {specs.map(([k, v]) => (
+    <div>
+      <dt class="mono">{k}</dt>
+      <dd>{v}</dd>
+    </div>
+  ))}
+</dl>
+
+<style>
+  dl { margin: 0; display: flex; flex-direction: column; }
+  div { display: flex; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); }
+  div:last-child { border-bottom: 1px solid var(--rule); }
+  dt { flex: 0 0 104px; font-size: 12px; line-height: 22px; color: var(--muted); }
+  dd { margin: 0; font-size: 16px; line-height: 22px; }
+</style>

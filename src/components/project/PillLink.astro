@@ -1,0 +1,18 @@
+---
+// Rounded call-to-action link. solid: ink fill. outline: thin border.
+interface Props { href: string; variant?: 'solid' | 'outline' }
+const { href, variant = 'solid' } = Astro.props;
+---
+<a class={variant} href={href}><slot /></a>
+
+<style>
+  a {
+    display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px;
+    border-radius: 999px; font-size: 15px; font-weight: 500;
+    transition: opacity .3s, border-color .3s;
+  }
+  .solid { background: var(--ink); color: var(--bg); }
+  .solid:hover { opacity: .85; color: var(--bg); }
+  .outline { border: 1px solid var(--strong); }
+  .outline:hover { border-color: var(--ink); }
+</style>

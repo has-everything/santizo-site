@@ -1,0 +1,71 @@
+---
+// (04) Contact: the closing pitch, email, link columns, and the theme toggle.
+import { site, footer, type FooterLink } from '../data/site';
+import SectionHead from './SectionHead.astro';
+import Clock from './Clock.astro';
+
+interface Props {
+  /** Override the "Tools" column (project pages link back to all work) */
+  tools?: FooterLink[];
+}
+const { tools = footer.tools } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer id="contact" class="wrap">
+  <SectionHead num="04" title="Contact">
+    <span slot="aside" class="mono cap muted">{site.city} <Clock /></span>
+  </SectionHead>
+  <p class="pitch">{footer.headline}</p>
+  <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+
+  <div class="cols">
+    <div class="col">
+      <p class="mono cap-sm muted label">Practice</p>
+      <p>{site.practice}</p>
+      <p class="muted">{site.region}</p>
+    </div>
+    <div class="col">
+      <p class="mono cap-sm muted label">Elsewhere</p>
+      <ul class="plain">
+        {footer.elsewhere.map((l) => <li><a class="hl" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="col">
+      <p class="mono cap-sm muted label">Tools</p>
+      <ul class="plain">
+        {tools.map((l) => <li><a class="hl" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+    <div class="col">
+      <p class="mono cap-sm muted label">Site</p>
+      <ul class="plain">
+        <li><a class="hl" href={footer.boring.href}>{footer.boring.label}</a></li>
+        <li><button type="button" class="hl themebtn" data-theme-toggle>Dark mode</button></li>
+        <li><a class="hl" href="#top">Back to top ↑</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="base">
+    <span class="mono cap-sm muted">© {year} {site.practice}</span>
+    <span class="mono cap-sm muted">{site.person} · {site.role}</span>
+  </div>
+</footer>
+
+<style>
+  footer { padding-top: var(--space-xl); padding-bottom: 32px; }
+  .pitch { margin: 0 0 28px; font-size: clamp(40px, 5vw, 72px); line-height: .96; letter-spacing: -0.035em; font-weight: 500; max-width: 16ch; }
+  .email {
+    display: inline-flex; align-items: center; min-height: 44px;
+    font-size: clamp(22px, 2.6vw, 36px); letter-spacing: -0.02em;
+    border-bottom: 1px solid var(--ink); padding-bottom: 4px;
+  }
+  .cols { display: flex; flex-wrap: wrap; gap: 40px 24px; margin-top: 96px; font-size: 15px; line-height: 1.6; }
+  .col { flex: 1 1 200px; min-width: 0; }
+  .col p { margin: 0; }
+  .col .label { margin: 0 0 12px; }
+  .base {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+    margin-top: 96px; padding-top: 14px; border-top: 1px solid var(--rule);
+  }
+</style>

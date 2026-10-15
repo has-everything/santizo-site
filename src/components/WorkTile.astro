@@ -1,0 +1,36 @@
+---
+// A linked clip with its caption. `size` sets the flex share in a row:
+// full (whole row), wide (7 parts), narrow (5 parts), card (XR strip).
+import type { WorkItem } from '../data/work';
+import Media from './Media.astro';
+
+interface Props {
+  item: WorkItem;
+  size?: 'full' | 'wide' | 'narrow' | 'card';
+  ratio?: string;
+  reveal?: boolean;
+}
+const { item, size = 'full', ratio = '16 / 9', reveal = true } = Astro.props;
+---
+<a class:list={['tile', size, { rv: reveal }]} href={item.href}>
+  <div class="frame" style={`aspect-ratio: ${ratio}`}>
+    <Media media={item.media} title={item.title} />
+  </div>
+  <div class="caption">
+    <p><span class="tname">{item.title}</span> <span class="muted">{item.blurb}</span></p>
+    {item.tag && <span class="mono cap muted tag">{item.tag}</span>}
+  </div>
+</a>
+
+<style>
+  .wide { flex: 7 1 520px; min-width: 0; }
+  .narrow { flex: 5 1 360px; min-width: 0; }
+  .card { flex: 1 0 260px; min-width: 0; }
+
+  .frame { position: relative; background: #000000; overflow: hidden; }
+
+  .caption { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 14px; }
+  .caption p { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em; }
+  .full .caption p { font-size: 20px; }
+  .tag { white-space: nowrap; }
+</style>

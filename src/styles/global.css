@@ -1,0 +1,131 @@
+/*
+  Site-wide styles: theme tokens, type, shared utilities, link and tile
+  hover states, the line-art SVG classes and their motion.
+  Component-specific layout lives in each component's <style> block.
+*/
+
+/* ---------- Tokens ---------- */
+
+:root {
+  --bg: #ffffff;
+  --ink: #0d0d0e;
+  --muted: #5c5c61;
+  --rule: #e3e2de;
+  --raised: #f3f2ef;
+  --strong: #85847f;
+  --accent: #ff4f12;
+
+  --font-sans: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  --gutter: clamp(16px, 2.4vw, 32px);
+  --max: 1440px;
+  --space-xl: clamp(96px, 11vw, 160px);
+  --space-lg: clamp(80px, 9vw, 140px);
+  --space-md: clamp(80px, 9vw, 128px);
+  --ease: cubic-bezier(.2, .7, 0, 1);
+}
+
+:root[data-theme="night"] {
+  --bg: #0b0b0c;
+  --ink: #f2f1ee;
+  --muted: #9a9a9f;
+  --rule: #242427;
+  --raised: #141416;
+  --strong: #636369;
+}
+
+/* ---------- Base ---------- */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+ul.plain { list-style: none; margin: 0; padding: 0; }
+
+/* ---------- Type utilities ---------- */
+
+.mono { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+.cap { font-size: 12px; line-height: 16px; }
+.cap-sm { font-size: 11px; line-height: 14px; }
+.muted { color: var(--muted); }
+
+/* Page container: centered, max width, side gutters */
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); box-sizing: border-box; }
+
+/* ---------- Links ---------- */
+
+.hl { color: var(--muted); transition: color .3s; }
+.hl:hover { color: var(--ink); }
+.hl-44 { display: inline-flex; align-items: center; min-height: 44px; }
+
+.themebtn { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-align: left; }
+
+/* ---------- Tiles (any link wrapping media + caption) ---------- */
+
+.tile { display: block; }
+.tile .art { transition: transform 1.2s var(--ease); }
+.tile:hover .art { transform: scale(1.025); }
+.tile:hover .tname { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+
+/* ---------- Media frames ---------- */
+
+/* Background video fill. Iframes are sized to always cover the frame at 16:9. */
+.vf { position: absolute; inset: 0; overflow: hidden; container-type: size; background: #000000; }
+.vf iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: max(100%, calc(100cqh * 16 / 9));
+  height: max(100%, calc(100cqw * 9 / 16));
+  transform: translate(-50%, -50%);
+  border: 0; pointer-events: none;
+}
+video.fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+svg.fill { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* Placeholder label printed on top of art that will become a real clip or still */
+.ph { position: absolute; left: 14px; bottom: 12px; color: rgba(255, 255, 255, .6); }
+
+/* ---------- Line art (SVG) ---------- */
+
+.ln { fill: none; stroke: rgba(255, 255, 255, .32); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.ln2 { fill: none; stroke: rgba(255, 255, 255, .7); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.lnS { fill: none; stroke: rgba(255, 255, 255, .12); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.lnA { fill: none; stroke: var(--accent); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.dash { stroke-dasharray: 4 7; }
+.node { fill: #000000; stroke: #ffffff; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.nodeA { fill: var(--accent); stroke: #ffffff; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.panel { fill: #0d0d0e; stroke: rgba(255, 255, 255, .18); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.solid { fill: #1d1d1f; stroke: rgba(255, 255, 255, .45); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.hole { fill: #050505; stroke: rgba(255, 255, 255, .55); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.shade { fill: rgba(255, 255, 255, .07); }
+
+/* ---------- Motion ---------- */
+
+.fb { transform-box: fill-box; transform-origin: center; }
+.sway { animation: sway 7s ease-in-out infinite; }
+.swayS { animation: swayS 9s ease-in-out infinite; }
+.pulse { animation: pulse 3.6s var(--ease) infinite; }
+
+@keyframes sway { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.88); } }
+@keyframes swayS { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.95); } }
+@keyframes pulse { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+
+/* Scroll reveal: .rv elements rise into place (see src/scripts/site.ts) */
+.rv-on .rv { transform: translate3d(0, 80px, 0); transition: transform 1.4s var(--ease); will-change: transform; }
+.rv-on .rv.in { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sway, .swayS, .pulse { animation: none; }
+  .tile .art { transition: none; }
+  .rv-on .rv { transform: none; transition: none; }
+}

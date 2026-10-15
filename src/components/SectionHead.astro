@@ -1,0 +1,28 @@
+---
+// The ruled section label: "(01) Featured work" on the left, and on the right
+// either a link (asideHref), plain text (aside), or anything in slot="aside".
+interface Props {
+  num?: string;
+  title: string;
+  aside?: string;
+  asideHref?: string;
+  /** Space below the rule before the section content */
+  gap?: 'lg' | 'md';
+}
+const { num, title, aside, asideHref, gap = 'lg' } = Astro.props;
+---
+<div class:list={['head', gap]}>
+  <h2 class="mono cap muted">{num && `(${num}) `}{title}</h2>
+  {asideHref && <a href={asideHref} class="mono cap hl hl-44">{aside}</a>}
+  {!asideHref && aside && <span class="mono cap muted">{aside}</span>}
+  <slot name="aside" />
+</div>
+
+<style>
+  .head {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    border-top: 1px solid var(--rule); padding-top: 14px; margin-bottom: 48px;
+  }
+  .head.md { margin-bottom: 32px; }
+  h2 { margin: 0; font-weight: 400; }
+</style>

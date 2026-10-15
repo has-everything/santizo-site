@@ -1,0 +1,55 @@
+---
+// Every page: <head>, fonts, theme, analytics, and the site script.
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = site.title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  {site.indexable ? <link rel="canonical" href={canonical}> : <meta name="robots" content="noindex, nofollow">}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content={site.name}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✷</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+  <!-- Theme before first paint: ?theme=night in the URL, else the saved choice, else day -->
+  <script is:inline>
+    (function () {
+      var t = null;
+      try { t = new URLSearchParams(location.search).get('theme') || localStorage.getItem('santizo-theme'); } catch (e) {}
+      if (t === 'night' || t === 'dark') document.documentElement.dataset.theme = 'night';
+    })();
+  </script>
+
+  {import.meta.env.PROD && (
+    <>
+      <!-- Vercel Web Analytics: enable it in the Vercel project (Analytics tab) -->
+      <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+      <script is:inline defer src="/_vercel/insights/script.js"></script>
+    </>
+  )}
+</head>
+<body>
+  <slot />
+  <script>
+    import '../scripts/site';
+  </script>
+</body>
+</html>

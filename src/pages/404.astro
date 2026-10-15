@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+---
+<Base title="Not found · Santizo">
+  <Header />
+  <Section label="Not found" space="lg">
+    <p class="mono cap muted">404</p>
+    <h1>This page didn’t make the cut.</h1>
+    <a href="/" class="hl hl-44">Back to the work →</a>
+  </Section>
+  <Footer />
+</Base>
+
+<style>
+  h1 { margin: 16px 0 24px; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; max-width: 14ch; }
+  a { font-size: 15px; }
+</style>

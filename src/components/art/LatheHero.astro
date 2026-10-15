@@ -1,0 +1,18 @@
+---
+// HAS Lathe page hero (21:9): blueprint grid, axis, vessel with handles and
+// a measured belly, and the base width dimension.
+import LatheVessel from './LatheVessel.astro';
+import { RINGS, LAST } from '../../lib/lathe';
+
+const cx = 1050;
+const baseR = RINGS[LAST][0];
+---
+<svg class="fill" viewBox="0 0 2100 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  {[300, 600, 1500, 1800].map((x) => <line class="lnS" x1={x} y1="0" x2={x} y2="900" />)}
+  {[150, 450, 750].map((y) => <line class="lnS" x1="0" y1={y} x2="2100" y2={y} />)}
+  <line class="ln dash" x1={cx} y1="110" x2={cx} y2="790" />
+  <LatheVessel cx={cx} motion="swayS" handles measure />
+  <line class="ln" x1={cx - baseR} y1="790" x2={cx + baseR} y2="790" />
+  <line class="ln" x1={cx - baseR} y1="780" x2={cx - baseR} y2="800" />
+  <line class="ln" x1={cx + baseR} y1="780" x2={cx + baseR} y2="800" />
+</svg>

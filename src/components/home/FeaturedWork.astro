@@ -1,0 +1,34 @@
+---
+// (01) Featured work. The first item runs full width; the rest pair up in
+// rows that alternate wide/narrow, narrow/wide. Add or reorder work in
+// src/data/work.ts and the layout follows.
+import { featured } from '../../data/work';
+import Section from '../Section.astro';
+import SectionHead from '../SectionHead.astro';
+import WorkTile from '../WorkTile.astro';
+
+const [lead, ...rest] = featured;
+const rows = [];
+for (let i = 0; i < rest.length; i += 2) rows.push(rest.slice(i, i + 2));
+---
+<Section id="work" label="Featured work">
+  <SectionHead num="01" title="Featured work" aside="All work →" asideHref="#work" />
+  <div class="works">
+    {lead && <WorkTile item={lead} size="full" />}
+    {rows.map((row, r) => {
+      const wideFirst = r % 2 === 0;
+      return (
+        <div class="row">
+          {row.map((item, i) => (
+            <WorkTile item={item} size={row.length === 1 ? 'full' : (i === 0) === wideFirst ? 'wide' : 'narrow'} />
+          ))}
+        </div>
+      );
+    })}
+  </div>
+</Section>
+
+<style>
+  .works { display: flex; flex-direction: column; gap: 64px; }
+  .row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 64px 24px; }
+</style>

@@ -1,0 +1,155 @@
+---
+// Project page: HAS Lathe. Copy a page like this one to add a new project page.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedGrid from '../../components/NumberedGrid.astro';
+import SpecList from '../../components/project/SpecList.astro';
+import PillLink from '../../components/project/PillLink.astro';
+import Figure from '../../components/project/Figure.astro';
+import NextProject from '../../components/project/NextProject.astro';
+import LatheHero from '../../components/art/LatheHero.astro';
+import LatheDemo from '../../components/art/LatheDemo.astro';
+import LatheClay from '../../components/art/LatheClay.astro';
+import LathePresets from '../../components/art/LathePresets.astro';
+import { featured } from '../../data/work';
+
+const appUrl = 'https://www.has.tools';
+const next = featured.find((w) => w.title === 'HAS LP-19')!;
+
+const features = [
+  { title: 'Shape the profile', body: 'Points can be smooth, sharp or filleted. Double-click a point to cycle it, then give it its own fillet radius.' },
+  { title: 'Real walls, real rims', body: 'Walls are hollow with true thickness. Finish the rim square, flat, round or beveled.' },
+  { title: 'Start from a preset', body: 'Vase, bowl, cup, bottle, plate and base get you most of the way in one click.' },
+  { title: 'Real-world scale', body: 'Export GLB, glTF or OBJ in meters, centimeters or millimeters, with PBR material settings.' },
+  { title: 'Stays on your machine', body: 'Everything runs in your browser. Your shapes never leave your computer.' },
+  { title: 'Share a link', body: 'Send a link and it opens HAS Lathe with your exact design.' },
+];
+---
+<Base title="HAS Lathe · Santizo" description="HAS Lathe: a free browser app that turns one section profile into a revolved 3D vessel.">
+  <Header active="work" />
+
+  <div class="crumbs">
+    <a href="/#work" class="mono cap hl hl-44">← All work</a>
+    <span class="mono cap muted">Apps / HAS Lathe</span>
+  </div>
+
+  <section aria-label="HAS Lathe hero" class="hero">
+    <LatheHero />
+    <span class="mono cap-sm ph hero-ph">[Video] HAS Lathe hero loop, 21:9</span>
+  </section>
+
+  <Section label="Overview" space="sm">
+    <div class="overview">
+      <div class="name">
+        <h1>HAS Lathe</h1>
+        <p class="muted">A potter’s wheel for 3D models.</p>
+      </div>
+      <div class="facts">
+        <SpecList specs={[
+          ['Type', 'Free browser app'],
+          ['Year', '2026'],
+          ['Runs', 'In your browser, on your machine'],
+          ['Exports', 'GLB · glTF · OBJ'],
+          ['Part of', 'HAS Tools'],
+        ]} />
+        <div class="ctas">
+          <PillLink href={appUrl}>Open HAS Lathe ↗</PillLink>
+          <PillLink href="#demo" variant="outline">Watch the demo</PillLink>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section label="About the app" space="md">
+    <div class="about">
+      <p class="lead">Draw one section profile and get a live, revolved vessel: vases, bowls, bottles and turned props, ready for your scene.</p>
+      <div class="copy">
+        <p>I made HAS Lathe because modeling a simple vase should not mean opening a full 3D package. You shape one curve, and the app turns it into a clean, crease-aware mesh with real wall thickness.</p>
+        <p class="muted">It is made for set dressing, turned props and product mockups. Take the result straight into Cinema 4D, Blender or Unreal.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section label="Demo" space="md">
+    <Figure id="demo" num="01" caption="Move a point on the profile and the vessel updates in real time." placeholder="[Video] Profile editing, 24 sec">
+      <LatheDemo />
+    </Figure>
+  </Section>
+
+  <Section label="Features">
+    <SectionHead num="01" title="What it does" aside={String(features.length).padStart(2, '0')} />
+    <NumberedGrid items={features} narrow />
+  </Section>
+
+  <Section label="Stills">
+    <div class="stills">
+      <Figure num="02" caption="Vase preset, clay render." ratio="1 / 1" placeholder="[Still] Clay render" half>
+        <LatheClay />
+      </Figure>
+      <Figure num="03" caption="Bowl, cup and bottle presets." ratio="1 / 1" placeholder="[Still] Presets" half>
+        <LathePresets />
+      </Figure>
+    </div>
+  </Section>
+
+  <Section label="Details">
+    <SectionHead num="02" title="Details" />
+    <div class="details">
+      <div>
+        <h3>credits</h3>
+        <p><span class="muted">Design and direction:</span> Hector Augusto Santizo</p>
+        <p><span class="muted">Collection:</span> HAS Tools</p>
+        <p><span class="muted">Price:</span> Free</p>
+      </div>
+      <div>
+        <h3>works with</h3>
+        <p>Cinema 4D</p>
+        <p>Blender</p>
+        <p>Unreal Engine</p>
+        <p>Product mockups</p>
+      </div>
+      <div>
+        <h3>formats</h3>
+        <p>GLB, glTF, OBJ</p>
+        <p><span class="muted">Units:</span> m, cm, mm</p>
+        <p><span class="muted">Materials:</span> PBR settings</p>
+      </div>
+    </div>
+  </Section>
+
+  <NextProject item={next} />
+
+  <Footer tools={[
+    { label: 'has.tools ↗', href: 'https://www.has.tools' },
+    { label: 'All work', href: '/#work' },
+  ]} />
+</Base>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 40px var(--gutter) 16px; }
+
+  .hero { position: relative; height: clamp(280px, 42.857vw, 760px); background: #000000; overflow: hidden; }
+  .hero-ph { left: var(--gutter); bottom: 16px; }
+
+  .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px 24px; }
+  .name { flex: 3 1 520px; min-width: 0; }
+  h1 { margin: 0; font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
+  .name p { margin: 20px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .facts { flex: 2 1 340px; min-width: 0; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+  .about { display: flex; flex-wrap: wrap; gap: 32px 24px; }
+  .lead { flex: 1 1 440px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 22ch; }
+  .copy { flex: 1 1 360px; min-width: 0; max-width: 56ch; display: flex; flex-direction: column; gap: 18px; }
+  .copy p { margin: 0; font-size: 17px; line-height: 1.6; }
+
+  .stills { display: flex; flex-wrap: wrap; gap: 48px 24px; }
+
+  .details { display: flex; flex-wrap: wrap; gap: 40px 24px; font-size: 16px; line-height: 1.6; }
+  .details > div { flex: 1 1 260px; min-width: 0; }
+  .details h3 { margin: 0 0 12px; font-size: 16px; font-weight: 500; }
+  .details p { margin: 0; }
+</style>

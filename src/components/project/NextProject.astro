@@ -1,0 +1,25 @@
+---
+// "(03) Next": a big linked title over a wide clip, at the end of a project page.
+import type { WorkItem } from '../../data/work';
+import Section from '../Section.astro';
+import SectionHead from '../SectionHead.astro';
+import Media from '../Media.astro';
+
+interface Props { item: WorkItem; num?: string }
+const { item, num = '03' } = Astro.props;
+---
+<Section label="Next project">
+  <SectionHead num={num} title="Next" aside="All work →" asideHref="/#work" gap="md" />
+  <a class="tile rv" href={item.href}>
+    <p class="title"><span class="tname">{item.title}</span> →</p>
+    <div class="frame">
+      <Media media={item.media} title={item.title} />
+    </div>
+  </a>
+</Section>
+
+<style>
+  .title { margin: 0 0 24px; font-size: clamp(40px, 5vw, 72px); line-height: .96; letter-spacing: -0.035em; font-weight: 500; }
+  .tile:hover .tname { text-underline-offset: 6px; }
+  .frame { position: relative; aspect-ratio: 21 / 9; background: #000000; overflow: hidden; }
+</style>

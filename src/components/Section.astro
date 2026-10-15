@@ -1,0 +1,20 @@
+---
+// Standard page section: centered container with the top spacing used
+// between sections. space: xl (default), lg, md, or sm (64px).
+interface Props {
+  id?: string;
+  label: string;
+  space?: 'xl' | 'lg' | 'md' | 'sm';
+}
+const { id, label, space = 'xl' } = Astro.props;
+---
+<section id={id} aria-label={label} class:list={['wrap', space]}>
+  <slot />
+</section>
+
+<style>
+  .xl { padding-top: var(--space-xl); }
+  .lg { padding-top: var(--space-lg); }
+  .md { padding-top: var(--space-md); }
+  .sm { padding-top: 64px; }
+</style>

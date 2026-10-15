@@ -1,0 +1,30 @@
+---
+// Fills its (position: relative) parent with a clip or drawing.
+// See src/data/media.ts for the three kinds of media.
+import type { Media } from '../data/media';
+import LatheTile from './art/LatheTile.astro';
+
+interface Props {
+  media: Media;
+  title: string;
+  /** Add the "art" class so a parent .tile zooms it on hover */
+  zoom?: boolean;
+}
+const { media, title, zoom = true } = Astro.props;
+
+const ART = { lathe: LatheTile };
+const vimeoSrc = (id: string) =>
+  `https://player.vimeo.com/video/${id}?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1`;
+const Art = 'art' in media ? ART[media.art] : null;
+---
+{'vimeo' in media && (
+  <div class:list={['vf', { art: zoom }]}>
+    <iframe src={vimeoSrc(media.vimeo)} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title={title} tabindex="-1"></iframe>
+  </div>
+)}
+{'video' in media && (
+  <video class:list={['fill', { art: zoom }]} autoplay muted loop playsinline preload="metadata" poster={media.poster} aria-label={title}>
+    <source src={media.video} type="video/mp4" />
+  </video>
+)}
+{Art && <Art class={zoom ? 'art' : undefined} />}
