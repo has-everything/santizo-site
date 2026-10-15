@@ -1,0 +1,47 @@
+---
+// Work: every video, in two groups. Each tile opens /work/<slug>.
+// Projects and their order live in src/data/work.ts.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import WorkTile from '../../components/WorkTile.astro';
+import { projects, groups, tile } from '../../data/work';
+
+const motion = projects.filter((p) => p.group === 'motion');
+const xr = projects.filter((p) => p.group === 'xr');
+const count = (n: number) => String(n).padStart(2, '0');
+---
+<Base title="Work · Santizo" description="Motion, real-time and XR work by Hector Augusto Santizo, 3D motion designer in Los Angeles.">
+  <Header />
+
+  <Section label="Work" space="sm">
+    <h1>Work</h1>
+    <p class="lead">Motion, real-time and XR. Every piece plays right here, with sound.</p>
+  </Section>
+
+  <Section id="motion" label={groups.motion.label} space="md">
+    <SectionHead num={groups.motion.num} title={groups.motion.label} aside={count(motion.length)} />
+    <div class="grid motion">
+      {motion.map((p) => <WorkTile item={tile(p)} size="cell" />)}
+    </div>
+  </Section>
+
+  <Section id="xr" label={groups.xr.label}>
+    <SectionHead num={groups.xr.num} title={groups.xr.label} aside={count(xr.length)} />
+    <div class="grid xr">
+      {xr.map((p) => <WorkTile item={tile(p)} size="cell" ratio="4 / 5" />)}
+    </div>
+  </Section>
+
+  <Footer num="03" />
+</Base>
+
+<style>
+  h1 { margin: 0 0 clamp(24px, 3vw, 40px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
+  .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
+  .grid { display: grid; gap: 56px 24px; }
+  .motion { grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); }
+  .xr { grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 48px 24px; }
+</style>

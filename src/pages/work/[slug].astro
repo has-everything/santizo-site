@@ -1,0 +1,78 @@
+---
+// One page per project in src/data/work.ts: the video (plays here, with
+// sound), what it is, and the next project in the same group. `year` and
+// `story` show only when filled in.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
+import SpecList from '../../components/project/SpecList.astro';
+import NextProject from '../../components/project/NextProject.astro';
+import { projects, groups, tile, type Project } from '../../data/work';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+interface Props { p: Project }
+const { p } = Astro.props;
+const group = groups[p.group];
+const list = projects.filter((x) => x.group === p.group);
+const next = list[(list.indexOf(p) + 1) % list.length];
+
+const specs: [string, string][] = [
+  ['Category', group.label],
+  ['Focus', p.focus.join(' · ')],
+  ...(p.year ? [['Year', p.year] as [string, string]] : []),
+];
+---
+<Base title={`${p.title} · Santizo`} description={`${p.title}: ${p.blurb}. By Hector Augusto Santizo.`}>
+  <Header />
+
+  <div class="crumbs">
+    <a href="/work" class="mono cap hl hl-44">← All work</a>
+    <span class="mono cap muted">Work / {group.label}</span>
+  </div>
+
+  <section aria-label="Video" class="wrap">
+    <VideoPlayer video={p.video} title={p.title} />
+  </section>
+
+  <Section label="Overview" space="sm">
+    <div class="overview">
+      <div class="name">
+        <h1>{p.title}</h1>
+        <p class="muted">{p.blurb}</p>
+      </div>
+      <div class="facts">
+        <SpecList specs={specs} />
+      </div>
+    </div>
+  </Section>
+
+  {p.story && (
+    <Section label="About the project" space="md">
+      <div class="story">
+        {p.story.map((para) => <p>{para}</p>)}
+      </div>
+    </Section>
+  )}
+
+  <NextProject item={tile(next)} num="01" />
+
+  <Footer num="02" />
+</Base>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
+
+  .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
+  .name { flex: 3 1 520px; min-width: 0; }
+  h1 { margin: 0; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; }
+  .name p { margin: 16px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .facts { flex: 2 1 340px; min-width: 0; }
+
+  .story { max-width: 62ch; display: flex; flex-direction: column; gap: 18px; }
+  .story p { margin: 0; font-size: 18px; line-height: 1.6; }
+</style>

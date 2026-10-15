@@ -12,7 +12,7 @@ const rows = [];
 for (let i = 0; i < rest.length; i += 2) rows.push(rest.slice(i, i + 2));
 ---
 <Section id="work" label="Featured work">
-  <SectionHead num="01" title="Featured work" aside="All work →" asideHref="#work" />
+  <SectionHead num="01" title="Featured work" aside="All work →" asideHref="/work" />
   <div class="works">
     {lead && <WorkTile item={lead} size="full" />}
     {rows.map((row, r) => {

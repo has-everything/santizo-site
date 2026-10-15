@@ -19,7 +19,7 @@ export const site = {
 
 // Top bar links, left to right. Keep it short so it fits on a phone.
 export const nav = [
-  { label: 'Work', href: '/#work' },
+  { label: 'Work', href: '/work' },
   { label: 'Apps', href: '/apps' },
   { label: 'Info', href: '/info' },
 ];
@@ -43,6 +43,15 @@ export const intro = {
   body: 'Teams bring me ideas they can’t quite see yet. I make them visible, then I make them work: 3D animation, real-time and XR.',
   cta: { label: 'Start a project →', href: '#contact' },
 };
+
+// The owner's five rules (manifesto.txt in SantizoOS), shown on Info.
+export const manifesto = [
+  'Show a working prototype, it speaks for itself.',
+  'Weird ideas welcome, shipped ideas better.',
+  'Make tech inspire people, every frame on purpose.',
+  'Clear beats clever, simple beats optimal.',
+  'When in doubt, add dust ✷',
+];
 
 export interface FooterLink { label: string; href: string }
 

@@ -1,5 +1,6 @@
 ---
-// Info: who, where, and what I do (the expertise grid lives here, not on home).
+// Info: who, where, what I do (the expertise grid lives here, not on home),
+// and the manifesto.
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -7,7 +8,7 @@ import Section from '../components/Section.astro';
 import SectionHead from '../components/SectionHead.astro';
 import NumberedGrid from '../components/NumberedGrid.astro';
 import SpecList from '../components/project/SpecList.astro';
-import { site, intro } from '../data/site';
+import { site, intro, manifesto } from '../data/site';
 import { expertise } from '../data/expertise';
 ---
 <Base title="Info · Santizo" description={site.description}>
@@ -34,7 +35,17 @@ import { expertise } from '../data/expertise';
     <NumberedGrid items={expertise.items} />
   </Section>
 
-  <Footer num="02" />
+  <Section id="manifesto" label="Manifesto">
+    <SectionHead num="02" title="Manifesto" />
+    <ol class="manifesto">
+      {manifesto.map((line, i) => (
+        <li><span class="mono cap-sm muted">{String(i + 1).padStart(2, '0')}</span><span>{line}</span></li>
+      ))}
+    </ol>
+    <a href="/photos" class="hl photos">Also: five years of playa dust. See the Burning Man photos →</a>
+  </Section>
+
+  <Footer num="03" />
 </Base>
 
 <style>
@@ -43,4 +54,9 @@ import { expertise } from '../data/expertise';
   .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
   .side { flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
   .side p { margin: 0; font-size: 17px; line-height: 1.6; }
+  .manifesto { margin: 0; padding: 0; list-style: none; }
+  .manifesto li { display: flex; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid var(--rule); font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; }
+  .manifesto li:last-child { border-bottom: 1px solid var(--rule); }
+  .manifesto .mono { flex: 0 0 auto; min-width: 2.5em; }
+  .photos { display: inline-flex; align-items: center; min-height: 44px; margin-top: 32px; font-size: 15px; }
 </style>

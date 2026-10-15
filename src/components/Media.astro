@@ -22,6 +22,11 @@ const Art = 'art' in media ? ART[media.art] : null;
     <iframe src={vimeoSrc(media.vimeo)} loading="lazy" allow="autoplay; fullscreen; picture-in-picture" title={title} tabindex="-1"></iframe>
   </div>
 )}
+{'youtube' in media && (
+  <div class:list={['vf', { art: zoom }]}>
+    <div class="yt"><img src={`https://i.ytimg.com/vi/${media.youtube}/hqdefault.jpg`} alt={`${title} thumbnail`} loading="lazy" decoding="async" /></div>
+  </div>
+)}
 {'video' in media && (
   <video class:list={['fill', { art: zoom }]} autoplay muted loop playsinline preload="metadata" poster={media.poster} aria-label={title}>
     <source src={media.video} type={/\.webm(\?|$)/.test(media.video) ? 'video/webm' : 'video/mp4'} />
