@@ -45,18 +45,17 @@ export const reel = {
 export const intro = {
   headline: 'Moving images, in three dimensions.',
   // Also the opening line on Info
-  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. Fifteen years where design, animation and 3D overlap, including a decade leading creative services at Universal Music Group.',
-  body: 'Teams bring me ideas they can’t quite see yet. I make them visible, then I make them work: 3D animation, real-time and XR.',
-  cta: { label: 'Start a project →', href: '#contact' },
+  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. Fifteen years where design, art, and technology overlap, including a decade leading creative services at Universal Music Group.',
 };
 
-// The owner's five rules (manifesto.txt in SantizoOS), shown on Info.
-export const manifesto = [
+// The owner's five rules (manifesto.txt in SantizoOS), shown on Info under
+// "How I work". The last line pairs with the Burning Man link below the list.
+export const howIWork = [
   'Show a working prototype, it speaks for itself.',
   'Weird ideas welcome, shipped ideas better.',
   'Make tech inspire people, every frame on purpose.',
   'Clear beats clever, simple beats optimal.',
-  'When in doubt, add dust.',
+  'When in doubt, add dust: texture makes it real.',
 ];
 
 export interface FooterLink { label: string; href: string }

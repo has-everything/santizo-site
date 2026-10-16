@@ -1,6 +1,6 @@
 # santizo-site: santizo.com, version B
 
-The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; a Work page with a page per video (15); an Apps page (nine has.tools apps); a Burning Man page (photos); an Info page (about, expertise, manifesto); and the HAS Lathe project page.
+The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; a Work page with a page per video (15); an Apps page (nine has.tools apps); a Burning Man page (photos); an Info page (about, expertise, how I work); and the HAS Lathe project page.
 
 It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
 
@@ -9,13 +9,13 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
-  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (its `lead` also opens Info), manifesto, footer links, and `indexable` (keep false while this is version B)
+  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (its `lead` also opens Info), the How I work rules (`howIWork`), footer links, and `indexable` (keep false while this is version B)
   - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order (its `burning_man_pics` folder, santizo-os `img/hector_santizo_burning_man_002..019.jpg`)
   - `work.ts`: `projects` (every video: slug, title, blurb, focus, group, Vimeo or YouTube id, optional `year` and `story`), plus the home page's `featured` work (order = layout) and XR strip, built from those projects
   - `expertise.ts`: the six expertise cards (shown on Info)
   - `apps.ts`: the Apps page: `appsIntro` (why the tools exist) and `tools` (the nine apps, grid order, each with a `note` saying what problem it answers), plus the short Apps list on the home page (`apps`). The why copy is condensed from the owner's own words on has.tools (About and Learn sections, and the first paragraph of each `tools/<slug>.html`); keep it in his voice and check new lines against those sources
   - `media.ts`: what can fill a tile: `{ vimeo: id }`, `{ video: '/video/x.mp4', poster }`, `{ art: 'lathe' }`, or `{ img: '/img/x.webp' }`
-- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (the photos one per row, all the same width: the column, up to 1200px, with slightly rounded corners; no click needed; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, manifesto), `404.astro` (always noindex), plus `robots.txt.ts` and `sitemap.xml.ts` (generated files, see SEO under Conventions)
+- `src/pages/`: one file per URL. `index.astro` (home), `work/index.astro` (all videos), `work/[slug].astro` (one page per project, generated), `apps/index.astro` (Apps grid), `apps/has-lathe.astro` (project page), `burning-man.astro` (the photos one per row, all the same width: the column, up to 1200px, with slightly rounded corners; no click needed; `/photos` redirects here via `redirects` in `astro.config.mjs`), `info.astro` (about, expertise, how I work), `404.astro` (always noindex), plus `robots.txt.ts` and `sitemap.xml.ts` (generated files, see SEO under Conventions)
 - `src/layouts/Base.astro`: `<head>` (title, description, noindex or canonical, Open Graph and X/Twitter link previews, JSON-LD, icons), fonts, no-flash theme script, Vercel Web Analytics. Pages pass `title`, `description`, optional `image` (link preview) and `schema` (JSON-LD nodes)
 - `src/lib/seo.ts`: the site's absolute address (`origin`, `abs()`), the default link preview image, and the JSON-LD builders (`person`, `website`, `breadcrumbs`)
 - `src/components/`
