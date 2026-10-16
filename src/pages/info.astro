@@ -8,7 +8,7 @@ import Section from '../components/Section.astro';
 import SectionHead from '../components/SectionHead.astro';
 import NumberedGrid from '../components/NumberedGrid.astro';
 import SpecList from '../components/project/SpecList.astro';
-import { site, intro, info, manifesto } from '../data/site';
+import { site, intro, manifesto } from '../data/site';
 import { expertise } from '../data/expertise';
 import { abs, person, breadcrumbs } from '../lib/seo';
 
@@ -24,7 +24,7 @@ const schema = [
   <Section label="Info" space="sm">
     <h1>Info</h1>
     <div class="about">
-      <p class="lead">{info.lead}</p>
+      <p class="lead">{intro.lead}</p>
       <div class="side">
         <p class="muted">{intro.body}</p>
         <SpecList specs={[

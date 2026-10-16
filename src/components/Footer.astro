@@ -22,11 +22,6 @@ const year = new Date().getFullYear();
 
   <div class="cols">
     <div class="col">
-      <p class="mono cap-sm muted label">Practice</p>
-      <p>{site.practice}</p>
-      <p class="muted">{site.region}</p>
-    </div>
-    <div class="col">
       <p class="mono cap-sm muted label">Elsewhere</p>
       <ul class="plain">
         {footer.elsewhere.map((l) => <li><a class="hl" href={l.href}>{l.label}</a></li>)}
@@ -49,7 +44,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="base">
-    <span class="mono cap-sm muted">© {year} {site.practice}</span>
+    <span class="mono cap-sm muted">© {year} {site.name}</span>
     <span class="mono cap-sm muted">{site.person} · {site.role}</span>
   </div>
 </footer>

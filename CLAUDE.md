@@ -9,7 +9,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
-  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (home), the Info page's opening line (`info.lead`), manifesto, footer links, and `indexable` (keep false while this is version B)
+  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (its `lead` also opens Info), manifesto, footer links, and `indexable` (keep false while this is version B)
   - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order (its `burning_man_pics` folder, santizo-os `img/hector_santizo_burning_man_002..019.jpg`)
   - `work.ts`: `projects` (every video: slug, title, blurb, focus, group, Vimeo or YouTube id, optional `year` and `story`), plus the home page's `featured` work (order = layout) and XR strip, built from those projects
   - `expertise.ts`: the six expertise cards (shown on Info)

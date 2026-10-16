@@ -10,7 +10,6 @@ export const site = {
   role: '3D motion designer',
   city: 'Los Angeles',
   email: 'hector@santizo.com',
-  practice: 'Santizo LLC',
   region: 'Los Angeles, California',
 
   // While this is version B (not yet on santizo.com), keep search engines out
@@ -45,14 +44,10 @@ export const reel = {
 
 export const intro = {
   headline: 'Moving images, in three dimensions.',
-  lead: 'I’m Hector Augusto Santizo, a 3D motion designer and creative technologist in Los Angeles. Fifteen years where design, animation and 3D overlap, including a decade leading creative services at a major music company.',
+  // Also the opening line on Info
+  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. Fifteen years where design, animation and 3D overlap, including a decade leading creative services at Universal Music Group.',
   body: 'Teams bring me ideas they can’t quite see yet. I make them visible, then I make them work: 3D animation, real-time and XR.',
   cta: { label: 'Start a project →', href: '#contact' },
-};
-
-// Info page opening line (the home page uses intro.lead above)
-export const info = {
-  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. Fifteen years where design, animation and 3D overlap, including a decade leading creative services at Universal Music Group.',
 };
 
 // The owner's five rules (manifesto.txt in SantizoOS), shown on Info.
