@@ -1,13 +1,13 @@
 ---
 // (02) XR and interaction: a statement and three wide clips in a row. The
-// full list is on /work. Pick the clips in src/data/work.ts (xr.clips).
+// full list is on /xr (and /work). Pick the clips in src/data/work.ts (xr.clips).
 import { xr } from '../../data/work';
 import Section from '../Section.astro';
 import SectionHead from '../SectionHead.astro';
 import WorkTile from '../WorkTile.astro';
 ---
 <Section id="xr" label="XR and interaction">
-  <SectionHead num="02" title="XR and interaction" aside="All XR →" asideHref="/work#xr" />
+  <SectionHead num="02" title="XR and interaction" aside="All XR →" asideHref="/xr" />
   <p class="statement">{xr.statement}</p>
   <div class="trio">
     {xr.clips.map((clip) => <WorkTile item={clip} size="cell" />)}

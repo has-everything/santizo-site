@@ -8,6 +8,7 @@ const paths = [
   '/',
   '/work',
   ...projects.map((p) => `/work/${p.slug}`),
+  '/xr',
   '/apps',
   '/apps/has-lathe',
   '/burning-man',

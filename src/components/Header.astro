@@ -39,13 +39,17 @@ const { overlay = false } = Astro.props;
     .top { padding-top: 12px; }
     .spacer { height: 76px; }
   }
-  /* Small phones: tighter spacing so the four links stay on one line */
+  /* Small phones: tighter spacing so the five links stay on one line */
   @media (max-width: 400px) {
     .top { gap: 16px; }
-    ul { gap: 16px; }
+    ul { gap: 14px; }
   }
-  @media (max-width: 350px) {
+  @media (max-width: 374px) {
     .top { gap: 12px; }
     ul { gap: 12px; font-size: 14px; }
+  }
+  @media (max-width: 350px) {
+    .top { gap: 10px; }
+    ul { gap: 10px; font-size: 13px; }
   }
 </style>
