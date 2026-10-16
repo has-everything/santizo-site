@@ -45,7 +45,7 @@ export const reel = {
 export const intro = {
   headline: 'Moving images, in three dimensions.',
   // Also the opening line on Info
-  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. I’ve spent fifteen years working where design, art, and technology meet, ten of them leading creative services at Universal Music Group.',
+  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. For fifteen years I’ve worked where design, art, and technology meet, including a decade leading creative services at Universal Music Group.',
 };
 
 // The owner's five rules (manifesto.txt in SantizoOS), shown on Info under
