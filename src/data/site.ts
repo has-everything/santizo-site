@@ -67,6 +67,7 @@ export const footer = {
     { label: 'has.tools ↗', href: 'https://has.tools' },
     { label: 'All apps', href: '/apps' },
   ] as FooterLink[],
-  // Boring mode lives on the current site (version A).
-  boring: { label: 'Boring mode', href: 'https://santizo.com/boring.html' },
+  // SantizoOS (the retro desktop site, version A) as an alternate mode. Its
+  // vercel.app address keeps working after santizo.com moves to this site.
+  os: { label: 'OS mode ↗', href: 'https://santizo-os.vercel.app' },
 };

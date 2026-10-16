@@ -79,7 +79,7 @@ Web Analytics: the snippet is in `Base.astro`. Turn it on in the Vercel project 
 
 1. `site.indexable = true` in `src/data/site.ts` (drops noindex, adds canonical URLs).
 2. Add `public/robots.txt` and a sitemap, an `og:image` (1200x630), and JSON-LD Person markup like santizo-os has.
-3. Boring mode: the footer links to `santizo.com/boring.html`, which lives in santizo-os. Bring it over (or drop the link) before the switch.
+3. OS mode: the footer's "OS mode ↗" links to SantizoOS at `https://santizo-os.vercel.app` (not santizo.com, so it survives the switch). SantizoOS keeps its own boring mode. Optional: an `os.santizo.com` address (one CNAME record at Netfirms, never a nameserver change), and an "exit OS" link in SantizoOS's menu back to this site.
 4. In Vercel, move the `santizo.com` and `www` domains from project `santizo-os` to this project. **Do not touch DNS or nameservers** (zone is on Netfirms, MX carries email). The A records already point at Vercel, so moving domains between projects needs no DNS change.
 5. Old SantizoOS deep links (`/?open=...`) land on the home page, which is fine.
 
