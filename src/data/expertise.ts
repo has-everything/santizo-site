@@ -8,6 +8,6 @@ export const expertise = {
     { title: 'Real-time', body: 'Interactive scenes and live visuals.', meta: 'Unity · Unreal Engine' },
     { title: 'XR and interaction', body: 'Hands, gesture and spatial input.', meta: 'Hand tracking · MediaPipe · VR/AR' },
     { title: 'Browser tools', body: 'Free creative tools that run in a browser tab.', meta: 'three.js · WebGPU' },
-    { title: 'AI', body: 'Part of how I design and prototype every day.', meta: 'Claude · ChatGPT · Gemini' },
+    { title: 'AI', body: 'Part of how I design and prototype every day.', meta: 'Claude · Codex · Gemini' },
   ],
 };

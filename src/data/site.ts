@@ -50,13 +50,18 @@ export const intro = {
   cta: { label: 'Start a project →', href: '#contact' },
 };
 
+// Info page opening line (the home page uses intro.lead above)
+export const info = {
+  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. Fifteen years where design, animation and 3D overlap, including a decade leading creative services at Universal Music Group.',
+};
+
 // The owner's five rules (manifesto.txt in SantizoOS), shown on Info.
 export const manifesto = [
   'Show a working prototype, it speaks for itself.',
   'Weird ideas welcome, shipped ideas better.',
   'Make tech inspire people, every frame on purpose.',
   'Clear beats clever, simple beats optimal.',
-  'When in doubt, add dust ✷',
+  'When in doubt, add dust.',
 ];
 
 export interface FooterLink { label: string; href: string }

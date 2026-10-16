@@ -9,7 +9,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
-  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy, manifesto, footer links, and `indexable` (keep false while this is version B)
+  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (home), the Info page's opening line (`info.lead`), manifesto, footer links, and `indexable` (keep false while this is version B)
   - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order (its `burning_man_pics` folder, santizo-os `img/hector_santizo_burning_man_002..019.jpg`)
   - `work.ts`: `projects` (every video: slug, title, blurb, focus, group, Vimeo or YouTube id, optional `year` and `story`), plus the home page's `featured` work (order = layout) and XR strip, built from those projects
   - `expertise.ts`: the six expertise cards (shown on Info)
@@ -62,7 +62,8 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 - **Never show Vimeo's controls** on the hero (owner's call), and don't add timers or checks that swap the player: an earlier 6-second check misfired on a working embed and restarted the reel.
 - The end of the reel is detected from `timeupdate` jumping back to the start, because background embeds loop.
 - Top bar: Work (`/work`), Apps (`/apps`), Burning Man (`/burning-man`), Info (`/info`). Checked to stay on one line from 320px up: labels never wrap, and gaps tighten below 400px (and the text drops to 14px below 350px). Re-check narrow widths before adding a fifth link. The bar sits inset from the media edges (gutter plus 0 to 24px, growing with screen width) so the logo and menu don't line up flush with the videos. It has no background, by design: page content scrolls under it.
-- The footer's "(04) Contact" number follows each page's own sections (`<Footer num="02" />` on Info).
+- The footer's "(04) Contact" number follows each page's own sections (`<Footer num="03" />` on Info).
+- Numbered cards (`NumberedGrid`: Expertise on Info, "What it does" on HAS Lathe) use fixed columns, 1, 2, then 3 from 1100px, so six cards always make even rows. Keep those lists at 3 or 6 items.
 - **SEO and link previews**: every page sets a unique `title` and `description` on `<Base>`; pages with their own picture pass `image` (1200x630 in `public/img/og/`), the rest use the default card. Structured data (JSON-LD, via `src/lib/seo.ts`): Person and WebSite on Home, ProfilePage on Info, CreativeWork per project, SoftwareApplication on HAS Lathe, ImageGallery on Burning Man, CollectionPage on Work and Apps, and breadcrumbs on every inner page. Absolute URLs come from `origin` in `seo.ts`: this project's Vercel production address before launch (`VERCEL_PROJECT_PRODUCTION_URL`, so previews of santizo-site.vercel.app links load their images), santizo.com once `site.indexable` is true. A new page needs a description, and a line in `src/pages/sitemap.xml.ts`.
 - **Link previews were made, not shot**: the default card was rendered from HTML in the site's fonts and night colors (a reel still would be better: export one from the reel at 1200x630 and replace `public/img/og/santizo.png`).
 
