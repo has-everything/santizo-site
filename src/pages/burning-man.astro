@@ -9,10 +9,34 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import SectionHead from '../components/SectionHead.astro';
 import { burningMan } from '../data/photos';
+import { site } from '../data/site';
+import { abs, author, breadcrumbs } from '../lib/seo';
 
 const { photos } = burningMan;
+
+const description = 'Burning Man photographs by Hector Augusto Santizo. Black Rock City, five years of dust and light.';
+const image = { src: '/img/og/burning-man.jpg', alt: 'A giant metal flower sculpture on the playa at Burning Man, with a person reaching up toward it' };
+const schema = [
+  {
+    '@type': 'ImageGallery',
+    name: 'Burning Man',
+    description,
+    url: abs('/burning-man'),
+    author: author(),
+    image: photos.map((ph) => ({
+      '@type': 'ImageObject',
+      contentUrl: abs(ph.src),
+      caption: ph.alt,
+      width: ph.w,
+      height: ph.h,
+      creator: author(),
+      creditText: site.person,
+    })),
+  },
+  breadcrumbs([['Burning Man', '/burning-man']]),
+];
 ---
-<Base title="Burning Man · Santizo" description="Burning Man photographs by Hector Augusto Santizo. Black Rock City, five years of dust and light.">
+<Base title="Burning Man · Santizo" description={description} image={image} schema={schema}>
   <Header />
 
   <Section label={burningMan.title} space="sm">

@@ -10,6 +10,7 @@ import VideoPlayer from '../../components/VideoPlayer.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import NextProject from '../../components/project/NextProject.astro';
 import { projects, groups, tile, type Project } from '../../data/work';
+import { abs, author, breadcrumbs } from '../../lib/seo';
 
 export function getStaticPaths() {
   return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -26,8 +27,24 @@ const specs: [string, string][] = [
   ['Focus', p.focus.join(' · ')],
   ...(p.year ? [['Year', p.year] as [string, string]] : []),
 ];
+
+const path = `/work/${p.slug}`;
+const description = `${p.title}: ${p.blurb}. ${group.label} by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const schema = [
+  {
+    '@type': 'CreativeWork',
+    name: p.title,
+    description,
+    url: abs(path),
+    genre: group.label,
+    keywords: p.focus.join(', '),
+    ...(p.year && { dateCreated: p.year }),
+    author: author(),
+  },
+  breadcrumbs([['Work', '/work'], [p.title, path]]),
+];
 ---
-<Base title={`${p.title} · Santizo`} description={`${p.title}: ${p.blurb}. By Hector Augusto Santizo.`}>
+<Base title={`${p.title} · Santizo`} description={description} schema={schema}>
   <Header />
 
   <div class="crumbs">

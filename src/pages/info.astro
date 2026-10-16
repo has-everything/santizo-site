@@ -10,8 +10,15 @@ import NumberedGrid from '../components/NumberedGrid.astro';
 import SpecList from '../components/project/SpecList.astro';
 import { site, intro, manifesto } from '../data/site';
 import { expertise } from '../data/expertise';
+import { abs, person, breadcrumbs } from '../lib/seo';
+
+const description = 'About Hector Augusto Santizo, 3D motion designer and creative technologist in Los Angeles: background, expertise and the five rules behind the work.';
+const schema = [
+  { '@type': 'ProfilePage', name: 'Info', description, url: abs('/info'), mainEntity: person() },
+  breadcrumbs([['Info', '/info']]),
+];
 ---
-<Base title="Info · Santizo" description={site.description}>
+<Base title="Info · Santizo" description={description} schema={schema}>
   <Header />
 
   <Section label="Info" space="sm">

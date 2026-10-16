@@ -8,12 +8,19 @@ import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import WorkTile from '../../components/WorkTile.astro';
 import { projects, groups, tile } from '../../data/work';
+import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const motion = projects.filter((p) => p.group === 'motion');
 const xr = projects.filter((p) => p.group === 'xr');
 const count = (n: number) => String(n).padStart(2, '0');
+
+const description = 'Motion, real-time and XR work by Hector Augusto Santizo, 3D motion designer in Los Angeles.';
+const schema = [
+  { '@type': 'CollectionPage', name: 'Work', description, url: abs('/work'), author: author() },
+  breadcrumbs([['Work', '/work']]),
+];
 ---
-<Base title="Work · Santizo" description="Motion, real-time and XR work by Hector Augusto Santizo, 3D motion designer in Los Angeles.">
+<Base title="Work · Santizo" description={description} schema={schema}>
   <Header />
 
   <Section label="Work" space="sm">
