@@ -4,7 +4,9 @@
 
 export const burningMan = {
   title: 'Burning Man',
-  lead: 'Black Rock City. Five years of dust and light.',
+  // The owner's words, lightly edited
+  lead: 'A glimpse of a visual journey, captured over five years in the desert of northern Nevada.',
+  body: 'Burning Man is an annual gathering in the Black Rock Desert that brings together about 70,000 people from all over the world.',
   photos: [
     { src: '/img/photos/burning-man-002.webp', w: 1200, h: 1800, alt: 'A Victorian house built as an art car, flying a green flag across the dusty playa' },
     { src: '/img/photos/burning-man-003.webp', w: 1200, h: 1754, alt: 'A figure on tall stilts in a spiked costume, walking through the dust' },

@@ -14,7 +14,7 @@ import { abs, author, breadcrumbs } from '../lib/seo';
 
 const { photos } = burningMan;
 
-const description = 'Burning Man photographs by Hector Augusto Santizo. Black Rock City, five years of dust and light.';
+const description = 'Burning Man photographs by Hector Augusto Santizo: a visual journey captured over five years in the Black Rock Desert of northern Nevada.';
 const image = { src: '/img/og/burning-man.jpg', alt: 'A giant metal flower sculpture on the playa at Burning Man, with a person reaching up toward it' };
 const schema = [
   {
@@ -42,6 +42,7 @@ const schema = [
   <Section label={burningMan.title} space="sm">
     <h1>{burningMan.title}</h1>
     <p class="lead">{burningMan.lead}</p>
+    <p class="body muted">{burningMan.body}</p>
   </Section>
 
   <Section label="Photographs" space="md">
@@ -58,7 +59,8 @@ const schema = [
 
 <style>
   h1 { margin: 0 0 clamp(24px, 3vw, 40px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
-  .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
+  .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 30ch; }
+  .body { margin: 20px 0 0; font-size: 17px; line-height: 1.6; max-width: 52ch; }
 
   /* One photo per row, centered, every photo the same width: the column, up
      to 1200px (the photos' real width, so none are upscaled). Height follows
