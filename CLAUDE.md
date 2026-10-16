@@ -2,14 +2,14 @@
 
 The editorial redesign of santizo.com for Hector Augusto Santizo (HAS): full-screen reel, featured work, XR strip, apps, contact; a Work page with a page per video (15); an XR page (AR, VR, mixed reality: the seven XR projects); an Apps page (nine has.tools apps); a Burning Man page (photos); an Info page (about, expertise, how I work); and the HAS Lathe project page.
 
-It is being built **alongside** the current site, SantizoOS (version A, repo `has-everything/santizo-os`, live on santizo.com). B gets its own Vercel project and URL so both can run side by side. B replaces A only when the owner says so.
+**Live on santizo.com since October 2026.** It was built as version B alongside the previous site, SantizoOS (version A, repo `has-everything/santizo-os`), which now lives on at `https://santizo-os.vercel.app` and is linked from the footer as "OS mode". Both are separate Vercel projects; santizo.com and www belong to this one.
 
 Built with Astro (static output, no client framework). The build ships plain HTML and CSS plus one small script. The design source is the owner's two HTML mockups (`index.html` and `has-lathe.html`, October 2026). This build was checked pixel-identical to them at 1440px and 390px wide, in day and night themes. Since then the layout was widened (see Wide layout under Conventions), and the top bar and the Play reel button come from the owner's XK variant mockup (`index-xk.html`): a fixed bar (Work, Apps, Info) that inverts over what is behind it, a quieter Play reel link, and the ruled Apps list.
 
 ## Structure
 
 - `src/data/`: **the content.** Edit these to change the site.
-  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (its `lead` also opens Info), the How I work rules (`howIWork`), footer links, and `indexable` (keep false while this is version B)
+  - `site.ts`: name, email, the home page's search description, top bar links, reel, intro copy (its `lead` also opens Info), the How I work rules (`howIWork`), footer links, and `indexable` (true since launch; false would put noindex on every page)
   - `photos.ts`: the Burning Man photos (file, size, alt text), in the owner's SantizoOS order (its `burning_man_pics` folder, santizo-os `img/hector_santizo_burning_man_002..019.jpg`)
   - `work.ts`: `projects` (every video: slug, title, blurb, focus, group, Vimeo or YouTube id, optional `year` and `story`), plus the home page's `featured` work (order = layout) and XR strip, and the XR page (`xrPage`: intro, tools, clip order), built from those projects
   - `expertise.ts`: the six expertise cards (shown on Info)
@@ -81,16 +81,12 @@ npm run build    # static site in dist/
 
 Vercel project imported from this GitHub repo, Framework Preset **Astro**, all defaults (build `astro build`, output `dist`). Push to `main` = production; any other branch gets its own preview URL. santizo-os notes that the GitHub webhook has missed pushes before. If a push doesn't show up, run `vercel deploy --prod` from this folder.
 
-Web Analytics: the snippet is in `Base.astro`. Turn it on in the Vercel project (Analytics tab) to compare B's traffic with A's.
+Web Analytics: the snippet is in `Base.astro`. Turn it on in the Vercel project (Analytics tab).
 
-## Launch checklist (when B replaces A)
+## Launch (October 2026)
 
-1. `site.indexable = true` in `src/data/site.ts`, in the same push as step 4 (or right after it). That one switch drops noindex on every page but the 404, adds canonical URLs, points every absolute URL (canonical, link previews, JSON-LD, sitemap) at santizo.com, and adds the `Sitemap:` line to robots.txt. Everything else (link previews, JSON-LD Person like santizo-os has, robots.txt, sitemap.xml, icons) is already live.
-2. After the switch: add santizo.com in Google Search Console (a DNS TXT record at Netfirms or the HTML-file method, never a nameserver change) and submit `https://santizo.com/sitemap.xml`. Check a link preview (for example by pasting the URL in iMessage or Slack, or in LinkedIn's Post Inspector).
-3. OS mode: the footer's "OS mode ↗" links to SantizoOS at `https://santizo-os.vercel.app` (not santizo.com, so it survives the switch). SantizoOS keeps its own boring mode. Optional: an `os.santizo.com` address (one CNAME record at Netfirms, never a nameserver change), and an "exit OS" link in SantizoOS's menu back to this site.
-4. In Vercel, move the `santizo.com` and `www` domains from project `santizo-os` to this project. **Do not touch DNS or nameservers** (zone is on Netfirms, MX carries email). The A records already point at Vercel, so moving domains between projects needs no DNS change.
-5. Old SantizoOS deep links (`/?open=...`) land on the home page, which is fine.
-
-## A real A/B split (optional, later)
-
-To send a share of santizo.com visitors to B before a full switch, add Vercel Routing Middleware to the **santizo-os** project. It assigns each visitor a sticky cookie (`ab=a|b`) and rewrites the `b` group to this project's URL. Compare the two in Vercel Web Analytics. Not set up yet; only do it if the owner asks.
+1. Done in code: `site.indexable = true` in `src/data/site.ts`. That one switch drops noindex on every page but the 404, adds canonical URLs, points every absolute URL (canonical, link previews, JSON-LD, sitemap) at santizo.com, and adds the `Sitemap:` line to robots.txt.
+2. In Vercel, the `santizo.com` and `www.santizo.com` domains move from project `santizo-os` to this project (apex primary, www redirects to it). **Do not touch DNS or nameservers** (zone is on Netfirms, MX carries email). The A records already point at Vercel, so moving domains between projects needs no DNS change.
+3. Google Search Console: a URL-prefix property for `https://santizo.com/`, verified with the HTML tag method (a `google-site-verification` meta tag in `Base.astro`; no DNS needed), then submit `https://santizo.com/sitemap.xml`.
+4. OS mode: the footer's "OS mode ↗" links to SantizoOS at `https://santizo-os.vercel.app`. SantizoOS keeps its own boring mode; its canonical still points at santizo.com, so search engines treat it as a copy of this site. Optional: an `os.santizo.com` address (one CNAME record at Netfirms, never a nameserver change), and an "exit OS" link in SantizoOS's menu back to this site.
+5. Old SantizoOS deep links (`/?open=...`) land on the home page, which is fine. `/boring.html` and SantizoOS's image paths now 404 on santizo.com (the 404 page links home).

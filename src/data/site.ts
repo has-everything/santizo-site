@@ -12,9 +12,10 @@ export const site = {
   email: 'hector@santizo.com',
   region: 'Los Angeles, California',
 
-  // While this is version B (not yet on santizo.com), keep search engines out
-  // so it never competes with the live site. Flip to true at launch.
-  indexable: false,
+  // Live on santizo.com since October 2026: search engines may index it, and
+  // every absolute URL (canonical, link previews, JSON-LD, sitemap) points at
+  // santizo.com. Set false to hide a copy of the site (noindex everywhere).
+  indexable: true,
 };
 
 // Top bar links, left to right. Keep it short so it fits on a phone.
