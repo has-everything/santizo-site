@@ -1,5 +1,7 @@
 ---
 // Project page: HAS Lathe. Copy a page like this one to add a new project page.
+// Media is real HAS Lathe output: the hero is the app's Vimeo loop from
+// has.tools, the figures are app captures and a render (public/img/lathe).
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -10,11 +12,9 @@ import SpecList from '../../components/project/SpecList.astro';
 import PillLink from '../../components/project/PillLink.astro';
 import Figure from '../../components/project/Figure.astro';
 import NextProject from '../../components/project/NextProject.astro';
-import LatheHero from '../../components/art/LatheHero.astro';
-import LatheDemo from '../../components/art/LatheDemo.astro';
-import LatheClay from '../../components/art/LatheClay.astro';
-import LathePresets from '../../components/art/LathePresets.astro';
+import Media from '../../components/Media.astro';
 import { featured } from '../../data/work';
+import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const appUrl = 'https://has.tools/apps/lathe/';
 const next = featured.find((w) => w.title === 'HAS LP-19')!;
@@ -27,8 +27,26 @@ const features = [
   { title: 'Stays on your machine', body: 'Everything runs in your browser. Your shapes never leave your computer.' },
   { title: 'Share a link', body: 'Send a link and it opens HAS Lathe with your exact design.' },
 ];
+
+const description = 'HAS Lathe: a free browser app that turns one section profile into a revolved 3D vessel.';
+const image = { src: '/img/og/has-lathe.jpg', alt: 'HAS Lathe: the section profile editor and the revolved vase it makes' };
+const schema = [
+  {
+    '@type': 'SoftwareApplication',
+    name: 'HAS Lathe',
+    description,
+    url: abs('/apps/has-lathe'),
+    installUrl: appUrl,
+    image: abs(image.src),
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Web browser',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: author(),
+  },
+  breadcrumbs([['Apps', '/apps'], ['HAS Lathe', '/apps/has-lathe']]),
+];
 ---
-<Base title="HAS Lathe · Santizo" description="HAS Lathe: a free browser app that turns one section profile into a revolved 3D vessel.">
+<Base title="HAS Lathe · Santizo" description={description} image={image} schema={schema}>
   <Header />
 
   <div class="crumbs">
@@ -37,8 +55,7 @@ const features = [
   </div>
 
   <section aria-label="HAS Lathe hero" class="hero">
-    <LatheHero />
-    <span class="mono cap-sm ph hero-ph">[Video] HAS Lathe hero loop, 21:9</span>
+    <Media media={{ vimeo: '1213074336' }} title="HAS Lathe" zoom={false} />
   </section>
 
   <Section label="Overview" space="sm">
@@ -57,7 +74,7 @@ const features = [
         ]} />
         <div class="ctas">
           <PillLink href={appUrl}>Open HAS Lathe ↗</PillLink>
-          <PillLink href="#demo" variant="outline">Watch the demo</PillLink>
+          <PillLink href="#demo" variant="outline">See the editor</PillLink>
         </div>
       </div>
     </div>
@@ -74,8 +91,8 @@ const features = [
   </Section>
 
   <Section label="Demo" space="md">
-    <Figure id="demo" num="01" caption="Move a point on the profile and the vessel updates in real time." placeholder="[Video] Profile editing, 24 sec">
-      <LatheDemo />
+    <Figure id="demo" num="01" caption="The editor: shape the profile on the left, the revolved vessel updates on the right.">
+      <img class="fill" src="/img/lathe/editor.webp" width="1600" height="900" loading="lazy" decoding="async" alt="HAS Lathe: the section profile editor on the left, the revolved vase on the right, presets and settings in the side panel" />
     </Figure>
   </Section>
 
@@ -86,11 +103,11 @@ const features = [
 
   <Section label="Stills">
     <div class="stills">
-      <Figure num="02" caption="Vase preset, clay render." ratio="1 / 1" placeholder="[Still] Clay render" half>
-        <LatheClay />
+      <Figure num="02" caption="A vase made in HAS Lathe, rendered." ratio="1 / 1" half>
+        <img class="fill" src="/img/lathe/vase-render.webp" width="832" height="832" loading="lazy" decoding="async" alt="A pale celadon vase with a long narrow neck on a stone plinth" />
       </Figure>
-      <Figure num="03" caption="Bowl, cup and bottle presets." ratio="1 / 1" placeholder="[Still] Presets" half>
-        <LathePresets />
+      <Figure num="03" caption="Bowl, cup, bottle and plate presets." ratio="1 / 1" half>
+        <img class="fill" src="/img/lathe/presets.webp" width="1600" height="1600" loading="lazy" decoding="async" alt="Four HAS Lathe presets in celadon: a bowl, a cup, a bottle and a plate" />
       </Figure>
     </div>
   </Section>
@@ -132,7 +149,6 @@ const features = [
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 40px var(--gutter) 16px; }
 
   .hero { position: relative; height: clamp(280px, 42.857vw, 760px); background: #000000; overflow: hidden; }
-  .hero-ph { left: var(--gutter); bottom: 16px; }
 
   .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px 24px; }
   .name { flex: 3 1 520px; min-width: 0; }

@@ -1,40 +1,21 @@
 ---
 // Wireframe vessel (rings + both profile lines) as an SVG <g>, swaying.
-// `handles` adds the editor handles on the right profile, `measure` adds the
-// dimension marker at the belly. Use inside an <svg>.
-import { rings, side, pathD, WIDEST, HANDLES, LAST } from '../../lib/lathe';
+// Use inside an <svg>.
+import { rings, side, pathD, LAST } from '../../lib/lathe';
 
 interface Props {
   cx: number;
   top?: number;
   motion?: 'sway' | 'swayS';
-  handles?: boolean;
-  measure?: boolean;
 }
-const { cx, top = 170, motion = 'sway', handles = false, measure = false } = Astro.props;
+const { cx, top = 170, motion = 'sway' } = Astro.props;
 
 const rs = rings(cx, top);
-const right = side(cx, top, 1);
-const belly = right[WIDEST];
 ---
 <g class={`fb ${motion}`}>
   {rs.map((r, i) => (
     <ellipse class={i === 0 ? 'lnA' : i === LAST ? 'ln2' : 'ln'} cx={r.cx} cy={r.cy} rx={r.rx} ry={r.ry} />
   ))}
-  <path class="ln2" d={pathD(right)} />
+  <path class="ln2" d={pathD(side(cx, top, 1))} />
   <path class="ln2" d={pathD(side(cx, top, -1))} />
-  {measure && (
-    <>
-      <line class="ln2 dash" x1={belly[0]} y1={belly[1] - 64} x2={belly[0]} y2={belly[1] + 64} />
-      <rect class="node" x={belly[0] - 4} y={belly[1] - 68} width="8" height="8" />
-      <rect class="node" x={belly[0] - 4} y={belly[1] + 60} width="8" height="8" />
-    </>
-  )}
-  {handles && (
-    <>
-      {HANDLES.map((i) => <circle class="node" cx={right[i][0]} cy={right[i][1]} r="6" />)}
-      <circle class="ln2 fb pulse" cx={belly[0]} cy={belly[1]} r="26" />
-      <circle class="nodeA" cx={belly[0]} cy={belly[1]} r="7" />
-    </>
-  )}
 </g>

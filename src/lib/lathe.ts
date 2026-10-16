@@ -1,5 +1,5 @@
-// The HAS Lathe vessel: one section profile shared by every Lathe drawing
-// (work tile, page hero, demo, clay still). Edit RINGS to reshape them all.
+// The HAS Lathe vessel drawn on the home page's HAS Lathe tile. Edit RINGS
+// to reshape it.
 
 // [rx, ry] per ring, top to bottom: rx is the radius, ry the ellipse depth.
 export const RINGS: readonly [number, number][] = [
@@ -9,8 +9,6 @@ export const RINGS: readonly [number, number][] = [
 ];
 
 export const STEP = 28;           // vertical distance between rings
-export const WIDEST = 11;         // index of the belly (the highlighted handle)
-export const HANDLES = [0, 3, 7, 16, 20]; // profile points drawn as editor handles
 export const LAST = RINGS.length - 1;
 
 export interface Ring { cx: number; cy: number; rx: number; ry: number }
