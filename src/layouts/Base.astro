@@ -27,6 +27,8 @@ const indexable = site.indexable && !noindex;
   <title>{title}</title>
   <meta name="description" content={description}>
   <meta name="author" content={site.person}>
+  <!-- Google Search Console ownership (URL-prefix property https://www.santizo.com/). Keep it: removing it unverifies the site -->
+  <meta name="google-site-verification" content="s3UadJBMtMgE3dg5nxDBXRAd_5nmgyDXCaVqj68juvg">
   {indexable ? <link rel="canonical" href={url}> : <meta name="robots" content="noindex, nofollow">}
 
   <!-- Link previews (Open Graph, X/Twitter) -->
