@@ -6,8 +6,10 @@
 // - a direct file (<video>, from reel.file in src/data/site.ts): the click
 //   itself unlocks sound, so it works in every browser, iPhones included.
 // - the Vimeo loop (<iframe>): unmuted through Vimeo's player API. Works in
-//   desktop browsers. iPhones refuse sound started this way; there the hero
-//   just stays on the silent loop. Setting reel.file fixes that.
+//   desktop browsers. iPhones and iPads refuse sound started this way, so there
+//   Play reel stays a plain link to the reel's page (reel.href), where it plays
+//   with sound and controls. A desktop browser that refuses goes there too.
+//   Setting reel.file keeps everyone on the hero.
 import type Player from '@vimeo/player';
 
 interface Driver { play(): void; stop(): void }
@@ -19,9 +21,6 @@ function setup(hero: HTMLElement) {
   const toggle = hero.querySelector<HTMLAnchorElement>('[data-reel-toggle]')!;
   const label = toggle.querySelector('span')!;
   let playing = false;
-
-  toggle.setAttribute('role', 'button');
-  toggle.setAttribute('aria-pressed', 'false');
 
   function set(on: boolean) {
     playing = on;
@@ -37,8 +36,15 @@ function setup(hero: HTMLElement) {
   }
 
   const video = hero.querySelector('video');
-  const driver = video ? fileDriver(video, stop) : vimeoDriver(hero.querySelector('iframe')!, stop);
+  // iOS can't unmute the Vimeo loop: leave the link alone, it opens the reel's page
+  if (!video && isIOS()) return;
 
+  const driver = video
+    ? fileDriver(video, stop)
+    : vimeoDriver(hero.querySelector('iframe')!, stop, () => location.assign(toggle.href));
+
+  toggle.setAttribute('role', 'button');
+  toggle.setAttribute('aria-pressed', 'false');
   toggle.addEventListener('click', (e) => {
     e.preventDefault();
     if (playing) return stop();
@@ -48,6 +54,11 @@ function setup(hero: HTMLElement) {
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) stop();
   }).observe(hero);
+}
+
+// iPhone, iPad (which reports itself as a Mac with touch), iPod: all WebKit
+function isIOS() {
+  return /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
 // `done` is called when the reel ends or the browser refuses to play it with sound.
@@ -70,7 +81,8 @@ function fileDriver(video: HTMLVideoElement, done: () => void): Driver {
   };
 }
 
-function vimeoDriver(iframe: HTMLIFrameElement, done: () => void): Driver {
+// `refused` (Vimeo only): play() was rejected, so open the reel's page instead.
+function vimeoDriver(iframe: HTMLIFrameElement, done: () => void, refused: () => void): Driver {
   let player: Promise<Player> | undefined;
   let active = false;
   let last = 0;
@@ -100,7 +112,7 @@ function vimeoDriver(iframe: HTMLIFrameElement, done: () => void): Driver {
         quiet(p.setCurrentTime(0));
         quiet(p.setMuted(false));
         quiet(p.setVolume(1));
-        p.play().catch(done);
+        p.play().catch(() => { done(); refused(); });
       }, done);
     },
     stop() {

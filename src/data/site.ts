@@ -5,7 +5,8 @@ export const site = {
   name: 'Santizo',
   person: 'Hector Augusto Santizo',
   title: 'Santizo · Hector Augusto Santizo',
-  description: 'Hector Augusto Santizo, 3D motion designer and creative technologist in Los Angeles.',
+  // Home page description in search results and link previews (other pages set their own)
+  description: 'Hector Augusto Santizo, 3D motion designer and creative technologist in Los Angeles. 3D animation, real-time and XR work, and free tools for creative people.',
   role: '3D motion designer',
   city: 'Los Angeles',
   email: 'hector@santizo.com',
@@ -30,12 +31,16 @@ export const reel = {
   // Optional direct MP4 of the reel. In Vimeo: the video's settings, ⋯ menu,
   // Video file links, then Copy link on the 1080p version. When set, the hero
   // plays this file instead of the Vimeo loop, which lets Play reel have sound
-  // on iPhones too. When empty, Play reel unmutes the Vimeo loop (desktop only).
+  // on iPhones too. When empty, Play reel unmutes the Vimeo loop (desktop), and
+  // iPhones and iPads open the reel's page instead (href below).
   file: '',
   poster: '', // optional still shown while the file loads, e.g. '/img/reel-poster.jpg'
   title: 'Santizo Reel 2026',
   credits: 'Art direction · Sim · Lighting',
-  href: 'https://vimeo.com/1216889002',
+  // The reel's own page on this site (its project in src/data/work.ts), where it
+  // plays with sound and controls. Play reel goes here on iPhones and iPads,
+  // when a browser refuses sound on the hero, and without JavaScript.
+  href: '/work/santizo-reel-2026',
 };
 
 export const intro = {
