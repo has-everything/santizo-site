@@ -4,7 +4,7 @@ import { site, footer } from '../data/site';
 
 // Where this site lives. Before launch: this Vercel project's production
 // address (santizo-site.vercel.app), so link previews load their images. At
-// launch (site.indexable = true): santizo.com, from `site` in astro.config.mjs.
+// launch (site.indexable = true): www.santizo.com, from `site` in astro.config.mjs.
 const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 export const origin = (site.indexable || !vercel ? import.meta.env.SITE : `https://${vercel}`).replace(/\/$/, '');
 

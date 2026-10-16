@@ -14,7 +14,7 @@ export const site = {
 
   // Live on santizo.com since October 2026: search engines may index it, and
   // every absolute URL (canonical, link previews, JSON-LD, sitemap) points at
-  // santizo.com. Set false to hide a copy of the site (noindex everywhere).
+  // www.santizo.com (`site` in astro.config.mjs). Set false to hide a copy of the site (noindex everywhere).
   indexable: true,
 };
 
