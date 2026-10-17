@@ -95,6 +95,7 @@ export const appPages: AppPage[] = [
     description: 'HAS Lathe: a free browser app that turns one section profile into a revolved 3D vessel.',
     appUrl: 'https://has.tools/apps/lathe/',
     hero: { vimeo: '1213074336' },
+    role: 'Concept, Creative Direction, Interface Design, Software Development',
     specs: [
       ['Type', 'Free browser app'],
       ['Version', 'v2.0'],
@@ -102,10 +103,23 @@ export const appPages: AppPage[] = [
       ['Exports', 'GLB · glTF · OBJ'],
       ['Part of', 'HAS Tools'],
     ],
-    lead: 'Draw one section profile and get a live, revolved vessel: vases, bowls, bottles and turned props, ready for your scene.',
-    copy: [
-      'I made HAS Lathe because modeling a simple vase should not mean opening a full 3D package. You shape one curve, and the app turns it into a clean, crease-aware mesh with real wall thickness.',
-      'It is made for set dressing, turned props and product mockups. Take the result straight into Cinema 4D, Blender or Unreal.',
+    story: [
+      { title: 'Vision', paras: [
+        'Turned objects are everywhere in set dressing: vases, bowls, bottles, lamp bases, table legs.',
+        'Modeling one in a full 3D package means spline revolves and cleanup for what is really a two-minute shape. I wanted it to take two minutes.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'Strip it to the essential move: edit the section, get the vessel.',
+        'The idea is the potter’s wheel, the rokuro, and the interface carries it: the profile on one side, the turning vessel on the other, finished with a glaze.',
+      ] },
+      { title: 'Execution', paras: [
+        'A live revolve engine in the browser, built around a single profile.',
+        'Points can be smooth, sharp or filleted, each with its own radius, and the mesh keeps crisp creases where you drew them. Walls are hollow with real thickness, rims finish square, flat, round or beveled, and presets for vase, bowl, cup, bottle, plate and base get you most of the way in one click.',
+      ] },
+      { title: 'Outcome', paras: [
+        'Version 2.0, free at has.tools.',
+        'Vessels export at real-world scale, in meters, centimeters or millimeters, as GLB, glTF or OBJ with PBR material settings, ready for Cinema 4D, Blender, Unreal or a product mockup. Everything runs on your machine.',
+      ] },
     ],
     demo: { src: '/img/apps/lathe/editor.webp', w: 1600, h: 900, alt: 'HAS Lathe: the section profile editor on the left, the revolved vase on the right, presets and settings in the side panel', caption: 'The editor: shape the profile on the left, the revolved vessel updates on the right.' },
     features: [
