@@ -209,15 +209,20 @@ export const toyline = {
     { title: 'Made in code', body: 'No model files and no image files: the cars, robots, machines, cartons and textures are all built in three.js.' },
     { title: 'The money layer', body: 'A price over every station and a running tab on every car, then break-even and price charts, and a month you can run day by day.' },
   ],
-  line: { src: '/img/work/has-toyline/detail.webp', w: 2400, h: 1350, alt: 'Yellow robot arms fitting parts to a red coupe at the Detail station', caption: 'Wheels on, then lights, grille and bumpers at Detail.' } as Still,
+  // Figures in story order: the order and its car, the build, the six models, the line, then the money layer.
+  // order.webp and models.webp are real app renders (Oct 2026): the Order tab beside the car it built, and
+  // the six models on the order-preview turntable, one render each at the same angle, set in a 3 x 2 grid.
+  order: { src: '/img/work/has-toyline/order.webp', w: 2400, h: 1350, alt: 'HAS Toyline with the Order tab open for a teal wagon with GT stripes, No. 3 and luggage on the roof; beside it, that wagon built and parked in the lot, with its running tab', caption: 'The work order in the panel, the wagon the line built from it, and its running tab.' } as Still,
   squares: [
     { src: '/img/work/has-toyline/birch.webp', w: 1360, h: 1360, alt: 'Raw birch coupe bodies on the conveyor after the cut', caption: 'A block of birch, cut to a coupe.' },
     { src: '/img/work/has-toyline/carton.webp', w: 1360, h: 1360, alt: 'A red No. 7 coupe boxed in a windowed HAS Wheels carton', caption: 'Boxed in its HAS Wheels carton.' },
   ] as Still[],
+  models: { src: '/img/work/has-toyline/models.webp', w: 2400, h: 1350, alt: 'The six models on the order-preview turntable: a red coupe, a mustard hatch, a teal wagon, a sky-blue van with a surfboard, a green pickup and a white racer with a red checker band', caption: 'Coupe, Hatch, Wagon, Van, Pickup and Racer, each with its own paint, livery, wheels and roof.' } as Still,
   pair: [
-    { src: '/img/work/has-toyline/line.webp', w: 2400, h: 1350, alt: 'The whole HAS Toyline factory from above, with cost tags over each station and a running tab on every car', caption: 'The money layer on: minutes and cost over every station, and the tab each car carries.' },
-    { src: '/img/work/has-toyline/truck.webp', w: 2400, h: 1350, alt: 'The HAS Wheels delivery truck at the end of the line', caption: 'On the truck: freight is the last line on the tab.' },
+    { src: '/img/work/has-toyline/detail.webp', w: 2400, h: 1350, alt: 'Yellow robot arms fitting parts to a red coupe at the Detail station', caption: 'Wheels on, then lights, grille and bumpers at Detail.' },
+    { src: '/img/work/has-toyline/truck.webp', w: 2400, h: 1350, alt: 'The HAS Wheels delivery truck at the end of the line', caption: 'On the truck, bound for the shops.' },
   ] as Still[],
+  money: { src: '/img/work/has-toyline/line.webp', w: 2400, h: 1350, alt: 'The whole HAS Toyline factory from above, with cost tags over each station and a running tab on every car', caption: 'The money layer on: minutes and cost over every station, and the tab each car carries.' } as Still,
   og: { src: '/img/og/has-toyline.jpg', alt: 'HAS Toyline: a red wooden coupe boxed in a HAS Wheels carton' },
 };
 

@@ -72,9 +72,9 @@ const schema = [
     <Story blocks={p.story} />
   </Section>
 
-  <Section label="At the line" space="md">
-    <Figure num="01" caption={p.line.caption}>
-      <img class="fill" src={p.line.src} width={p.line.w} height={p.line.h} loading="lazy" decoding="async" alt={p.line.alt} />
+  <Section label="Build to order" space="md">
+    <Figure num="01" caption={p.order.caption}>
+      <img class="fill" src={p.order.src} width={p.order.w} height={p.order.h} loading="lazy" decoding="async" alt={p.order.alt} />
     </Figure>
   </Section>
 
@@ -88,19 +88,31 @@ const schema = [
     </div>
   </Section>
 
+  <Section label="The six models" space="md">
+    <Figure num="04" caption={p.models.caption}>
+      <img class="fill" src={p.models.src} width={p.models.w} height={p.models.h} loading="lazy" decoding="async" alt={p.models.alt} />
+    </Figure>
+  </Section>
+
   <Section label="What it does">
     <SectionHead num="01" title="What it does" aside={String(p.features.length).padStart(2, '0')} />
     <NumberedGrid items={p.features} narrow />
   </Section>
 
-  <Section label="The money layer" space="lg">
+  <Section label="At the line" space="md">
     <div class="pair">
       {p.pair.map((s, i) => (
-        <Figure num={String(i + 4).padStart(2, '0')} caption={s.caption} half>
+        <Figure num={String(i + 5).padStart(2, '0')} caption={s.caption} half>
           <img class="fill" src={s.src} width={s.w} height={s.h} loading="lazy" decoding="async" alt={s.alt} />
         </Figure>
       ))}
     </div>
+  </Section>
+
+  <Section label="The money layer" space="lg">
+    <Figure num="07" caption={p.money.caption}>
+      <img class="fill" src={p.money.src} width={p.money.w} height={p.money.h} loading="lazy" decoding="async" alt={p.money.alt} />
+    </Figure>
   </Section>
 
   <NextProject item={next} num="02" aside="All work →" asideHref="/work" />
