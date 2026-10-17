@@ -110,7 +110,7 @@ export const appPages: AppPage[] = [
       ] },
       { title: 'Creative Direction', paras: [
         'Strip it to the essential move: edit the section, get the vessel.',
-        'The idea is the potter’s wheel, the rokuro, and the interface carries it: the profile on one side, the turning vessel on the other, finished with a glaze.',
+        'The idea is the potter’s wheel, and the interface carries it: the profile on one side, the turning vessel on the other, finished with a glaze.',
       ] },
       { title: 'Execution', paras: [
         'A live revolve engine in the browser, built around a single profile.',
