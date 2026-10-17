@@ -52,19 +52,20 @@ export const appPages: AppPage[] = [
     ],
     story: [
       { title: 'Vision', paras: [
-        'Exploded views are one of the clearest ways to explain how a product works, but creating them can be surprisingly time-consuming.',
-        'I wanted to simplify that process, giving designers a faster and more intuitive way to turn complex 3D assemblies into animated visual stories.',
+        'An exploded view is the clearest way to explain how a product works. Making one is slow.',
+        'In Cinema 4D or After Effects it means hand-rigging an offset for every part, then redoing them all when the model changes. I wanted the explosion to be something you direct, not something you rig.',
       ] },
       { title: 'Creative Direction', paras: [
-        'I approached Splay as a motion design tool rather than a traditional CAD application.',
-        'The focus was on clarity, composition, and movement. How do parts separate? In what order? How can animation reveal the relationships between components without overwhelming the viewer?',
+        'I treated Splay as a motion design tool, not a CAD app.',
+        'The questions are a motion designer’s. Which parts separate first? How far, and in what order? How do you show how everything fits together without overwhelming the viewer?',
       ] },
       { title: 'Execution', paras: [
-        'I designed and developed a browser-based application that imports STEP, GLB, and OBJ models and transforms them into editable exploded-view animations.',
-        'Users can control individual parts, adjust their movement, create animation sequences on a timeline, add annotations, and export animated GLB files.',
+        'Splay runs entirely in the browser and reads real CAD files (STEP) as well as GLB and OBJ.',
+        'Auto-explode reads the shape of the model and gives every part a starting direction. From there it is choreography: stagger parts on a timeline, ease the keyframes, label parts and bookmark the camera angles. Everything stays editable, and nothing is uploaded.',
       ] },
       { title: 'Outcome', paras: [
-        'A working creative software prototype that makes technical visualization more accessible, connecting product design, animation, and interactive technology in one streamlined workflow.',
+        'A working prototype, free at has.tools.',
+        'A product model goes in. An animated exploded view comes out, as a GLB for any 3D pipeline or web viewer, or rendered as a PNG or an MP4.',
       ] },
     ],
     demo: { src: '/img/apps/splay/app.webp', w: 1600, h: 900, alt: 'Splay: the scene tree on the left, an exploded camera drone in the viewport, the inspector on the right and the timeline below', caption: 'The studio: the parts on the left, the exploded drone in the middle, the timeline below.' },
@@ -129,7 +130,7 @@ export const appPages: AppPage[] = [
   {
     slug: 'has-sculpt',
     name: 'HAS Sculpt',
-    tagline: 'Digital clay, without the complexity.',
+    tagline: 'Digital clay, in a browser tab.',
     description: 'HAS Sculpt: free digital clay in your browser. Push, pull, crease and smooth a sphere into a character or a form study, then export a GLB.',
     appUrl: 'https://has.tools/apps/sculpt/',
     hero: { img: '/img/apps/sculpt/hero.webp' },
@@ -143,19 +144,20 @@ export const appPages: AppPage[] = [
     ],
     story: [
       { title: 'Vision', paras: [
-        'Sometimes a creative idea begins with nothing more than a shape.',
-        'I wanted to make digital sculpting immediate and approachable, removing the setup and interface complexity that can interrupt the early stages of experimentation.',
+        'Sometimes an idea starts as nothing more than a shape.',
+        'Blocking out a head, a creature or a rock in a full sculpting app means installing it, learning it and waiting for it to open. I wanted sculpting to start as fast as the idea does.',
       ] },
       { title: 'Creative Direction', paras: [
-        'Inspired by the simplicity of working with physical clay, I designed the experience around direct interaction.',
-        'The goal was to let the form take center stage, with tools that feel accessible while providing the control needed to develop more detailed shapes.',
+        'It should feel like clay: you touch the form, and the form responds.',
+        'The form stays at the center of the screen. Nine brushes, mirror symmetry on from the start, and nothing else in the way until you need it.',
       ] },
       { title: 'Execution', paras: [
-        'I developed a browser-based sculpting application with interactive brushes, symmetry, masking, dynamic mesh detail, and remeshing.',
-        'Users can push, pull, smooth, and reshape geometry, combine primitive forms, and export their creations as GLB models for further development in other 3D applications.',
+        'Under the simple surface is a full sculpting engine, built for the browser.',
+        'Detail builds only where you sculpt, so the model stays light. Masks protect what you want to keep, primitive shapes weld into the mesh, and a remesh evens out stretched surfaces. Your work autosaves, with earlier versions you can recover.',
       ] },
       { title: 'Outcome', paras: [
-        'A lightweight creative environment for exploring characters, objects, and organic forms, demonstrating how sophisticated 3D technology can be presented through a simple, approachable interface.',
+        'Version 2.0, free at has.tools.',
+        'Open a tab, start from a sphere, and leave with a GLB for Cinema 4D, Blender or Unreal.',
       ] },
     ],
     demo: { src: '/img/apps/sculpt/app.webp', w: 1600, h: 900, alt: 'HAS Sculpt: a terracotta clay head in the middle, the brushes on the left, size, strength and mirror settings on the right', caption: 'The studio: brushes on the left, the clay in the middle, size, strength and mirror on the right.' },
@@ -195,19 +197,20 @@ export const appPages: AppPage[] = [
     ],
     story: [
       { title: 'Vision', paras: [
-        'Complex structures often begin with simple lines.',
-        'I wanted to explore how a single curve could become a complete 3D truss system, eliminating the repetitive modeling traditionally required for stage, event, and exhibition visualization.',
+        'Truss is in every stage, concert and exhibition render, and it is tedious to model by hand.',
+        'Dozens of tubes, repeated bays, diagonals that have to land on the chords, and along a curve it gets worse. I wanted a single line to be enough.',
       ] },
       { title: 'Creative Direction', paras: [
-        'The guiding idea was to make structure generation feel more like drawing than engineering.',
-        'Rather than building every component individually, users define the overall shape while the application handles the repeating geometric elements.',
+        'It should feel more like drawing than engineering.',
+        'You shape the line and the app does the repetition. Every control is a slider in meters, and every change shows up live in a lit viewport.',
       ] },
       { title: 'Execution', paras: [
-        'I developed a procedural 3D generator that transforms editable curves into detailed truss geometry.',
-        'Users can create straight runs, arches, and custom paths, select different structural profiles, adjust dimensions and materials, and export models for visualization in other 3D environments.',
+        'I built a procedural generator that follows a bezier path, bay by bay.',
+        'Chords, diagonals, cross braces and end caps are built along the curve in a square, triangle or ladder profile, in six real finishes from aluminum to Corten. The whole design fits in a share link, and exports at real scale as GLB, glTF or OBJ.',
       ] },
       { title: 'Outcome', paras: [
-        'A practical tool for rapid concept development and visualization, demonstrating how procedural modeling can simplify repetitive production tasks while preserving creative control.',
+        'Version 1.2, free at has.tools.',
+        'Straight runs, arches, S-curves and full rings, built live as you draw, ready for stage design, previs and set dressing in Cinema 4D, Blender, Unreal or Unity.',
       ] },
     ],
     demo: { src: '/img/apps/truss/app.webp', w: 1600, h: 900, alt: 'HAS Truss: the path editor and profile settings on the left, an arched square truss in the viewport', caption: 'The studio: draw the path on the left, the truss builds along it on the right.' },
@@ -247,19 +250,20 @@ export const appPages: AppPage[] = [
     ],
     story: [
       { title: 'Vision', paras: [
-        'Designing an exhibition should be as intuitive as imagining the space itself.',
-        'I wanted to create a tool that allows artists, designers, and curators to explore spatial ideas without the complexity of traditional architectural software.',
+        'Planning a show usually means graph paper or a full 3D package. I wanted something in between.',
+        'A tool for artists, designers and curators to try out a space before it exists, without learning architectural software.',
       ] },
       { title: 'Creative Direction', paras: [
-        'The concept was simple: draw in two dimensions, experience in three.',
-        'I focused on making the transition between planning and visualization feel immediate. Walls, openings, artwork, and lighting become part of a space that can be explored as it takes shape.',
+        'Draw in two dimensions, experience in three.',
+        'The plan and the room sit side by side, and the room builds itself as you draw: walls at real height, doors, windows and daylight. Hanging art had to be one gesture, so it is: drop an image near a wall.',
       ] },
       { title: 'Execution', paras: [
-        'I developed an interactive browser application that translates 2D floor plans into navigable 3D environments.',
-        'Users can create walls, add doors and windows, position artwork, explore the gallery at eye level, and export their designs for use in other 3D applications.',
+        'I built it as a browser app: a 2D plan editor joined to a live 3D scene.',
+        'Images hang at real-world scale, on the side of the wall you dropped them on. A hotspot puts you inside at eye level, and the whole gallery exports as GLB or glTF for other 3D apps or the web.',
       ] },
       { title: 'Outcome', paras: [
-        'A creative tool that brings spatial planning and real-time visualization together, making it easier to explore, communicate, and refine exhibition concepts before they exist physically.',
+        'Version 1.0, free at has.tools.',
+        'A show can be planned, walked through and shared before a single nail goes into a wall. The gallery on this page is hung with my Burning Man photos.',
       ] },
     ],
     demo: { src: '/img/apps/gallery/app.webp', w: 1600, h: 900, alt: 'HAS Gallery: the floor plan on the left, the same room in 3D in the middle with photographs on the walls, properties on the right', caption: 'The studio: the 2D plan on the left, the 3D gallery builds itself beside it.' },

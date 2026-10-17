@@ -47,20 +47,20 @@ export const projects: Project[] = [
     tagline: 'Turning a painting into a place to explore.',
     story: [
       { title: 'Vision', paras: [
-        'What if you could step inside a painting rather than simply look at it?',
-        'I wanted to reimagine Vincent van Gogh’s *The Bedroom* as an interactive experience, transforming a familiar work of art into a space where curiosity leads to discovery.',
+        'What if you could step inside a painting instead of looking at it?',
+        'I rebuilt Vincent van Gogh’s *The Bedroom* as a room you can walk into, where curiosity leads to discovery.',
       ] },
       { title: 'Creative Direction', paras: [
-        'The goal wasn’t simply to reproduce a painting in 3D. It was to create a more personal way to experience the artwork and the stories behind it.',
-        'Every detail offered an opportunity for discovery. Paintings reveal their stories, everyday objects provide glimpses into Van Gogh’s life, and a drawer opens to reveal a collection of his letters. Visitors can also explore different versions of the original painting.',
+        'Not a copy of the painting in 3D, but a more personal way into it, and into the life behind it.',
+        'Every object holds something. The paintings on the walls tell their stories, everyday things give glimpses of his life, and a drawer opens onto a collection of his letters. You can also explore different versions of the original painting.',
       ] },
       { title: 'Execution', paras: [
-        'I developed the experience in Unreal Engine, bringing together 3D environment design, lighting, interaction, and storytelling.',
-        'The room becomes a navigable space where visitors can explore objects, uncover information, and experience the artwork at their own pace.',
+        'Built in Unreal Engine: the room, the light, the interactions and the storytelling.',
+        'Visitors move through the room at their own pace, exploring objects and uncovering what each one holds.',
       ] },
       { title: 'Outcome', paras: [
-        'An interactive exploration of how technology can create new ways to experience art.',
-        'Rather than simply viewing an image, visitors become participants, turning observation into discovery.',
+        'Visitors stop looking at the painting and start exploring it.',
+        'An experiment in how real-time technology can open new ways into art, turning observation into discovery.',
       ] },
     ],
   },
@@ -71,19 +71,19 @@ export const projects: Project[] = [
     story: [
       { title: 'Vision', paras: [
         'What if music could become something you could hold?',
-        'LP-19 explores the idea of transforming sound into a physical visual artifact, translating music into patterns printed on paper.',
+        'LP-19 turns sound into a physical artifact: music, printed as patterns on paper.',
       ] },
       { title: 'Creative Direction', paras: [
-        'I envisioned a minimal, beautifully considered object that makes an invisible experience tangible.',
-        'The design follows a restrained industrial aesthetic, with simple geometric forms, clean surfaces, and an emphasis on function. The intention was to create a product where the interaction between sound, movement, and paper becomes the visual centerpiece.',
+        'A minimal object that makes an invisible experience tangible.',
+        'Restrained industrial design: simple geometry, clean surfaces, everything there for a reason. The centerpiece is the moment sound, movement and paper meet.',
       ] },
       { title: 'Execution', paras: [
-        'I developed the product concept through 3D design and visualization, exploring its proportions, materials, and mechanical expression.',
-        'The project considers how audio could be translated into graphic patterns, with the movement of paper and the emerging visualization communicating the relationship between sound and physical output.',
+        'Designed and visualized in 3D: the proportions, the materials and the way the mechanism moves.',
+        'The film explores how audio could turn into graphic patterns. As the paper moves, the print emerges, and you can watch sound become an object.',
       ] },
       { title: 'Outcome', paras: [
-        'A product design exploration that connects industrial design, motion, and creative technology.',
-        'LP-19 imagines a different relationship with music, where something fleeting can become something physical and lasting.',
+        'A product concept where industrial design, motion and creative technology meet.',
+        'LP-19 imagines a different relationship with music, where something fleeting becomes something you can keep.',
       ] },
     ],
   },
