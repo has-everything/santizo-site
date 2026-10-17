@@ -1,7 +1,8 @@
 // One page per app at /apps/<slug>, all built by src/pages/apps/[slug].astro.
-// The copy is condensed from the owner's own words on has.tools (each app's
-// tools/<slug>.html showcase page); keep it in his voice and check new lines
-// against those pages. Images are real app output in public/img/apps/<app>/:
+// `story` (Vision, Creative Direction, Execution, Outcome), `tagline` and
+// `role` are the owner's own case-study copy (Oct 2026): keep them as written.
+// Apps without a story yet show `lead` and `copy`, condensed from each app's
+// has.tools showcase page (tools/<slug>.html). Images are real app output in public/img/apps/<app>/:
 // a wide hero (7:3), the app at work (16:9) and two square stills.
 import type { Media } from './media';
 import type { OgImage } from '../lib/seo';
@@ -15,9 +16,11 @@ export interface AppPage {
   description: string; // search results and link previews
   appUrl: string;      // the app itself, on has.tools
   hero: Media;         // wide band at the top: a Vimeo loop or a still
+  role?: string;       // "My role", shown first in the specs
   specs: [string, string][];
-  lead: string;
-  copy: [string, string]; // why it exists (first person), then a muted line
+  story?: { title: string; paras: string[] }[]; // the case study, in the owner's words
+  lead?: string;          // without a story: one big line...
+  copy?: [string, string]; // ...why it exists (first person), then a muted line
   demo: Still;            // Fig. 01, the app at work (16:9)
   features: { title: string; body: string }[]; // six cards
   stills: [Still, Still]; // Fig. 02 and 03, square
@@ -29,16 +32,16 @@ const credits = {
   title: 'credits',
   lines: [['Design and direction', 'Hector Augusto Santizo'], ['Collection', 'HAS Tools'], ['Price', 'Free']] as [string, string][],
 };
-const local = 'Everything runs in your browser. Your work never leaves your computer.';
 
 export const appPages: AppPage[] = [
   {
     slug: 'splay',
     name: 'Splay',
-    tagline: 'An exploded-view studio in your browser.',
+    tagline: 'Making complexity visible.',
     description: 'Splay: a free exploded-view studio in your browser. Import a STEP, GLB or OBJ model, choreograph how it comes apart on a timeline, and export an animated GLB.',
     appUrl: 'https://has.tools/apps/splay/',
     hero: { img: '/img/apps/splay/hero.webp' },
+    role: 'Concept, Creative Direction, Interaction Design, Software Development',
     specs: [
       ['Type', 'Free browser app'],
       ['Version', 'v0.1 · prototype'],
@@ -46,10 +49,22 @@ export const appPages: AppPage[] = [
       ['Exports', 'Animated GLB · PNG · MP4'],
       ['Part of', 'HAS Tools'],
     ],
-    lead: 'Import a product model, choreograph how it comes apart on a timeline, and export the whole animation.',
-    copy: [
-      'I made Splay because exploded views usually mean hand-rigging offsets in Cinema 4D or After Effects, then redoing them every time the model changes. Here the explosion itself is the document: every part gets a direction and a distance, and the timeline sets the sequence.',
-      'It reads real CAD data as well as GLB and OBJ, groups parts for you, and keeps everything editable. Drop the result into any 3D pipeline or web viewer.',
+    story: [
+      { title: 'Vision', paras: [
+        'Exploded views are one of the clearest ways to explain how a product works, but creating them can be surprisingly time-consuming.',
+        'I wanted to simplify that process, giving designers a faster and more intuitive way to turn complex 3D assemblies into animated visual stories.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'I approached Splay as a motion design tool rather than a traditional CAD application.',
+        'The focus was on clarity, composition, and movement. How do parts separate? In what order? How can animation reveal the relationships between components without overwhelming the viewer?',
+      ] },
+      { title: 'Execution', paras: [
+        'I designed and developed a browser-based application that imports STEP, GLB, and OBJ models and transforms them into editable exploded-view animations.',
+        'Users can control individual parts, adjust their movement, create animation sequences on a timeline, add annotations, and export animated GLB files.',
+      ] },
+      { title: 'Outcome', paras: [
+        'A working creative software prototype that makes technical visualization more accessible, connecting product design, animation, and interactive technology in one streamlined workflow.',
+      ] },
     ],
     demo: { src: '/img/apps/splay/app.webp', w: 1600, h: 900, alt: 'Splay: the scene tree on the left, an exploded camera drone in the viewport, the inspector on the right and the timeline below', caption: 'The studio: the parts on the left, the exploded drone in the middle, the timeline below.' },
     features: [
@@ -113,10 +128,11 @@ export const appPages: AppPage[] = [
   {
     slug: 'has-sculpt',
     name: 'HAS Sculpt',
-    tagline: 'Digital clay in your browser.',
+    tagline: 'Digital clay, without the complexity.',
     description: 'HAS Sculpt: free digital clay in your browser. Push, pull, crease and smooth a sphere into a character or a form study, then export a GLB.',
     appUrl: 'https://has.tools/apps/sculpt/',
     hero: { img: '/img/apps/sculpt/hero.webp' },
+    role: 'Concept, Creative Direction, Interface Design, 3D Development',
     specs: [
       ['Type', 'Free browser app'],
       ['Version', 'v2.0'],
@@ -124,10 +140,22 @@ export const appPages: AppPage[] = [
       ['Exports', 'GLB'],
       ['Part of', 'HAS Tools'],
     ],
-    lead: 'Push, pull, crease and smooth a sphere into a character, a creature or a form study.',
-    copy: [
-      'I made HAS Sculpt because blocking out a head, a creature or a rock shouldn’t start with installing a sculpting app and waiting for it to open. This one opens in a tab: a clay sphere, nine brushes, and mirror symmetry on by default.',
-      'Detail builds only where you sculpt, and the result exports as a GLB for Cinema 4D, Blender or Unreal.',
+    story: [
+      { title: 'Vision', paras: [
+        'Sometimes a creative idea begins with nothing more than a shape.',
+        'I wanted to make digital sculpting immediate and approachable, removing the setup and interface complexity that can interrupt the early stages of experimentation.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'Inspired by the simplicity of working with physical clay, I designed the experience around direct interaction.',
+        'The goal was to let the form take center stage, with tools that feel accessible while providing the control needed to develop more detailed shapes.',
+      ] },
+      { title: 'Execution', paras: [
+        'I developed a browser-based sculpting application with interactive brushes, symmetry, masking, dynamic mesh detail, and remeshing.',
+        'Users can push, pull, smooth, and reshape geometry, combine primitive forms, and export their creations as GLB models for further development in other 3D applications.',
+      ] },
+      { title: 'Outcome', paras: [
+        'A lightweight creative environment for exploring characters, objects, and organic forms, demonstrating how sophisticated 3D technology can be presented through a simple, approachable interface.',
+      ] },
     ],
     demo: { src: '/img/apps/sculpt/app.webp', w: 1600, h: 900, alt: 'HAS Sculpt: a terracotta clay head in the middle, the brushes on the left, size, strength and mirror settings on the right', caption: 'The studio: brushes on the left, the clay in the middle, size, strength and mirror on the right.' },
     features: [
@@ -191,10 +219,11 @@ export const appPages: AppPage[] = [
   {
     slug: 'has-gallery',
     name: 'HAS Gallery',
-    tagline: 'A gallery studio in your browser.',
+    tagline: 'From floor plan to experience.',
     description: 'HAS Gallery: draw a floor plan in 2D, hang artwork on the walls, walk through at eye level, and export the gallery as a GLB. Free, in your browser.',
     appUrl: 'https://has.tools/apps/gallery/',
     hero: { img: '/img/apps/gallery/hero.webp' },
+    role: 'Concept, Creative Direction, UX Design, 3D Development',
     specs: [
       ['Type', 'Free browser app'],
       ['Version', 'v1.0'],
@@ -202,10 +231,22 @@ export const appPages: AppPage[] = [
       ['Exports', 'GLB · glTF · PNG · JSON'],
       ['Part of', 'HAS Tools'],
     ],
-    lead: 'Draw the floor plan in 2D and it becomes a real 3D space beside it. Hang the art, then walk through.',
-    copy: [
-      'I made HAS Gallery because planning an exhibition, a portfolio room or a virtual gallery usually means graph paper or a full 3D package. This sits in between: sketch walls in a 2D plan and the 3D preview builds itself as you draw.',
-      'Artwork is the point, so hanging it is one gesture: drop an image near a wall and it hangs there at real-world scale. Export the whole gallery for Cinema 4D, Blender, Unreal or the web.',
+    story: [
+      { title: 'Vision', paras: [
+        'Designing an exhibition should be as intuitive as imagining the space itself.',
+        'I wanted to create a tool that allows artists, designers, and curators to explore spatial ideas without the complexity of traditional architectural software.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'The concept was simple: draw in two dimensions, experience in three.',
+        'I focused on making the transition between planning and visualization feel immediate. Walls, openings, artwork, and lighting become part of a space that can be explored as it takes shape.',
+      ] },
+      { title: 'Execution', paras: [
+        'I developed an interactive browser application that translates 2D floor plans into navigable 3D environments.',
+        'Users can create walls, add doors and windows, position artwork, explore the gallery at eye level, and export their designs for use in other 3D applications.',
+      ] },
+      { title: 'Outcome', paras: [
+        'A creative tool that brings spatial planning and real-time visualization together, making it easier to explore, communicate, and refine exhibition concepts before they exist physically.',
+      ] },
     ],
     demo: { src: '/img/apps/gallery/app.webp', w: 1600, h: 900, alt: 'HAS Gallery: the floor plan on the left, the same room in 3D in the middle with photographs on the walls, properties on the right', caption: 'The studio: the 2D plan on the left, the 3D gallery builds itself beside it.' },
     features: [

@@ -1,7 +1,8 @@
 ---
 // One page per app (HAS Lathe, Splay, HAS Sculpt, HAS Truss, HAS Gallery),
-// all from src/data/app-pages.ts: a wide hero, the overview and why the app
-// exists, the app at work, six features, two stills, details, and the next app.
+// all from src/data/app-pages.ts: a wide hero, the overview, the case study
+// (Vision, Creative Direction, Execution, Outcome) or a short why, the app at
+// work, six features, two stills, details, and the next app.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -23,6 +24,7 @@ export function getStaticPaths() {
 interface Props { app: AppPage }
 const { app } = Astro.props;
 const path = `/apps/${app.slug}`;
+const specs: [string, string][] = app.role ? [['Role', app.role], ...app.specs] : app.specs;
 
 // Next: the following app in page order, shown with its hero
 const n = appPages[(appPages.indexOf(app) + 1) % appPages.length];
@@ -63,7 +65,7 @@ const schema = [
         <p class="muted">{app.tagline}</p>
       </div>
       <div class="facts">
-        <SpecList specs={app.specs} />
+        <SpecList specs={specs} />
         <div class="ctas">
           <PillLink href={app.appUrl}>Open {app.name} ↗</PillLink>
           <PillLink href="#demo" variant="outline">See the app</PillLink>
@@ -72,15 +74,30 @@ const schema = [
     </div>
   </Section>
 
-  <Section label="About the app" space="md">
-    <div class="about">
-      <p class="lead">{app.lead}</p>
-      <div class="copy">
-        <p>{app.copy[0]}</p>
-        <p class="muted">{app.copy[1]}</p>
+  {app.story ? (
+    <Section label="The project" space="md">
+      <div class="story">
+        {app.story.map((b) => (
+          <div class="block">
+            <h2 class="mono cap muted">{b.title}</h2>
+            <div class="paras">
+              {b.paras.map((t, i) => <p class:list={{ first: i === 0 }}>{t}</p>)}
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  </Section>
+    </Section>
+  ) : (
+    <Section label="About the app" space="md">
+      <div class="about">
+        <p class="lead">{app.lead}</p>
+        <div class="copy">
+          <p>{app.copy?.[0]}</p>
+          <p class="muted">{app.copy?.[1]}</p>
+        </div>
+      </div>
+    </Section>
+  )}
 
   <Section label="The app" space="md">
     <Figure id="demo" num="01" caption={app.demo.caption}>
@@ -139,6 +156,14 @@ const schema = [
   .lead { flex: 1 1 440px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 22ch; }
   .copy { flex: 1 1 360px; min-width: 0; max-width: 56ch; display: flex; flex-direction: column; gap: 18px; }
   .copy p { margin: 0; font-size: 17px; line-height: 1.6; }
+
+  /* Case study: ruled rows, the label on the left, the owner's text on the right */
+  .block { display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 28px 0 36px; border-top: 1px solid var(--rule); }
+  .block:last-child { border-bottom: 1px solid var(--rule); }
+  .block h2 { flex: 1 1 200px; margin: 6px 0 0; font-weight: 400; }
+  .paras { flex: 3 1 520px; min-width: 0; max-width: 64ch; display: flex; flex-direction: column; gap: 16px; }
+  .paras p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted); }
+  .paras p.first { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; color: var(--ink); max-width: 32ch; }
 
   .stills { display: flex; flex-wrap: wrap; gap: 48px var(--tile-gap); }
 
