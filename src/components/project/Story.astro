@@ -1,0 +1,31 @@
+---
+// A case study in the owner's words (Vision, Creative Direction, Execution,
+// Outcome) as ruled rows: the title on the left, the text on the right, the
+// first paragraph of each set large. *Asterisks* mark italics, e.g. a title.
+import type { StoryBlock } from '../../data/work';
+
+interface Props { blocks: StoryBlock[] }
+const { blocks } = Astro.props;
+
+const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const inline = (t: string) => esc(t).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+---
+<div class="story">
+  {blocks.map((b) => (
+    <div class="block">
+      <h2 class="mono cap muted">{b.title}</h2>
+      <div class="paras">
+        {b.paras.map((t, i) => <p class:list={{ first: i === 0 }} set:html={inline(t)} />)}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .block { display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 28px 0 36px; border-top: 1px solid var(--rule); }
+  .block:last-child { border-bottom: 1px solid var(--rule); }
+  h2 { flex: 1 1 200px; margin: 6px 0 0; font-weight: 400; }
+  .paras { flex: 3 1 520px; min-width: 0; max-width: 64ch; display: flex; flex-direction: column; gap: 16px; }
+  p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted); }
+  p.first { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; color: var(--ink); max-width: 32ch; }
+</style>

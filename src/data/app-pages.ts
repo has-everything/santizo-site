@@ -5,6 +5,7 @@
 // has.tools showcase page (tools/<slug>.html). Images are real app output in public/img/apps/<app>/:
 // a wide hero (7:3), the app at work (16:9) and two square stills.
 import type { Media } from './media';
+import type { StoryBlock } from './work';
 import type { OgImage } from '../lib/seo';
 
 export interface Still { src: string; w: number; h: number; alt: string; caption: string }
@@ -18,7 +19,7 @@ export interface AppPage {
   hero: Media;         // wide band at the top: a Vimeo loop or a still
   role?: string;       // "My role", shown first in the specs
   specs: [string, string][];
-  story?: { title: string; paras: string[] }[]; // the case study, in the owner's words
+  story?: StoryBlock[];   // the case study, in the owner's words
   lead?: string;          // without a story: one big line...
   copy?: [string, string]; // ...why it exists (first person), then a muted line
   demo: Still;            // Fig. 01, the app at work (16:9)
@@ -180,10 +181,11 @@ export const appPages: AppPage[] = [
   {
     slug: 'has-truss',
     name: 'HAS Truss',
-    tagline: 'A truss generator in your browser.',
+    tagline: 'From a line to a structure.',
     description: 'HAS Truss: a free 3D truss generator in your browser. Draw a curve, pick a profile, and export a tubed truss as GLB, glTF or OBJ.',
     appUrl: 'https://has.tools/apps/truss/',
     hero: { img: '/img/apps/truss/hero.webp' },
+    role: 'Concept, Creative Direction, Procedural Design, Software Development',
     specs: [
       ['Type', 'Free browser app'],
       ['Version', 'v1.2'],
@@ -191,10 +193,22 @@ export const appPages: AppPage[] = [
       ['Exports', 'GLB · glTF · OBJ'],
       ['Part of', 'HAS Tools'],
     ],
-    lead: 'Draw the centerline, pick a profile, and a tubed truss builds live along the curve.',
-    copy: [
-      'I made HAS Truss because truss is in every stage, concert, trade-show and exhibition render, and it is tedious to model by hand: dozens of tubes, repeated bays, diagonals that have to land on the chords. Along a curve it gets worse. Here it takes one gesture.',
-      'Straight runs, arches, S-curves and full rings export at real scale for Cinema 4D, Blender, Unreal or Unity.',
+    story: [
+      { title: 'Vision', paras: [
+        'Complex structures often begin with simple lines.',
+        'I wanted to explore how a single curve could become a complete 3D truss system, eliminating the repetitive modeling traditionally required for stage, event, and exhibition visualization.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'The guiding idea was to make structure generation feel more like drawing than engineering.',
+        'Rather than building every component individually, users define the overall shape while the application handles the repeating geometric elements.',
+      ] },
+      { title: 'Execution', paras: [
+        'I developed a procedural 3D generator that transforms editable curves into detailed truss geometry.',
+        'Users can create straight runs, arches, and custom paths, select different structural profiles, adjust dimensions and materials, and export models for visualization in other 3D environments.',
+      ] },
+      { title: 'Outcome', paras: [
+        'A practical tool for rapid concept development and visualization, demonstrating how procedural modeling can simplify repetitive production tasks while preserving creative control.',
+      ] },
     ],
     demo: { src: '/img/apps/truss/app.webp', w: 1600, h: 900, alt: 'HAS Truss: the path editor and profile settings on the left, an arched square truss in the viewport', caption: 'The studio: draw the path on the left, the truss builds along it on the right.' },
     features: [

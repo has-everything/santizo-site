@@ -14,6 +14,9 @@ export interface WorkItem {
 
 export type Video = { vimeo: string } | { youtube: string };
 
+/** One section of a case study (Vision, Creative Direction, Execution, Outcome) */
+export interface StoryBlock { title: string; paras: string[] }
+
 export interface Project {
   slug: string;    // URL: /work/<slug>
   title: string;
@@ -24,7 +27,8 @@ export interface Project {
   video: Video;
   // Optional, for the owner to fill in. Each shows on the page only when set.
   year?: string;
-  story?: string[]; // paragraphs about the project
+  tagline?: string;     // the owner's one-liner under the title (else the blurb shows)
+  story?: StoryBlock[]; // the owner's case study; shows only when set
 }
 
 export const groups = {
@@ -37,7 +41,29 @@ export const groups = {
 export const projects: Project[] = [
   // Motion and animation
   { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Art direction', 'Sim', 'Lighting'], group: 'motion', video: { vimeo: '1216889002' } },
-  { slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'motion', video: { vimeo: '1230984635' } },
+  {
+    slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'motion', video: { vimeo: '1230984635' },
+    // The owner's own write-up (Oct 2026)
+    tagline: 'Turning a painting into a place to explore.',
+    story: [
+      { title: 'Vision', paras: [
+        'What if you could step inside a painting rather than simply look at it?',
+        'I wanted to reimagine Vincent van Gogh’s *The Bedroom* as an interactive experience, transforming a familiar work of art into a space where curiosity leads to discovery.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'The goal wasn’t simply to reproduce a painting in 3D. It was to create a more personal way to experience the artwork and the stories behind it.',
+        'Every detail offered an opportunity for discovery. Paintings reveal their stories, everyday objects provide glimpses into Van Gogh’s life, and a drawer opens to reveal a collection of his letters. Visitors can also explore different versions of the original painting.',
+      ] },
+      { title: 'Execution', paras: [
+        'I developed the experience in Unreal Engine, bringing together 3D environment design, lighting, interaction, and storytelling.',
+        'The room becomes a navigable space where visitors can explore objects, uncover information, and experience the artwork at their own pace.',
+      ] },
+      { title: 'Outcome', paras: [
+        'An interactive exploration of how technology can create new ways to experience art.',
+        'Rather than simply viewing an image, visitors become participants, turning observation into discovery.',
+      ] },
+    ],
+  },
   { slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' } },
   { slug: 'star-trails', title: 'Star trails', blurb: 'Concept, art and animation', tag: 'Animation', focus: ['Concept', 'Art', 'Animation'], group: 'motion', video: { vimeo: '269102770' } },
   { slug: 'evidence-of-existence', title: 'Evidence of Existence', blurb: '360 VR with particles', tag: '360 VR', focus: ['360 VR', 'Particles'], group: 'motion', video: { vimeo: '207575582' } },

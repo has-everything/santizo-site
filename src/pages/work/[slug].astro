@@ -1,7 +1,7 @@
 ---
 // One page per project in src/data/work.ts: the video (plays here, with
-// sound), what it is, and the next project in the same group. `year` and
-// `story` show only when filled in.
+// sound), what it is, the owner's case study when there is one, and the next
+// project in the same group. `tagline`, `year` and `story` show only when set.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -9,6 +9,7 @@ import Section from '../../components/Section.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import NextProject from '../../components/project/NextProject.astro';
+import Story from '../../components/project/Story.astro';
 import { projects, groups, tile, type Project } from '../../data/work';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
@@ -29,7 +30,7 @@ const specs: [string, string][] = [
 ];
 
 const path = `/work/${p.slug}`;
-const description = `${p.title}: ${p.blurb}. ${group.label} by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const description = `${p.title}: ${(p.tagline ?? p.blurb).replace(/\.$/, '')}. ${group.label} by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',
@@ -60,7 +61,7 @@ const schema = [
     <div class="overview">
       <div class="name">
         <h1>{p.title}</h1>
-        <p class="muted">{p.blurb}</p>
+        <p class="muted">{p.tagline ?? p.blurb}</p>
       </div>
       <div class="facts">
         <SpecList specs={specs} />
@@ -70,9 +71,7 @@ const schema = [
 
   {p.story && (
     <Section label="About the project" space="md">
-      <div class="story">
-        {p.story.map((para) => <p>{para}</p>)}
-      </div>
+      <Story blocks={p.story} />
     </Section>
   )}
 
@@ -94,6 +93,4 @@ const schema = [
   .name p { margin: 16px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
   .facts { flex: 2 1 340px; min-width: 0; }
 
-  .story { max-width: 62ch; display: flex; flex-direction: column; gap: 18px; }
-  .story p { margin: 0; font-size: 18px; line-height: 1.6; }
 </style>
