@@ -1,7 +1,8 @@
 import type { WorkItem } from './work';
 
-// Apps from has.tools. Card images are the has.tools card captures
-// (has-tools-website/img/<slug>-card.png, 800x500) saved as WebP in public/img/apps.
+// Apps from has.tools. Images are the has.tools stage captures
+// (has-tools-website/img/<slug>-stage.png, 2400x1350) saved as 2000px WebP in
+// public/img/apps, sharp enough for the full-width first tile on /apps.
 // The "why" copy is condensed from the owner's own words: the About and Learn
 // sections of has.tools and the opening paragraph of each tool's showcase page.
 const tool = (slug: string) => `https://has.tools/tools/${slug}.html`;
@@ -14,7 +15,8 @@ export const appsIntro = {
   aside: 'They run in the browser, with nothing to install. Some people use the tools; others take the idea and build their own. Both are welcome.',
 };
 
-// The /apps grid, in this order. `note` is the problem each app answers.
+// The /apps page, in this order: the first runs full width, the rest two per
+// row, so keep the count odd. `note` is the problem each app answers.
 export const tools: WorkItem[] = [
   {
     title: 'Splay', blurb: 'Exploded views of 3D models, animated on a timeline', tag: 'Animation',
@@ -32,11 +34,6 @@ export const tools: WorkItem[] = [
     href: tool('sculpt'), media: img('sculpt'),
   },
   {
-    title: 'PLAT', blurb: 'Drop in rooms and the floor plan builds itself in 3D', tag: 'Architecture',
-    note: 'Real CAD is overkill when you just want to block out a space.',
-    href: tool('plat'), media: img('plat'),
-  },
-  {
     title: 'HAS Truss', blurb: 'Draw a curve, get a truss rig', tag: 'Modeling',
     note: 'Truss is in every stage and exhibition render, and tedious to model by hand. Along a curve it gets worse.',
     href: tool('truss'), media: img('truss'),
@@ -45,21 +42,6 @@ export const tools: WorkItem[] = [
     title: 'HAS Gallery', blurb: 'Draw a gallery, walk it, hang the art', tag: 'Spaces',
     note: 'Planning a show usually means graph paper or a full 3D package. This sits in between.',
     href: tool('gallery'), media: img('gallery'),
-  },
-  {
-    title: 'HAS Cabinet', blurb: 'Parametric cabinets, with a cut list', tag: 'Furniture',
-    note: 'Modeling apps know nothing about millimeters, and CAD fights you on the fun part.',
-    href: tool('cabinet'), media: img('cabinet'),
-  },
-  {
-    title: 'HAS Dither', blurb: 'Node-based image dithering', tag: 'Image',
-    note: 'Most dithering tools do their math in raw 8-bit, which is why their output looks muddy.',
-    href: tool('dither'), media: img('dither'),
-  },
-  {
-    title: 'HAS Books', blurb: 'Shelves and piles of book props for any scene', tag: 'Props',
-    note: 'Every archviz render needs a bookshelf, and dressing one by hand takes an afternoon.',
-    href: tool('books'), media: img('books'),
   },
 ];
 

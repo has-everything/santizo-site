@@ -1,7 +1,7 @@
 ---
-// Apps: why the tools exist, then nine of them from has.tools as a grid of
-// preview cards, each with the problem it answers. Copy and order live in
-// src/data/apps.ts.
+// Apps: why the tools exist, then five of them from has.tools, each with the
+// problem it answers: the first full width, the rest two per row. Copy and
+// order live in src/data/apps.ts.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -12,6 +12,7 @@ import PillLink from '../../components/project/PillLink.astro';
 import { tools, appsIntro } from '../../data/apps';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
+const [first, ...rest] = tools;
 const count = String(tools.length).padStart(2, '0');
 
 const description = 'Free creative tools by Hector Augusto Santizo for motion designers, 3D artists and creative coders. They run in the browser.';
@@ -37,8 +38,11 @@ const schema = [
 
   <Section label="All apps" space="md">
     <SectionHead num="01" title="The tools" aside={count} />
-    <div class="grid-3">
-      {tools.map((t) => <WorkTile item={t} size="cell" ratio="16 / 10" />)}
+    <div class="apps">
+      <WorkTile item={first} size="full" />
+      <div class="grid-2">
+        {rest.map((t) => <WorkTile item={t} size="cell" />)}
+      </div>
     </div>
   </Section>
 
@@ -54,4 +58,5 @@ const schema = [
   .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(28px, 3.4vw, 52px); line-height: 1.06; letter-spacing: -0.03em; font-weight: 500; max-width: 18ch; }
   .side { flex: 2 1 340px; min-width: 0; max-width: 52ch; display: flex; flex-direction: column; gap: 18px; }
   .side p { margin: 0; font-size: 17px; line-height: 1.6; }
+  .apps { display: flex; flex-direction: column; gap: 56px; }
 </style>
