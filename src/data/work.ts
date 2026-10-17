@@ -161,53 +161,61 @@ export const xrPage = {
 // A one-off page, not in `projects`: there is no Vimeo or YouTube film yet, so
 // the page loops a self-hosted capture of the app and adds stills. When the
 // film is on Vimeo it can join `projects` like the others.
-// DRAFT copy (Oct 2026), written in the site's voice for the owner to edit.
+// Copy (Oct 2026): the owner's why, in his words (build a working line and watch
+// a car get made; then ask if it could teach cost and profit; a factory is a
+// spreadsheet you can see), shaped into the site's voice. DRAFT for him to edit;
+// the role line is a proposal for him to confirm.
 export interface Still { src: string; w: number; h: number; alt: string; caption: string }
 
 export const toyline = {
   slug: 'has-toyline',
   title: 'HAS Toyline',
-  blurb: 'A toy factory, in three.js',
+  blurb: 'A 3D assembly line, in three.js',
   tag: 'three.js · Interactive',
-  focus: ['three.js', 'Interactive'],
+  role: 'Concept, Creative Direction, 3D Design, Development',
+  focus: ['three.js', 'Real-time 3D', 'Interactive'],
   group: 'motion' as const,
   year: '2026',
-  tagline: 'A factory that shows what a toy costs.',
+  tagline: 'Watch a car get built, and see what it costs.',
   film: { video: '/video/has-toyline.mp4', poster: '/img/work/has-toyline/poster.webp' },
   story: [
     { title: 'Vision', paras: [
-      'What if a factory showed you what everything costs?',
-      'HAS Toyline is a wooden toy-car factory you can orbit. I turned it into one you have to pay for, so you can see what it really takes to make a toy and sell it.',
+      'I wanted to build a working assembly line in 3D. And why not watch a car get made?',
+      'You fill in a work order and the line builds that exact car: a block of birch drops from a hopper, then seven stations cut, sand, paint, print, fit wheels and finish it, until it parks, gets boxed and rides off on a truck.',
+    ] },
+    { title: 'The Turn', paras: [
+      'Once the line worked, I asked a different question.',
+      'After a few rounds of iteration it ran the way I wanted. Could it teach what a toy really costs: the birch, the minutes, the waiting, the carton, the truck, and what each car has to sell for to make a profit? A factory is a spreadsheet you can walk through. So I let you see it.',
     ] },
     { title: 'Creative Direction', paras: [
-      'Money as part of the scene, not a spreadsheet beside it.',
-      'Prices float over each station, a running tab rides on every car, and the minutes people spend waiting show up in hatched amber. The slowest station wears a yellow tag: it sets the pace for everyone.',
+      'The world first, then the money inside it.',
+      'Birch, safety yellow and machines that read as real at toy scale, down to a carton printed for the car inside. The numbers live in the scene, not in a table beside it: prices float over each station, a running tab rides on every car, and the minutes spent waiting for the slowest station show up as amber hatching.',
     ] },
     { title: 'Execution', paras: [
-      'Built in three.js: the line, the cameras and one cost model behind every number.',
-      'Short lessons switch the layers on one at a time, from a single block of birch to a month of running the business. Tap any figure and it shows how it was worked out.',
+      'Built in three.js, with no model files.',
+      'Every car, robot, machine and carton is made in code, with liveries, number roundels and wood grain painted in code too. Three cameras: an overview, one that rides along with a single car, and one that inspects any car you tap. On the money side, every figure on screen comes from one cost model, so tap any number and it shows how it was worked out.',
     ] },
     { title: 'Outcome', paras: [
-      'People stop pricing by feel and start reading the line.',
-      'An experiment in how real-time 3D can turn an abstract subject into something you can watch, and check.',
+      'Two apps from one factory.',
+      'HAS Toyline, the line you order from, and Toyline Ledger, a course in what a toy costs to make and sell: 15 short lessons, 3 challenges, and a month you can run to watch the bank. Both run in the browser. Neither is public yet.',
     ] },
   ] as StoryBlock[],
   // Six cards, like "What it does" on the app pages
-  learns: [
-    { title: 'Price one car', body: 'Birch, paint, wheels, the minutes at every station, the carton and the truck: what one car costs at the door.' },
-    { title: 'Find the bottleneck', body: 'The whole line waits for its slowest station, and everyone is paid while they wait.' },
-    { title: 'Break even', body: 'Rent, leases and salaries arrive every month, whatever you make. How many cars cover them?' },
-    { title: 'Markup and margin', body: 'Two percentages that sound alike and are not. Mix them up and the price comes out too low.' },
-    { title: 'Price against demand', body: 'A higher price earns more on each car and sells fewer of them. Find the price that earns most.' },
-    { title: 'Profit is not cash', body: 'A month in the black can still empty the bank, because the shops pay thirty days later.' },
+  features: [
+    { title: 'Build to order', body: 'Six models, twelve paints, six liveries, a race number, wheels, bumpers, a roof extra and a finish. The line builds exactly the car you ordered.' },
+    { title: 'Seven stations', body: 'Blank, cut, sand, paint, livery, wheels and detail, each with its own machine, robots that reach for every part, and stack lights that show what it is doing.' },
+    { title: 'Follow one car', body: 'Ride along with your order from the block of birch to the truck, or tap any car on the floor to inspect it.' },
+    { title: 'Boxed and shipped', body: 'Finished cars park in a numbered lot. A gantry crane takes them to packing, into a carton printed for that car, and onto the truck.' },
+    { title: 'Made in code', body: 'No model files and no image files: the cars, robots, machines, cartons and textures are all built in three.js.' },
+    { title: 'The money layer', body: 'A price over every station and a running tab on every car, then break-even and price charts, and a month you can run day by day.' },
   ],
-  line: { src: '/img/work/has-toyline/line.webp', w: 2400, h: 1350, alt: 'The whole HAS Toyline factory from above, with cost tags over each station and a running tab on every car', caption: 'The line with the money layer on: minutes and cost over every station, and the tab each car carries.' } as Still,
+  line: { src: '/img/work/has-toyline/detail.webp', w: 2400, h: 1350, alt: 'Yellow robot arms fitting parts to a red coupe at the Detail station', caption: 'Wheels on, then lights, grille and bumpers at Detail.' } as Still,
   squares: [
     { src: '/img/work/has-toyline/birch.webp', w: 1360, h: 1360, alt: 'Raw birch coupe bodies on the conveyor after the cut', caption: 'A block of birch, cut to a coupe.' },
     { src: '/img/work/has-toyline/carton.webp', w: 1360, h: 1360, alt: 'A red No. 7 coupe boxed in a windowed HAS Wheels carton', caption: 'Boxed in its HAS Wheels carton.' },
   ] as Still[],
   pair: [
-    { src: '/img/work/has-toyline/detail.webp', w: 2400, h: 1350, alt: 'Yellow robot arms fitting parts to a red coupe at the Detail station', caption: 'Wheels on, then lights, grille and bumpers at Detail.' },
+    { src: '/img/work/has-toyline/line.webp', w: 2400, h: 1350, alt: 'The whole HAS Toyline factory from above, with cost tags over each station and a running tab on every car', caption: 'The money layer on: minutes and cost over every station, and the tab each car carries.' },
     { src: '/img/work/has-toyline/truck.webp', w: 2400, h: 1350, alt: 'The HAS Wheels delivery truck at the end of the line', caption: 'On the truck: freight is the last line on the tab.' },
   ] as Still[],
   og: { src: '/img/og/has-toyline.jpg', alt: 'HAS Toyline: a red wooden coupe boxed in a HAS Wheels carton' },

@@ -1,7 +1,8 @@
 ---
 // HAS Toyline: a one-off work page (see `toyline` in src/data/work.ts). The
 // work page layout, with a looping capture of the app instead of a Vimeo
-// player, then the stills and the six things it teaches, as on the app pages.
+// player, the role first in the specs and six "What it does" cards, as on the
+// app pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -20,13 +21,14 @@ const group = groups[p.group];
 const next = tile(project('star-trails'));
 
 const specs: [string, string][] = [
+  ['Role', p.role],
   ['Category', group.label],
   ['Focus', p.focus.join(' · ')],
   ['Year', p.year],
 ];
 
 const path = `/work/${p.slug}`;
-const description = `${p.title}: ${p.tagline.replace(/\.$/, '')}. A wooden toy-car factory in three.js that puts a price on every step, by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const description = `${p.title}: ${p.tagline.replace(/\.$/, '')}. A working 3D assembly line in three.js that builds the toy car you order and shows what it costs, by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',
@@ -70,7 +72,7 @@ const schema = [
     <Story blocks={p.story} />
   </Section>
 
-  <Section label="The line" space="md">
+  <Section label="At the line" space="md">
     <Figure num="01" caption={p.line.caption}>
       <img class="fill" src={p.line.src} width={p.line.w} height={p.line.h} loading="lazy" decoding="async" alt={p.line.alt} />
     </Figure>
@@ -86,12 +88,12 @@ const schema = [
     </div>
   </Section>
 
-  <Section label="What it teaches">
-    <SectionHead num="01" title="What you learn" aside={String(p.learns.length).padStart(2, '0')} />
-    <NumberedGrid items={p.learns} narrow />
+  <Section label="What it does">
+    <SectionHead num="01" title="What it does" aside={String(p.features.length).padStart(2, '0')} />
+    <NumberedGrid items={p.features} narrow />
   </Section>
 
-  <Section label="More stills" space="lg">
+  <Section label="The money layer" space="lg">
     <div class="pair">
       {p.pair.map((s, i) => (
         <Figure num={String(i + 4).padStart(2, '0')} caption={s.caption} half>
