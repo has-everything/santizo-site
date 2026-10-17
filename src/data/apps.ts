@@ -7,11 +7,12 @@ import type { WorkItem } from './work';
 // sections of has.tools and the opening paragraph of each tool's showcase page.
 const img = (slug: string) => ({ img: `/img/apps/${slug}.webp` });
 
-// Top of the /apps page: why the tools exist.
+// Top of the /apps page: why the tools exist (the owner's text, Oct 2026,
+// merged with the earlier has.tools wording).
 export const appsIntro = {
-  lead: 'Every tool here started as a problem I had on a real deadline.',
-  body: 'These tools are built on deadline, not in theory. When a job needs something that a full 3D package makes slow, I build the small tool I wish existed and publish it, free, at has.tools.',
-  aside: 'They run in the browser, with nothing to install. Some people use the tools; others take the idea and build their own. Both are welcome.',
+  lead: 'Creative tools, built from real problems.',
+  body: 'Most of them start with a simple frustration on a real job: why is this harder than it needs to be? When a workflow gets in the way, I design and build a simpler one, from the first idea and the interface to the 3D technology underneath.',
+  aside: 'They’re free and run in your browser at has.tools, with nothing to install. Some people use the tools; others take the idea and build their own. Both are welcome.',
 };
 
 // The /apps grid, in this order (three across on wide screens, so six fill two
