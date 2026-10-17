@@ -155,3 +155,69 @@ export const xrPage = {
     'hand-tracker', 'has-photo-booth',
   ].map((s) => tile(project(s))),
 };
+
+// ---------- HAS Toyline (/work/has-toyline) ----------
+
+// A one-off page, not in `projects`: there is no Vimeo or YouTube film yet, so
+// the page loops a self-hosted capture of the app and adds stills. When the
+// film is on Vimeo it can join `projects` like the others.
+// DRAFT copy (Oct 2026), written in the site's voice for the owner to edit.
+export interface Still { src: string; w: number; h: number; alt: string; caption: string }
+
+export const toyline = {
+  slug: 'has-toyline',
+  title: 'HAS Toyline',
+  blurb: 'A toy factory, in three.js',
+  tag: 'three.js · Interactive',
+  focus: ['three.js', 'Interactive'],
+  group: 'motion' as const,
+  year: '2026',
+  tagline: 'A factory that shows what a toy costs.',
+  film: { video: '/video/has-toyline.mp4', poster: '/img/work/has-toyline/poster.webp' },
+  story: [
+    { title: 'Vision', paras: [
+      'What if a factory showed you what everything costs?',
+      'HAS Toyline is a wooden toy-car factory you can orbit. I turned it into one you have to pay for, so you can see what it really takes to make a toy and sell it.',
+    ] },
+    { title: 'Creative Direction', paras: [
+      'Money as part of the scene, not a spreadsheet beside it.',
+      'Prices float over each station, a running tab rides on every car, and the minutes people spend waiting show up in hatched amber. The slowest station wears a yellow tag: it sets the pace for everyone.',
+    ] },
+    { title: 'Execution', paras: [
+      'Built in three.js: the line, the cameras and one cost model behind every number.',
+      'Short lessons switch the layers on one at a time, from a single block of birch to a month of running the business. Tap any figure and it shows how it was worked out.',
+    ] },
+    { title: 'Outcome', paras: [
+      'People stop pricing by feel and start reading the line.',
+      'An experiment in how real-time 3D can turn an abstract subject into something you can watch, and check.',
+    ] },
+  ] as StoryBlock[],
+  // Six cards, like "What it does" on the app pages
+  learns: [
+    { title: 'Price one car', body: 'Birch, paint, wheels, the minutes at every station, the carton and the truck: what one car costs at the door.' },
+    { title: 'Find the bottleneck', body: 'The whole line waits for its slowest station, and everyone is paid while they wait.' },
+    { title: 'Break even', body: 'Rent, leases and salaries arrive every month, whatever you make. How many cars cover them?' },
+    { title: 'Markup and margin', body: 'Two percentages that sound alike and are not. Mix them up and the price comes out too low.' },
+    { title: 'Price against demand', body: 'A higher price earns more on each car and sells fewer of them. Find the price that earns most.' },
+    { title: 'Profit is not cash', body: 'A month in the black can still empty the bank, because the shops pay thirty days later.' },
+  ],
+  line: { src: '/img/work/has-toyline/line.webp', w: 2400, h: 1350, alt: 'The whole HAS Toyline factory from above, with cost tags over each station and a running tab on every car', caption: 'The line with the money layer on: minutes and cost over every station, and the tab each car carries.' } as Still,
+  squares: [
+    { src: '/img/work/has-toyline/birch.webp', w: 1360, h: 1360, alt: 'Raw birch coupe bodies on the conveyor after the cut', caption: 'A block of birch, cut to a coupe.' },
+    { src: '/img/work/has-toyline/carton.webp', w: 1360, h: 1360, alt: 'A red No. 7 coupe boxed in a windowed HAS Wheels carton', caption: 'Boxed in its HAS Wheels carton.' },
+  ] as Still[],
+  pair: [
+    { src: '/img/work/has-toyline/detail.webp', w: 2400, h: 1350, alt: 'Yellow robot arms fitting parts to a red coupe at the Detail station', caption: 'Wheels on, then lights, grille and bumpers at Detail.' },
+    { src: '/img/work/has-toyline/truck.webp', w: 2400, h: 1350, alt: 'The HAS Wheels delivery truck at the end of the line', caption: 'On the truck: freight is the last line on the tab.' },
+  ] as Still[],
+  og: { src: '/img/og/has-toyline.jpg', alt: 'HAS Toyline: a red wooden coupe boxed in a HAS Wheels carton' },
+};
+
+/** HAS Toyline as a tile (the /work grid) */
+export const toylineTile: WorkItem = {
+  title: toyline.title,
+  blurb: toyline.blurb,
+  tag: 'three.js',
+  href: `/work/${toyline.slug}`,
+  media: toyline.film,
+};

@@ -53,6 +53,8 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 
 **Add a one-off project page**: build it from `src/pages/apps/[slug].astro` and its parts (its path is its URL): copy, figures, `description`, preview `image` and `schema`; add its path to `src/pages/sitemap.xml.ts`, then point the work item's `href` at it.
 
+**HAS Toyline** (`/work/has-toyline`, Oct 2026): the first one-off work page, `src/pages/work/has-toyline.astro`, from `toyline` in `src/data/work.ts`. It has no Vimeo film yet, so it loops a self-hosted capture, `public/video/has-toyline.mp4` (33 s, 1600x900, about 10 MB; force-added past the `*.mp4` ignore), and adds five stills from `public/img/work/has-toyline/`, the six "What you learn" cards and the case study. Its tile sits on /work after HAS LP-19 (`toylineTile`, spliced in by `work/index.astro`); it is not in the home page's `featured`. Everything is real app output, captured headlessly by `tools/capture-portfolio.mjs` in the HAS Toyline project. The copy is a DRAFT written in the site's voice for the owner to rewrite. When the film is on Vimeo, the project can move into `projects` like the others and the mp4 can go.
+
 **Change colors or type**: tokens at the top of `src/styles/global.css` (`:root` for day, `[data-theme="night"]` for night).
 
 ## Conventions

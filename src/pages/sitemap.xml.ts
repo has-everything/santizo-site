@@ -9,6 +9,7 @@ const paths = [
   '/',
   '/work',
   ...projects.map((p) => `/work/${p.slug}`),
+  '/work/has-toyline',
   '/xr',
   '/apps',
   ...appPages.map((a) => `/apps/${a.slug}`),
