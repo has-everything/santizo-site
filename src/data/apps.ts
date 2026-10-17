@@ -63,10 +63,17 @@ export const tools: WorkItem[] = [
   },
 ];
 
-// (03) Apps on the home page: a short ruled list that points to /apps.
+// (03) Apps on the home page: a short ruled list that points to /apps. Rows
+// are picked by title from `tools` above (same blurb and link), then has.tools.
+const row = (title: string) => {
+  const t = tools.find((x) => x.title === title);
+  if (!t) throw new Error(`No app "${title}" in tools (src/data/apps.ts)`);
+  return { name: t.title, blurb: t.blurb, href: t.href, cta: t.href.startsWith('/') ? 'View →' : 'View ↗' };
+};
+
 export const apps = {
   items: [
-    { name: 'HAS Lathe', blurb: 'A potter’s wheel for 3D models', href: '/apps/has-lathe', cta: 'View →' },
+    ...['HAS Lathe', 'Splay', 'HAS Gallery', 'HAS Sculpt', 'HAS Truss'].map(row),
     { name: 'HAS.TOOLS', blurb: 'Free creative tools that run in your browser', href: 'https://has.tools', cta: 'has.tools ↗' },
   ],
 };
