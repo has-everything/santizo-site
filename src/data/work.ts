@@ -36,7 +36,7 @@ export const groups = {
   xr: { num: '02', label: 'XR and interaction' },
 } as const;
 
-// Order within each group = order on /work and the "Next" link on each page.
+// Order within each group = order on /work (and the fallback for "Related", see related.ts).
 // Titles, tags and videos come from SantizoOS (santizo-os js/site-data.js).
 export const projects: Project[] = [
   // Motion and animation

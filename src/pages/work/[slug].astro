@@ -1,16 +1,17 @@
 ---
 // One page per project in src/data/work.ts: the video (plays here, with
-// sound), what it is, the owner's case study when there is one, and the next
-// project in the same group. `tagline`, `year` and `story` show only when set.
+// sound), what it is, the owner's case study when there is one, and three
+// related projects. `tagline`, `year` and `story` show only when set.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import VideoPlayer from '../../components/VideoPlayer.astro';
 import SpecList from '../../components/project/SpecList.astro';
-import NextProject from '../../components/project/NextProject.astro';
+import Related from '../../components/project/Related.astro';
 import Story from '../../components/project/Story.astro';
-import { projects, groups, tile, type Project } from '../../data/work';
+import { projects, groups, type Project } from '../../data/work';
+import { related, nextThree } from '../../data/related';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -20,8 +21,6 @@ export function getStaticPaths() {
 interface Props { p: Project }
 const { p } = Astro.props;
 const group = groups[p.group];
-const list = projects.filter((x) => x.group === p.group);
-const next = list[(list.indexOf(p) + 1) % list.length];
 
 const specs: [string, string][] = [
   ['Category', group.label],
@@ -30,6 +29,8 @@ const specs: [string, string][] = [
 ];
 
 const path = `/work/${p.slug}`;
+// Related: three picked in src/data/related.ts (else the next three in its group)
+const more = related(path, nextThree(projects.filter((x) => x.group === p.group).map((x) => `/work/${x.slug}`), path));
 const description = `${p.title}: ${(p.tagline ?? p.blurb).replace(/\.$/, '')}. ${group.label} by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
 const schema = [
   {
@@ -75,7 +76,7 @@ const schema = [
     </Section>
   )}
 
-  <NextProject item={tile(next)} num="01" />
+  <Related items={more} num="01" />
 
   <Footer num="02" />
 </Base>

@@ -2,7 +2,7 @@
 // One page per app (HAS Lathe, Splay, HAS Sculpt, HAS Truss, HAS Gallery),
 // all from src/data/app-pages.ts: a wide hero, the overview, the case study
 // (Vision, Creative Direction, Execution, Outcome) or a short why, the app at
-// work, six features, two stills, details, and the next app.
+// work, six features, two stills, details, and three related pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -12,10 +12,11 @@ import NumberedGrid from '../../components/NumberedGrid.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import PillLink from '../../components/project/PillLink.astro';
 import Figure from '../../components/project/Figure.astro';
-import NextProject from '../../components/project/NextProject.astro';
+import Related from '../../components/project/Related.astro';
 import Media from '../../components/Media.astro';
 import Story from '../../components/project/Story.astro';
 import { appPages, type AppPage } from '../../data/app-pages';
+import { related, nextThree } from '../../data/related';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -27,9 +28,8 @@ const { app } = Astro.props;
 const path = `/apps/${app.slug}`;
 const specs: [string, string][] = app.role ? [['Role', app.role], ...app.specs] : app.specs;
 
-// Next: the following app in page order, shown with its hero
-const n = appPages[(appPages.indexOf(app) + 1) % appPages.length];
-const next = { title: n.name, blurb: n.tagline, href: `/apps/${n.slug}`, media: n.hero };
+// Related: three picked in src/data/related.ts (else the next three apps)
+const more = related(path, nextThree(appPages.map((a) => `/apps/${a.slug}`), path));
 
 const schema = [
   {
@@ -124,7 +124,7 @@ const schema = [
     </div>
   </Section>
 
-  <NextProject item={next} aside="All apps →" asideHref="/apps" />
+  <Related items={more} aside="All apps →" asideHref="/apps" />
 
   <Footer tools={[
     { label: 'has.tools ↗', href: 'https://has.tools' },

@@ -1,0 +1,23 @@
+---
+// "(03) Related": three smaller tiles at the end of a project or app page,
+// laid out like the home page's XR row. Pick them in src/data/related.ts.
+import type { WorkItem } from '../../data/work';
+import Section from '../Section.astro';
+import SectionHead from '../SectionHead.astro';
+import WorkTile from '../WorkTile.astro';
+
+interface Props { items: WorkItem[]; num?: string; aside?: string; asideHref?: string }
+const { items, num = '03', aside = 'All work →', asideHref = '/work' } = Astro.props;
+---
+<Section label="Related">
+  <SectionHead num={num} title="Related" aside={aside} asideHref={asideHref} gap="md" />
+  <div class="trio">
+    {items.map((item) => <WorkTile item={item} size="cell" />)}
+  </div>
+</Section>
+
+<style>
+  /* As on the home page: one per row on phones, three across from 760px */
+  .trio { display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px var(--tile-gap); }
+  @media (min-width: 760px) { .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+</style>

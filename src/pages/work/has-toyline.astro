@@ -12,13 +12,13 @@ import NumberedGrid from '../../components/NumberedGrid.astro';
 import Media from '../../components/Media.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import Figure from '../../components/project/Figure.astro';
-import NextProject from '../../components/project/NextProject.astro';
+import Related from '../../components/project/Related.astro';
 import Story from '../../components/project/Story.astro';
-import { toyline as p, project, groups, tile } from '../../data/work';
+import { toyline as p, groups } from '../../data/work';
+import { related } from '../../data/related';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const group = groups[p.group];
-const next = tile(project('star-trails'));
 
 const specs: [string, string][] = [
   ['Role', p.role],
@@ -115,7 +115,7 @@ const schema = [
     </Figure>
   </Section>
 
-  <NextProject item={next} num="02" aside="All work →" asideHref="/work" />
+  <Related items={related(path, [])} num="02" />
 
   <Footer num="03" />
 </Base>
