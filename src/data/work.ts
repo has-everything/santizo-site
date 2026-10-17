@@ -64,7 +64,29 @@ export const projects: Project[] = [
       ] },
     ],
   },
-  { slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' } },
+  {
+    slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' },
+    // The owner's own write-up (Oct 2026)
+    tagline: 'Sound made physical.',
+    story: [
+      { title: 'Vision', paras: [
+        'What if music could become something you could hold?',
+        'LP-19 explores the idea of transforming sound into a physical visual artifact, translating music into patterns printed on paper.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'I envisioned a minimal, beautifully considered object that makes an invisible experience tangible.',
+        'The design follows a restrained industrial aesthetic, with simple geometric forms, clean surfaces, and an emphasis on function. The intention was to create a product where the interaction between sound, movement, and paper becomes the visual centerpiece.',
+      ] },
+      { title: 'Execution', paras: [
+        'I developed the product concept through 3D design and visualization, exploring its proportions, materials, and mechanical expression.',
+        'The project considers how audio could be translated into graphic patterns, with the movement of paper and the emerging visualization communicating the relationship between sound and physical output.',
+      ] },
+      { title: 'Outcome', paras: [
+        'A product design exploration that connects industrial design, motion, and creative technology.',
+        'LP-19 imagines a different relationship with music, where something fleeting can become something physical and lasting.',
+      ] },
+    ],
+  },
   { slug: 'star-trails', title: 'Star trails', blurb: 'Concept, art and animation', tag: 'Animation', focus: ['Concept', 'Art', 'Animation'], group: 'motion', video: { vimeo: '269102770' } },
   { slug: 'evidence-of-existence', title: 'Evidence of Existence', blurb: '360 VR with particles', tag: '360 VR', focus: ['360 VR', 'Particles'], group: 'motion', video: { vimeo: '207575582' } },
   { slug: 'visual-alternatives', title: 'Visual Alternatives', blurb: 'Audio-visual, in Unity', tag: 'Unity', focus: ['Audio-visual', 'Unity'], group: 'motion', video: { youtube: 'FrM8C7vHTow' } },

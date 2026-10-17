@@ -35,7 +35,7 @@ Built with Astro (static output, no client framework). The build ships plain HTM
 
 ## Common tasks
 
-**Add a video project**: add an entry to `projects` in `src/data/work.ts` (`slug` becomes `/work/<slug>`; `video` is `{ vimeo: id }` or `{ youtube: id }`). It appears on `/work` in its group and gets its own page automatically. Give it the owner's write-up as `tagline` (shown under the title instead of the blurb) and `story` (sections like `{ title: 'Vision', paras: ['...'] }`, rendered by `Story`), and a `year`; each shows only when set. Only Van Gogh · The Bedroom has a write-up so far (the owner's, Oct 2026): the owner writes them, so never invent stories, years, clients or credits.
+**Add a video project**: add an entry to `projects` in `src/data/work.ts` (`slug` becomes `/work/<slug>`; `video` is `{ vimeo: id }` or `{ youtube: id }`). It appears on `/work` in its group and gets its own page automatically. Give it the owner's write-up as `tagline` (shown under the title instead of the blurb) and `story` (sections like `{ title: 'Vision', paras: ['...'] }`, rendered by `Story`), and a `year`; each shows only when set. Van Gogh · The Bedroom and HAS LP-19 have write-ups so far (the owner's, Oct 2026): the owner writes them, so never invent stories, years, clients or credits.
 
 **Add photos**: save as WebP in `public/img/photos/` and add `{ src, w, h, alt }` to `src/data/photos.ts` (w/h are the real pixel size: they reserve each photo's space before it loads). Every photo shows at the same width, up to 1200px, so export new ones at least 1200px wide or they get upscaled; larger exports would look sharper on big retina screens.
 
