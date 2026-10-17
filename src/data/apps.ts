@@ -2,7 +2,7 @@ import type { WorkItem } from './work';
 
 // Apps from has.tools. Images are the has.tools stage captures
 // (has-tools-website/img/<slug>-stage.png, 2400x1350) saved as 2000px WebP in
-// public/img/apps, sharp enough for the full-width first tile on /apps.
+// public/img/apps (sharp on retina screens).
 // The "why" copy is condensed from the owner's own words: the About and Learn
 // sections of has.tools and the opening paragraph of each tool's showcase page.
 const tool = (slug: string) => `https://has.tools/tools/${slug}.html`;
@@ -15,8 +15,8 @@ export const appsIntro = {
   aside: 'They run in the browser, with nothing to install. Some people use the tools; others take the idea and build their own. Both are welcome.',
 };
 
-// The /apps page, in this order: the first runs full width, the rest two per
-// row, so keep the count odd. `note` is the problem each app answers.
+// The /apps grid, in this order (three across on wide screens, so six fill two
+// rows). `note` is the problem each app answers.
 export const tools: WorkItem[] = [
   {
     title: 'Splay', blurb: 'Exploded views of 3D models, animated on a timeline', tag: 'Animation',
