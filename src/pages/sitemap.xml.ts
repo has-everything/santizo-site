@@ -1,7 +1,8 @@
 // /sitemap.xml: every page worth finding in search. A new page file in
-// src/pages needs a line here; project pages come from src/data/work.ts.
+// src/pages needs a line here; project and app pages come from their data.
 import type { APIRoute } from 'astro';
 import { projects } from '../data/work';
+import { appPages } from '../data/app-pages';
 import { abs } from '../lib/seo';
 
 const paths = [
@@ -10,7 +11,7 @@ const paths = [
   ...projects.map((p) => `/work/${p.slug}`),
   '/xr',
   '/apps',
-  '/apps/has-lathe',
+  ...appPages.map((a) => `/apps/${a.slug}`),
   '/burning-man',
   '/info',
 ];

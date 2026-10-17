@@ -5,11 +5,11 @@ import Section from '../Section.astro';
 import SectionHead from '../SectionHead.astro';
 import Media from '../Media.astro';
 
-interface Props { item: WorkItem; num?: string }
-const { item, num = '03' } = Astro.props;
+interface Props { item: WorkItem; num?: string; aside?: string; asideHref?: string }
+const { item, num = '03', aside = 'All work →', asideHref = '/#work' } = Astro.props;
 ---
 <Section label="Next project">
-  <SectionHead num={num} title="Next" aside="All work →" asideHref="/#work" gap="md" />
+  <SectionHead num={num} title="Next" aside={aside} asideHref={asideHref} gap="md" />
   <a class="tile rv" href={item.href}>
     <p class="title"><span class="tname">{item.title}</span> →</p>
     <div class="frame">

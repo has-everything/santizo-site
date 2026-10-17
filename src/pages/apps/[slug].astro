@@ -1,0 +1,149 @@
+---
+// One page per app (HAS Lathe, Splay, HAS Sculpt, HAS Truss, HAS Gallery),
+// all from src/data/app-pages.ts: a wide hero, the overview and why the app
+// exists, the app at work, six features, two stills, details, and the next app.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedGrid from '../../components/NumberedGrid.astro';
+import SpecList from '../../components/project/SpecList.astro';
+import PillLink from '../../components/project/PillLink.astro';
+import Figure from '../../components/project/Figure.astro';
+import NextProject from '../../components/project/NextProject.astro';
+import Media from '../../components/Media.astro';
+import { appPages, type AppPage } from '../../data/app-pages';
+import { abs, author, breadcrumbs } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return appPages.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+interface Props { app: AppPage }
+const { app } = Astro.props;
+const path = `/apps/${app.slug}`;
+
+// Next: the following app in page order, shown with its hero
+const n = appPages[(appPages.indexOf(app) + 1) % appPages.length];
+const next = { title: n.name, blurb: n.tagline, href: `/apps/${n.slug}`, media: n.hero };
+
+const schema = [
+  {
+    '@type': 'SoftwareApplication',
+    name: app.name,
+    description: app.description,
+    url: abs(path),
+    installUrl: app.appUrl,
+    image: abs(app.og.src),
+    applicationCategory: 'DesignApplication',
+    operatingSystem: 'Web browser',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: author(),
+  },
+  breadcrumbs([['Apps', '/apps'], [app.name, path]]),
+];
+---
+<Base title={`${app.name} · Santizo`} description={app.description} image={app.og} schema={schema}>
+  <Header />
+
+  <div class="crumbs">
+    <a href="/apps" class="mono cap hl hl-44">← All apps</a>
+    <span class="mono cap muted">Apps / {app.name}</span>
+  </div>
+
+  <section aria-label={`${app.name} hero`} class="hero">
+    <Media media={app.hero} title={app.name} zoom={false} />
+  </section>
+
+  <Section label="Overview" space="sm">
+    <div class="overview">
+      <div class="name">
+        <h1>{app.name}</h1>
+        <p class="muted">{app.tagline}</p>
+      </div>
+      <div class="facts">
+        <SpecList specs={app.specs} />
+        <div class="ctas">
+          <PillLink href={app.appUrl}>Open {app.name} ↗</PillLink>
+          <PillLink href="#demo" variant="outline">See the app</PillLink>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section label="About the app" space="md">
+    <div class="about">
+      <p class="lead">{app.lead}</p>
+      <div class="copy">
+        <p>{app.copy[0]}</p>
+        <p class="muted">{app.copy[1]}</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section label="The app" space="md">
+    <Figure id="demo" num="01" caption={app.demo.caption}>
+      <img class="fill" src={app.demo.src} width={app.demo.w} height={app.demo.h} loading="lazy" decoding="async" alt={app.demo.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="Features">
+    <SectionHead num="01" title="What it does" aside={String(app.features.length).padStart(2, '0')} />
+    <NumberedGrid items={app.features} narrow />
+  </Section>
+
+  <Section label="Stills">
+    <div class="stills">
+      {app.stills.map((s, i) => (
+        <Figure num={String(i + 2).padStart(2, '0')} caption={s.caption} ratio="1 / 1" half>
+          <img class="fill" src={s.src} width={s.w} height={s.h} loading="lazy" decoding="async" alt={s.alt} />
+        </Figure>
+      ))}
+    </div>
+  </Section>
+
+  <Section label="Details">
+    <SectionHead num="02" title="Details" />
+    <div class="details">
+      {app.details.map((col) => (
+        <div>
+          <h3>{col.title}</h3>
+          {col.lines.map((l) => (typeof l === 'string' ? <p>{l}</p> : <p><span class="muted">{l[0]}:</span> {l[1]}</p>))}
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <NextProject item={next} aside="All apps →" asideHref="/apps" />
+
+  <Footer tools={[
+    { label: 'has.tools ↗', href: 'https://has.tools' },
+    { label: 'All apps', href: '/apps' },
+  ]} />
+</Base>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 40px var(--gutter) 16px; }
+
+  .hero { position: relative; height: clamp(280px, 42.857vw, 760px); background: #000000; overflow: hidden; }
+
+  .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px 24px; }
+  .name { flex: 3 1 520px; min-width: 0; }
+  h1 { margin: 0; font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
+  .name p { margin: 20px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .facts { flex: 2 1 340px; min-width: 0; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+  .about { display: flex; flex-wrap: wrap; gap: 32px 24px; }
+  .lead { flex: 1 1 440px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 22ch; }
+  .copy { flex: 1 1 360px; min-width: 0; max-width: 56ch; display: flex; flex-direction: column; gap: 18px; }
+  .copy p { margin: 0; font-size: 17px; line-height: 1.6; }
+
+  .stills { display: flex; flex-wrap: wrap; gap: 48px var(--tile-gap); }
+
+  .details { display: flex; flex-wrap: wrap; gap: 40px 24px; font-size: 16px; line-height: 1.6; }
+  .details > div { flex: 1 1 260px; min-width: 0; }
+  .details h3 { margin: 0 0 12px; font-size: 16px; font-weight: 500; }
+  .details p { margin: 0; }
+</style>
