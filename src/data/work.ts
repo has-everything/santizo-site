@@ -79,7 +79,7 @@ export const projects: Project[] = [
       ] },
       { title: 'Execution', paras: [
         'Designed and visualized in 3D: the proportions, the materials and the way the mechanism moves.',
-        'The film explores how audio could turn into graphic patterns. As the paper moves, the print emerges, and you can watch sound become an object.',
+        'The animation explores how audio could turn into graphic patterns. As the paper moves, the print emerges, and you can watch sound become an object.',
       ] },
       { title: 'Outcome', paras: [
         'A product concept where industrial design, motion and creative technology meet.',
