@@ -40,7 +40,7 @@ export const groups = {
 // Titles, tags and videos come from SantizoOS (santizo-os js/site-data.js).
 export const projects: Project[] = [
   // Motion and animation
-  { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Art direction', 'Sim', 'Lighting'], group: 'motion', video: { vimeo: '1216889002' } },
+  { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Direction', 'Design', 'Animation'], group: 'motion', video: { vimeo: '1216889002' } },
   {
     slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'motion', video: { vimeo: '1230984635' },
     // The owner's own write-up (Oct 2026)
