@@ -234,3 +234,72 @@ export const toylineTile: WorkItem = {
   href: `/work/${toyline.slug}`,
   media: toyline.film,
 };
+
+// ---------- HAS Space (/work/has-space) ----------
+
+// A one-off page, like HAS Toyline: HAS Space is a desktop app in beta (repo
+// has-everything/kata-studio), so the page shows renders made with it, not a film.
+// Copy (Oct 2026): the owner's why, in his words (spaces to see artwork on the
+// walls and walk through; then interiors, furniture and Blender renders, one need
+// after another; an interface pleasant to look at and easy for anyone), shaped
+// into the site's voice. His role line, his status ("still in beta").
+export const space = {
+  slug: 'has-space',
+  title: 'HAS Space',
+  blurb: 'Interiors, from floor plan to render',
+  role: 'Creative Director, Builder',
+  specs: [
+    ['Status', 'Beta'],
+    ['Runs on', 'Mac and Windows'],
+    ['Built with', 'three.js · Blender · Python'],
+  ] as [string, string][],
+  group: 'motion' as const,
+  tagline: 'Design. Material. Light.',
+  hero: { src: '/img/work/has-space/hero.webp', w: 2400, h: 1350, alt: 'A HAS Space render: a limewash gallery room with a framed Burning Man photograph on the wall, a white ceramic vessel on a stone plinth, and a diagonal of sunlight', caption: '' } as Still,
+  story: [
+    { title: 'Vision', paras: [
+      'I wanted to hang art on walls, and walk through the rooms.',
+      'It started with artwork. I wanted to build spaces, see the work on their walls and walk through them, so my first prototype was a three.js app for walking around and experiencing the art.',
+    ] },
+    { title: 'How It Grew', paras: [
+      'Every step asked for the next one.',
+      'To show the art I needed interiors, so it learned to draw them: my own floor plans, little houses with doors and windows. Rooms needed furniture, so I built a catalog. Then I wanted it to look real, so Blender’s render engine makes the final image, with real light.',
+    ] },
+    { title: 'Creative Direction', paras: [
+      'Pleasant to look at, and easy for anyone.',
+      'Not only for architects, designers or animators: anyone should be able to open it, figure it out and start playing. A calm interface in warm neutrals, three modes, Model, Material and Light, and five looks for presenting a space: Materials, Clay, Outline, X-ray and Frosted Glass.',
+    ] },
+    { title: 'Execution', paras: [
+      'A live 3D view for designing, Blender for the final image.',
+      'You draw in 2D or 3D and see the room live in three.js, while Blender keeps the same scene in the background and renders it with Cycles. Built-in objects with editable dimensions, all made in code; sun, area and spot lights, skies and HDRI environments; saved camera views; and export to GLB, glTF and Blender files that open in Cinema 4D.',
+    ] },
+    { title: 'Outcome', paras: [
+      'A desktop app for Mac and Windows, in beta.',
+      'HAS Space 0.6 runs on your own computer, with Blender for the renders. Every image on this page came out of it.',
+    ] },
+  ] as StoryBlock[],
+  features: [
+    { title: 'Draw a room', body: 'A 2D plan, a 3D studio, or both side by side: walls, doors and windows, rulers and room areas.' },
+    { title: 'Furnish it', body: 'Sofas, tables, beds, lamps, plants and more, each with editable dimensions, plus a flat screen that shows your own image.' },
+    { title: 'Hang your art', body: 'Any image becomes artwork on a wall, sized to the picture, with an optional black frame.' },
+    { title: 'Light it', body: 'Sun, area, spot and point lights, saved light rigs, a procedural sky or your own HDRI.' },
+    { title: 'Five looks', body: 'Materials, Clay, Outline, X-ray and Frosted Glass, all from the same scene.' },
+    { title: 'Render and export', body: 'Blender renders, transparent PNGs, and GLB, glTF or Blender files that open in Cinema 4D.' },
+  ],
+  // Figures in story order. All rendered in HAS Space 0.6 (Blender 5.2.1, Cycles) through its own
+  // API, Oct 2026; the catalog sheet is its own catalog renders (web/assets/furnishings).
+  app: { src: '/img/work/has-space/app.webp', w: 2400, h: 1350, alt: 'The HAS Space interface in Plan + 3D: the floor plan of a furnished room beside the live 3D view, with the scene list, the material library and the inspector', caption: 'Plan + 3D: the floor plan and the live room, side by side.' } as Still,
+  spaces: { src: '/img/work/has-space/spaces.webp', w: 2400, h: 1176, alt: 'Three HAS Space renders of the same ceramic vessel on a plinth: a pale limewash gallery, a terracotta room and a dark room lit from above', caption: 'Gallery, Terracotta and Nocturne: one vessel, three spaces.' } as Still,
+  looks: { src: '/img/work/has-space/looks.webp', w: 2400, h: 1339, alt: 'The same furnished room rendered five ways: with materials, as clay, in outline, as an X-ray outline and in frosted glass', caption: 'One room, five looks: Materials, Clay, Outline, X-ray and Frosted Glass.' } as Still,
+  catalog: { src: '/img/work/has-space/catalog.webp', w: 2400, h: 789, alt: 'The built-in objects: sofa, armchair, tables, chairs, stool, desk, office chair, bookcase, credenza, closet, bed, nightstand, lamps, plant, carpet, artwork, screen, plinth and bathroom pieces', caption: 'Built-in objects, each with editable dimensions.' } as Still,
+  og: { src: '/img/og/has-space.jpg', alt: 'HAS Space: a gallery room with a framed photograph and a ceramic vessel on a plinth' },
+};
+
+/** HAS Space as a tile (the /work grid) */
+export const spaceTile: WorkItem = {
+  title: space.title,
+  blurb: space.blurb,
+  tag: 'Blender · three.js',
+  href: `/work/${space.slug}`,
+  media: { img: space.hero.src },
+};

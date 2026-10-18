@@ -10,6 +10,7 @@ const paths = [
   '/work',
   ...projects.map((p) => `/work/${p.slug}`),
   '/work/has-toyline',
+  '/work/has-space',
   '/xr',
   '/apps',
   ...appPages.map((a) => `/apps/${a.slug}`),

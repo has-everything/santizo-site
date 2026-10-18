@@ -7,12 +7,12 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import WorkTile from '../../components/WorkTile.astro';
-import { projects, groups, tile, toylineTile } from '../../data/work';
+import { projects, groups, tile, toylineTile, spaceTile } from '../../data/work';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
-// HAS Toyline has its own page (no Vimeo film yet), so its tile is added here, after HAS LP-19
+// HAS Toyline and HAS Space have their own pages (no Vimeo film), so their tiles are added here, after HAS LP-19
 const motion = projects.filter((p) => p.group === 'motion').map((p) => tile(p));
-motion.splice(motion.findIndex((t) => t.href === '/work/has-lp-19') + 1, 0, toylineTile);
+motion.splice(motion.findIndex((t) => t.href === '/work/has-lp-19') + 1, 0, toylineTile, spaceTile);
 const xr = projects.filter((p) => p.group === 'xr');
 const count = (n: number) => String(n).padStart(2, '0');
 

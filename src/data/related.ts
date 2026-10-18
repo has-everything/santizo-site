@@ -2,7 +2,7 @@
 // hand for what they share with the page they sit on (tools, subject, craft).
 // Keys and values are page paths. A page without an entry shows the next
 // three in its own list (see `nextThree`), so a new project never breaks.
-import { projects, tile, toyline, toylineTile, type WorkItem } from './work';
+import { projects, tile, toyline, toylineTile, spaceTile, type WorkItem } from './work';
 import { tools } from './apps';
 
 // Every page that can appear as a related tile, by path. No tags (three across
@@ -11,15 +11,17 @@ import { tools } from './apps';
 const tiles = new Map<string, WorkItem>([
   ...projects.map((p) => tile(p, { withTag: false })).map((t) => [t.href, t] as const),
   [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.film.poster } }],
+  [spaceTile.href, { ...spaceTile, tag: undefined }],
   ...tools.map((t) => [t.href, { ...t, tag: undefined, note: undefined }] as const),
 ]);
 
 const picks: Record<string, string[]> = {
   // Motion and animation
   '/work/santizo-reel-2026': ['/work/van-gogh-the-bedroom', '/work/has-lp-19', '/work/star-trails'],
-  '/work/van-gogh-the-bedroom': ['/work/real-time-interactive-app', '/work/evidence-of-existence', '/work/has-toyline'],
+  '/work/van-gogh-the-bedroom': ['/work/has-space', '/work/real-time-interactive-app', '/work/evidence-of-existence'],
   '/work/has-lp-19': ['/work/has-toyline', '/work/roboto', '/apps/has-lathe'],
   '/work/has-toyline': ['/apps/splay', '/work/has-lp-19', '/work/roboto'],
+  '/work/has-space': ['/apps/has-gallery', '/work/van-gogh-the-bedroom', '/work/has-toyline'],
   '/work/star-trails': ['/work/santizo-reel-2026', '/work/evidence-of-existence', '/work/visual-alternatives'],
   '/work/evidence-of-existence': ['/work/star-trails', '/work/van-gogh-the-bedroom', '/work/arrow-grid-system'],
   '/work/visual-alternatives': ['/work/real-time-interactive-app', '/work/roboto', '/work/star-trails'],
@@ -38,7 +40,7 @@ const picks: Record<string, string[]> = {
   '/apps/has-lathe': ['/apps/has-sculpt', '/work/has-lp-19', '/apps/splay'],
   '/apps/has-sculpt': ['/apps/has-lathe', '/work/roboto', '/apps/splay'],
   '/apps/has-truss': ['/apps/has-gallery', '/apps/splay', '/apps/has-lathe'],
-  '/apps/has-gallery': ['/work/van-gogh-the-bedroom', '/apps/has-truss', '/work/evidence-of-existence'],
+  '/apps/has-gallery': ['/work/has-space', '/work/van-gogh-the-bedroom', '/apps/has-truss'],
 };
 
 /** The next three paths after `path` in `list`, wrapping around (the fallback). */

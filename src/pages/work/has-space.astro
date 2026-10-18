@@ -1,0 +1,114 @@
+---
+// HAS Space: a one-off work page (see `space` in src/data/work.ts), built like
+// HAS Toyline's: a still render in the film band (the app is a desktop beta,
+// there is no film), the role first in the specs, the case study, the figures
+// in story order, six "What it does" cards and three related pages.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedGrid from '../../components/NumberedGrid.astro';
+import SpecList from '../../components/project/SpecList.astro';
+import Figure from '../../components/project/Figure.astro';
+import Related from '../../components/project/Related.astro';
+import Story from '../../components/project/Story.astro';
+import { space as p, groups } from '../../data/work';
+import { related } from '../../data/related';
+import { abs, author, breadcrumbs } from '../../lib/seo';
+
+const group = groups[p.group];
+const specs: [string, string][] = [['Role', p.role], ...p.specs];
+
+const path = `/work/${p.slug}`;
+const description = `${p.title}: ${p.tagline} A desktop app for designing interiors, from floor plan to Blender render, by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const schema = [
+  {
+    '@type': 'CreativeWork',
+    name: p.title,
+    description,
+    url: abs(path),
+    genre: group.label,
+    keywords: 'Interior design, three.js, Blender, Rendering',
+    image: abs(p.og.src),
+    author: author(),
+  },
+  breadcrumbs([['Work', '/work'], [p.title, path]]),
+];
+---
+<Base title={`${p.title} · Santizo`} description={description} image={p.og} schema={schema}>
+  <Header />
+
+  <div class="crumbs">
+    <a href="/work" class="mono cap hl hl-44">← All work</a>
+    <span class="mono cap muted">Work / {group.label}</span>
+  </div>
+
+  <section aria-label="Render" class="screen">
+    <div class="fit"><div class="film"><img class="fill" src={p.hero.src} width={p.hero.w} height={p.hero.h} alt={p.hero.alt} /></div></div>
+  </section>
+
+  <Section label="Overview" space="sm">
+    <div class="overview">
+      <div class="name">
+        <h1>{p.title}</h1>
+        <p class="muted">{p.tagline}</p>
+      </div>
+      <div class="facts">
+        <SpecList specs={specs} />
+      </div>
+    </div>
+  </Section>
+
+  <Section label="About the project" space="md">
+    <Story blocks={p.story} />
+  </Section>
+
+  <Section label="The app" space="md">
+    <Figure num="01" caption={p.app.caption}>
+      <img class="fill" src={p.app.src} width={p.app.w} height={p.app.h} loading="lazy" decoding="async" alt={p.app.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="Three spaces" space="md">
+    <Figure num="02" caption={p.spaces.caption} ratio={`${p.spaces.w} / ${p.spaces.h}`}>
+      <img class="fill" src={p.spaces.src} width={p.spaces.w} height={p.spaces.h} loading="lazy" decoding="async" alt={p.spaces.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="Five looks" space="md">
+    <Figure num="03" caption={p.looks.caption} ratio={`${p.looks.w} / ${p.looks.h}`}>
+      <img class="fill" src={p.looks.src} width={p.looks.w} height={p.looks.h} loading="lazy" decoding="async" alt={p.looks.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="What it does">
+    <SectionHead num="01" title="What it does" aside={String(p.features.length).padStart(2, '0')} />
+    <NumberedGrid items={p.features} narrow />
+  </Section>
+
+  <Section label="The catalog" space="lg">
+    <Figure num="04" caption={p.catalog.caption} ratio={`${p.catalog.w} / ${p.catalog.h}`}>
+      <img class="fill" src={p.catalog.src} width={p.catalog.w} height={p.catalog.h} loading="lazy" decoding="async" alt={p.catalog.alt} />
+    </Figure>
+  </Section>
+
+  <Related items={related(path, [])} num="02" />
+
+  <Footer num="03" />
+</Base>
+
+<style>
+  /* As on the other work pages: the picture edge to edge on a black band, sized
+     to fit on screen under the top bar and the crumbs */
+  .screen { background: #000000; }
+  .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
+  .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
+  .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
+
+  .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
+  .name { flex: 3 1 520px; min-width: 0; }
+  h1 { margin: 0; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; }
+  .name p { margin: 16px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .facts { flex: 2 1 340px; min-width: 0; }
+</style>
