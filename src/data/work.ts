@@ -93,8 +93,52 @@ export const projects: Project[] = [
   { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'motion', video: { vimeo: '548921641' } },
   { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'motion', video: { vimeo: '1056096066' } },
   // XR and interaction
-  { slug: 'has-photo-booth', title: 'HAS Photo Booth', blurb: 'MediaPipe, in the browser', focus: ['MediaPipe', 'Browser'], group: 'xr', video: { youtube: '1L2anMG2k-8' } },
-  { slug: 'hand-tracker', title: 'Hand Tracker', blurb: 'MediaPipe and JavaScript', focus: ['MediaPipe', 'JavaScript'], group: 'xr', video: { youtube: '2WZzjRuMJU0' } },
+  {
+    slug: 'has-photo-booth', title: 'HAS Photo Booth', blurb: 'MediaPipe, in the browser', focus: ['MediaPipe', 'Browser'], group: 'xr', video: { youtube: '1L2anMG2k-8' },
+    // The owner's own write-up (Oct 2026), in story sections; his list as paragraphs
+    story: [
+      { title: 'Vision', paras: [
+        'One possible future of user interaction is intuitive, accessible, and touch-free.',
+        'To explore this, I built HAS Photo Booth. It reimagines the camera by turning your hands into the frame itself. You physically shape the shot you want with your fingers, hold it steady for a moment to capture, and then point to drag the results.',
+      ] },
+      { title: 'The Experiment', paras: [
+        'This isn’t just a photo booth.',
+        'It’s a functional experiment in Human-Computer Interaction (HCI) that asks: How intuitive and engaging can a web experience be when you remove traditional inputs?',
+      ] },
+      { title: 'Opportunities', paras: [
+        'The prototype highlights opportunities for:',
+        'User engagement: designing interactions that are playful and memorable.',
+        'Accessibility: expanding possibilities for users with motor limitations.',
+        'Future platforms: rapidly prototyping mechanics for AR and VR.',
+      ] },
+      { title: 'What I Learned', paras: [
+        'Building this was as much about learning as it was about testing possibilities.',
+        'I explored firsthand how accessible tools like Google’s MediaPipe can open doors to new interaction models.',
+      ] },
+      { title: 'The Bigger Picture', paras: [
+        'I believe creativity and strategy go hand in hand.',
+        'Innovation comes from experimenting, learning, and connecting those insights to the bigger picture.',
+      ] },
+    ],
+  },
+  {
+    slug: 'hand-tracker', title: 'Hand Tracker', blurb: 'MediaPipe and JavaScript', focus: ['MediaPipe', 'JavaScript'], group: 'xr', video: { youtube: '2WZzjRuMJU0' },
+    // The owner's own write-up (Oct 2026), in story sections; his gesture list as sentences
+    story: [
+      { title: 'Vision', paras: [
+        'Flip mood boards, product shots, and slides without touching a trackpad.',
+        'I built a browser-based, webcam-only, gesture-controlled gallery using JavaScript.',
+      ] },
+      { title: 'How It Works', paras: [
+        'Pinch for next. Hang loose to switch the layout.',
+        'Four layouts: horizontal, vertical, diagonal, and circular. Upload and reorder your own images. Tuned for reliable far-hand detection.',
+      ] },
+      { title: 'Why It Matters', paras: [
+        'More natural, accessible, and expressive UI.',
+        'Present without breaking eye contact or flow.',
+      ] },
+    ],
+  },
   { slug: 'wrist-interaction', title: 'Wrist Interaction', blurb: 'Tracked transforms', focus: ['Tracked transforms'], group: 'xr', video: { vimeo: '989005478' } },
   { slug: '3d-calculator', title: '3D Calculator', blurb: 'Gesture math', focus: ['Gesture math'], group: 'xr', video: { vimeo: '1001763153' } },
   { slug: 'gauge-control', title: 'Gauge Control', blurb: 'VR/AR dials', focus: ['VR/AR dials'], group: 'xr', video: { vimeo: '982232014' } },
