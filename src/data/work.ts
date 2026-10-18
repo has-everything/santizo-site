@@ -255,7 +255,7 @@ export const space = {
   ] as [string, string][],
   group: 'motion' as const,
   tagline: 'Design. Material. Light.',
-  hero: { src: '/img/work/has-space/hero.webp', w: 2400, h: 1029, alt: 'A HAS Space render: a limewash gallery room with a large framed Burning Man photograph on the wall, a white ceramic vessel beside it on a stone plinth, and a diagonal of sunlight', caption: '' } as Still,
+  hero: { src: '/img/work/has-space/hero.webp', w: 2400, h: 1029, alt: 'A HAS Space render: a limewash gallery room with a large framed Burning Man photograph centred over a stone plinth, a white ceramic vessel on the floor beside it, and a diagonal of sunlight', caption: '' } as Still,
   story: [
     { title: 'Vision', paras: [
       'I wanted to hang art on walls, and walk through the rooms.',
