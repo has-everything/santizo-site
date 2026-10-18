@@ -119,18 +119,7 @@ export const tile = (p: Project, { withTag = true } = {}): WorkItem => ({
 
 // ---------- Home page ----------
 
-// (01) Featured work. Order is layout: the first item runs full width, the
-// rest pair up in rows that alternate wide/narrow and narrow/wide.
-export const featured: WorkItem[] = [
-  ...['van-gogh-the-bedroom', 'has-lp-19', 'roboto', 'evidence-of-existence', 'real-time-interactive-app', 'star-trails'].map((s) => tile(project(s))),
-  {
-    title: 'HAS Lathe',
-    blurb: 'A potter’s wheel for 3D models',
-    tag: 'Free app',
-    href: '/apps/has-lathe',
-    media: { art: 'lathe' },
-  },
-];
+// (01) Featured work: `featured`, at the end of this file (it leads with HAS Toyline's tile, defined below).
 
 // (02) XR and interaction: three wide clips in a row (all of them are on /xr).
 export const xr = {
@@ -378,3 +367,20 @@ export const recordsTile: WorkItem = {
   href: `/work/${records.slug}`,
   media: { video: '/video/has-records-tile.mp4', poster: '/img/work/has-records/tile-poster.webp' },
 };
+
+// ---------- Home page: featured work ----------
+
+// (01) Featured work. Order is layout: the first item runs full width, the
+// rest pair up in rows that alternate wide/narrow and narrow/wide. Here, after
+// the one-off pages, because it leads with HAS Toyline's tile (owner's order, Oct 2026).
+export const featured: WorkItem[] = [
+  toylineTile,
+  ...['van-gogh-the-bedroom', 'roboto', 'real-time-interactive-app', 'has-lp-19', 'star-trails'].map((s) => tile(project(s))),
+  {
+    title: 'HAS Lathe',
+    blurb: 'A potter’s wheel for 3D models',
+    tag: 'Free app',
+    href: '/apps/has-lathe',
+    media: { art: 'lathe' },
+  },
+];
