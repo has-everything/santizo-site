@@ -11,8 +11,9 @@ import { tools } from './apps';
 const tiles = new Map<string, WorkItem>([
   ...projects.map((p) => tile(p, { withTag: false })).map((t) => [t.href, t] as const),
   [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.film.poster } }],
-  [spaceTile.href, { ...spaceTile, tag: undefined }],
   ...tools.map((t) => [t.href, { ...t, tag: undefined, note: undefined }] as const),
+  // after `tools`, so HAS Space's tile shows its render, not its Apps card (the interface)
+  [spaceTile.href, { ...spaceTile, tag: undefined }],
 ]);
 
 const picks: Record<string, string[]> = {

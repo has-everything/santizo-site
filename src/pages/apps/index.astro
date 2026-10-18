@@ -1,6 +1,6 @@
 ---
-// Apps: why the tools exist, then the apps from has.tools as a grid of preview
-// cards (three across on wide screens), each with the problem it answers.
+// Apps: why the tools exist, then the apps (has.tools, plus HAS Space) as a grid
+// of preview cards (three across on wide screens), each with the problem it answers.
 // Copy and order live in src/data/apps.ts.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
@@ -14,7 +14,7 @@ import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const count = String(tools.length).padStart(2, '0');
 
-const description = 'Free creative tools by Hector Augusto Santizo for motion designers, 3D artists and creative coders. They run in the browser.';
+const description = 'Creative tools by Hector Augusto Santizo for motion designers, 3D artists and creative coders: free browser apps from has.tools, and HAS Space, a desktop app for interiors.';
 const schema = [
   { '@type': 'CollectionPage', name: 'Apps', description, url: abs('/apps'), author: author() },
   breadcrumbs([['Apps', '/apps']]),
