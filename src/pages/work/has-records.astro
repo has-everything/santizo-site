@@ -1,7 +1,7 @@
 ---
 // HAS Records: a one-off work page (see `records` in src/data/work.ts), built
-// like HAS Toyline's: a looping capture of the app instead of a Vimeo player,
-// the role first in the specs, the case study, the figures, six "What it does"
+// like HAS Toyline's, but its video plays in the Vimeo player, with sound and
+// controls, as on the other work pages; the role first in the specs, the case study, the figures, six "What it does"
 // cards and three related pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
@@ -9,7 +9,7 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import NumberedGrid from '../../components/NumberedGrid.astro';
-import Media from '../../components/Media.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import Figure from '../../components/project/Figure.astro';
 import Related from '../../components/project/Related.astro';
@@ -54,7 +54,7 @@ const schema = [
   </div>
 
   <section aria-label="Video" class="screen">
-    <div class="fit"><div class="film"><Media media={p.film} title={p.title} zoom={false} /></div></div>
+    <div class="fit"><VideoPlayer video={p.video} title={p.title} /></div>
   </section>
 
   <Section label="Overview" space="sm">
@@ -122,11 +122,10 @@ const schema = [
 </Base>
 
 <style>
-  /* As on the other work pages: the film edge to edge on a black band, sized to
+  /* As on the other work pages: the video edge to edge on a black band, sized to
      fit on screen under the top bar and the crumbs */
   .screen { background: #000000; }
   .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
-  .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
 
   .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }

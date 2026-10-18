@@ -2,16 +2,16 @@
 // hand for what they share with the page they sit on (tools, subject, craft).
 // Keys and values are page paths. A page without an entry shows the next
 // three in its own list (see `nextThree`), so a new project never breaks.
-import { projects, tile, toyline, toylineTile, spaceTile, records, recordsTile, type WorkItem } from './work';
+import { projects, tile, toyline, toylineTile, spaceTile, recordsTile, type WorkItem } from './work';
 import { tools } from './apps';
 
 // Every page that can appear as a related tile, by path. No tags (three across
-// leaves no room for them), no notes; HAS Toyline and HAS Records show their
-// posters, not their films, so a page doesn't download one just for the last row.
+// leaves no room for them), no notes; HAS Toyline shows its poster, not its
+// 10 MB capture, so a page doesn't download it just for the last row.
 const tiles = new Map<string, WorkItem>([
   ...projects.map((p) => tile(p, { withTag: false })).map((t) => [t.href, t] as const),
   [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.film.poster } }],
-  [recordsTile.href, { ...recordsTile, tag: undefined, media: { img: records.film.poster } }],
+  [recordsTile.href, { ...recordsTile, tag: undefined }],
   ...tools.map((t) => [t.href, { ...t, tag: undefined, note: undefined }] as const),
   // after `tools`, so HAS Space's tile shows its render, not its Apps card (the interface)
   [spaceTile.href, { ...spaceTile, tag: undefined }],

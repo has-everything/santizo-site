@@ -347,10 +347,11 @@ export const spaceTile: WorkItem = {
 // ---------- HAS Records (/work/has-records) ----------
 
 // A one-off page, like HAS Toyline: HAS Records is a desktop app (Unreal Engine,
-// Mac and Windows), so the page loops a self-hosted capture and adds stills.
+// Mac and Windows), so the page adds stills and features to its video.
 // A Rega Planar 6 RS modeled in Blender from published dimensions and played in
 // Unreal Engine: drop the needle anywhere on side A and hear that moment of the
-// song. Copy, stills and film from the project's case study package (Oct 2026).
+// song. Copy and stills from the project's case study package; the video is the
+// owner's Vimeo cut (37 s, Oct 2026), on the page, its tiles and the home page.
 export const records = {
   slug: 'has-records',
   title: 'HAS Records',
@@ -361,7 +362,7 @@ export const records = {
   group: 'interactive' as const,
   year: '2026',
   tagline: 'A turntable you can actually play.',
-  film: { video: '/video/has-records.mp4', poster: '/img/work/has-records/poster.webp' },
+  video: { vimeo: '1237080035' },
   story: [
     { title: 'Vision', paras: [
       'I wanted to play a record, not just look at one.',
@@ -393,7 +394,7 @@ export const records = {
     { title: 'Your view', body: 'Orbit, zoom in close to the label, or hide the interface and just listen. The keyboard shortcuts keep working.' },
   ],
   // Figures in page order: close up, the Blender source, at the turntable, the app, taken apart.
-  // The stills and the film are rendered by the app itself; Figs. 03 and 07 by Blender.
+  // The stills are rendered by the app itself; Figs. 03 and 07 by Blender.
   squares: [
     { src: '/img/work/has-records/label.webp', w: 1360, h: 1360, alt: 'Close-up of the HAS Records centre label: a sunset disc above the navy HAS Records wordmark on cream paper, on a black LP', caption: 'The HAS Records label, on cream paper.' },
     { src: '/img/work/has-records/stylus.webp', w: 1360, h: 1360, alt: 'The Nd9 cartridge in the groove, with a small green light glowing on its front and a faint green glow on the vinyl below', caption: 'The stylus light, on while the record turns.' },
@@ -408,13 +409,13 @@ export const records = {
   og: { src: '/img/og/has-records.jpg', alt: 'HAS Records: a Rega Planar 6 RS playing a HAS Records LP, its stylus light glowing green' },
 };
 
-/** HAS Records as a tile (the /work grid): a 6 s loop (0.5 MB), not the film */
+/** HAS Records as a tile (home, /work, Related): its Vimeo video as a muted loop, like the other Vimeo projects */
 export const recordsTile: WorkItem = {
   title: records.title,
   blurb: records.blurb,
   tag: 'Unreal Engine',
   href: `/work/${records.slug}`,
-  media: { video: '/video/has-records-tile.mp4', poster: '/img/work/has-records/tile-poster.webp' },
+  media: records.video,
 };
 
 // ---------- Home page: featured work ----------
