@@ -90,7 +90,7 @@ npm run build    # static site in dist/
 
 ## Deploy
 
-Vercel project imported from this GitHub repo, Framework Preset **Astro**, all defaults (build `astro build`, output `dist`). Push to `main` = production; any other branch gets its own preview URL. santizo-os notes that the GitHub webhook has missed pushes before. If a push doesn't show up, run `vercel deploy --prod` from this folder.
+Vercel project imported from this GitHub repo, Framework Preset **Astro**, all defaults (build `astro build`, output `dist`). Push to `main` = production; any other branch gets its own preview URL, `https://santizo-site-git-<branch>-augustos-projects-c42fb8a3.vercel.app`. Keep preview branch names to 18 characters or fewer (e.g. `has-space`): that host name part can't pass 63 characters, and past it Vercel shortens the name with a hash, so the predictable address doesn't exist (as happened with `has-space-case-study`). santizo-os notes that the GitHub webhook has missed pushes before. If a push doesn't show up, run `vercel deploy --prod` from this folder.
 
 Web Analytics: the snippet is in `Base.astro`. Turn it on in the Vercel project (Analytics tab).
 
