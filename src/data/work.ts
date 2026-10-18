@@ -418,7 +418,7 @@ export const recordsTile: WorkItem = {
 // rest pair up in rows that alternate wide/narrow and narrow/wide, and a last
 // one on its own runs full width. Here, after the one-off pages, because it uses
 // their tiles (owner's order, Oct 2026: HAS Toyline, HAS Records, Splay,
-// HAS Space, Van Gogh · The Bedroom, HAS LP-19).
+// HAS Space, Van Gogh · The Bedroom, HAS LP-19, HAS Lathe).
 const app = (title: string): WorkItem => {
   const t = tools.find((x) => x.title === title);
   if (!t) throw new Error(`No app "${title}" in tools (src/data/apps.ts)`);
@@ -432,4 +432,6 @@ export const featured: WorkItem[] = [
   app('Splay'),
   spaceTile,
   ...['van-gogh-the-bedroom', 'has-lp-19'].map((s) => tile(project(s))),
+  // Its line drawing, not its Apps card
+  { ...app('HAS Lathe'), media: { art: 'lathe' } },
 ];
