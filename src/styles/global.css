@@ -18,11 +18,14 @@
   --font-sans: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 
-  /* Wide layout (field.io-like): media runs the full window width with thin
-     margins and tight gaps; text keeps its own reading-width limits. For the
-     old centered column, set --max back to 1440px. */
+  /* Layout (field.io-like, owner's call, Oct 2026): heroes at the top of a page
+     run the full window width (they sit outside .wrap); everything else sits in
+     a centred column, about 82% of the window on wide screens, at most 1440px,
+     and full width (less the gutters) up to 760px. Tiles keep tight gaps; text
+     keeps its own reading-width limits. --max: 100% puts the content edge to
+     edge again. */
   --gutter: clamp(12px, 1.6vw, 24px);
-  --max: 100%;
+  --max: min(100%, max(760px, 82vw), 1440px);
   --tile-gap: clamp(10px, 1.2vw, 20px);
   --space-xl: clamp(96px, 11vw, 160px);
   --space-lg: clamp(80px, 9vw, 140px);
