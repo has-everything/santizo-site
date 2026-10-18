@@ -9,7 +9,7 @@ import Media from '../Media.astro';
 const media: MediaType = reel.file ? { video: reel.file, poster: reel.poster || undefined } : { vimeo: reel.vimeo };
 ---
 <section id="top" aria-label="Showreel" class="reel-hero" data-reel>
-  <Media media={media} title={reel.title} zoom={false} />
+  <Media media={media} title={reel.title} zoom={false} lazy={false} />
   <div class="shade-top" aria-hidden="true"></div>
 
   <div class="bar">

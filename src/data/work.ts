@@ -226,13 +226,15 @@ export const toyline = {
   og: { src: '/img/og/has-toyline.jpg', alt: 'HAS Toyline: a red wooden coupe boxed in a HAS Wheels carton' },
 };
 
-/** HAS Toyline as a tile (the /work grid) */
+/** HAS Toyline as a tile (the /work grid). Not the 10 MB film, which starts
+ * downloading as soon as /work opens: an 8 s cut of it at 1280 px (1.5 MB), from
+ * 8 s in, where the bare birch car is painted, printed and gets its wheels. */
 export const toylineTile: WorkItem = {
   title: toyline.title,
   blurb: toyline.blurb,
   tag: 'three.js',
   href: `/work/${toyline.slug}`,
-  media: toyline.film,
+  media: { video: '/video/has-toyline-tile.mp4', poster: '/img/work/has-toyline/tile-poster.webp' },
 };
 
 // ---------- HAS Space (/work/has-space) ----------
