@@ -11,6 +11,7 @@ const paths = [
   ...projects.map((p) => `/work/${p.slug}`),
   '/work/has-toyline',
   '/work/has-space',
+  '/work/has-records',
   '/xr',
   '/apps',
   ...appPages.map((a) => `/apps/${a.slug}`),

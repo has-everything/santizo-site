@@ -305,3 +305,76 @@ export const spaceTile: WorkItem = {
   href: `/work/${space.slug}`,
   media: { img: space.hero.src },
 };
+
+// ---------- HAS Records (/work/has-records) ----------
+
+// A one-off page, like HAS Toyline: HAS Records is a desktop app (Unreal Engine,
+// Mac and Windows), so the page loops a self-hosted capture and adds stills.
+// A Rega Planar 6 RS modeled in Blender from published dimensions and played in
+// Unreal Engine: drop the needle anywhere on side A and hear that moment of the
+// song. Copy, stills and film from the project's case study package (Oct 2026).
+export const records = {
+  slug: 'has-records',
+  title: 'HAS Records',
+  blurb: 'A turntable you can play, in Unreal Engine',
+  role: 'Concept, Creative Direction, 3D Design, Development',
+  focus: ['Unreal Engine', 'Blender', 'Interactive'],
+  runsOn: 'Mac and Windows',
+  group: 'motion' as const,
+  year: '2026',
+  tagline: 'A turntable you can actually play.',
+  film: { video: '/video/has-records.mp4', poster: '/img/work/has-records/poster.webp' },
+  story: [
+    { title: 'Vision', paras: [
+      'I wanted to play a record, not just look at one.',
+      'Most 3D turntables are props: a perfect render that never moves. I wanted one that works. Lift the arm, set the needle in a groove, and hear that exact moment of the song. So I modeled a Rega Planar 6 RS, gave it a HAS Records pressing, and built a listening room around it.',
+    ] },
+    { title: 'How It Grew', paras: [
+      'First it had to look right. Then it had to work right.',
+      'It started as a Blender model, built part by part from Rega’s published numbers: a 447 × 360 mm plinth, 222 mm from spindle to pivot, a 236.5 mm effective arm length. Once it looked right, it had to behave right. The platter had to turn at 33⅓, the arm had to swing on its own pivot, and every groove had to mean a moment in a song.',
+    ] },
+    { title: 'Creative Direction', paras: [
+      'Quiet hardware, a warm label, and nothing that breaks the spell.',
+      'A cool studio, a silver plinth and a black pressing, so the colour comes from the label: a sunset over the HAS Records wordmark on cream paper. The interface sits to one side and disappears when you want it to. The small things carry the feeling: the motor eases up to speed, the arm lifts before it travels, and a green light on the cartridge glows whenever the record turns.',
+    ] },
+    { title: 'Execution', paras: [
+      'Modeled in Blender, played in Unreal Engine.',
+      'The Blender scene is the source. Every part, pivot and material exports to a compact geometry file that Unreal assembles at startup, so the platter, tonearm and dustcover each move on their own axes. Six bands hold six songs, which makes the needle’s radius a timestamp: set it down a third of the way across band two, and band two plays from a third of the way in. Hardware ray-traced shadows keep the cartridge and platter edges soft and steady, and a built-in self-test runs 44 checks, from the stylus meeting the vinyl to the platter’s measured speed.',
+    ] },
+    { title: 'Outcome', paras: [
+      'A Mac and Windows app, and a side that plays all the way through.',
+      'HAS Records is an Unreal Engine app for Mac and Windows. Side A plays six songs end to end, the needle following the grooves inward without lifting, and the arm returns to rest when the side is done. The turntable is a reference-based reconstruction for the experience, not an official Rega product.',
+    ] },
+  ] as StoryBlock[],
+  features: [
+    { title: 'Drop the needle', body: 'Drag the head up to lift it and sideways to cue, from any angle. Let go over a groove and it plays from there.' },
+    { title: 'Six songs, one side', body: 'Six bands on the pressing, six full songs. The needle’s position is the playback position, and it stays down from one song to the next.' },
+    { title: '33⅓ rpm', body: 'The motor eases up to speed, the platter turns clockwise at 200° a second, and it coasts down when you pause.' },
+    { title: 'A light at the stylus', body: 'A green LED on the cartridge lights while the record turns and casts a soft glow on the groove beneath it.' },
+    { title: 'Lid, lift and return', body: 'The dustcover swings on its hinge pins, the cueing lift raises the arm, and Return parks it on its rest.' },
+    { title: 'Your view', body: 'Orbit, zoom in close to the label, or hide the interface and just listen. The keyboard shortcuts keep working.' },
+  ],
+  // Figures in page order: close up, the Blender source, at the turntable, the app, taken apart.
+  // The stills and the film are rendered by the app itself; Figs. 03 and 07 by Blender.
+  squares: [
+    { src: '/img/work/has-records/label.webp', w: 1360, h: 1360, alt: 'Close-up of the HAS Records centre label: a sunset disc above the navy HAS Records wordmark on cream paper, on a black LP', caption: 'The HAS Records label, on cream paper.' },
+    { src: '/img/work/has-records/stylus.webp', w: 1360, h: 1360, alt: 'The Nd9 cartridge in the groove, with a small green light glowing on its front and a faint green glow on the vinyl below', caption: 'The stylus light, on while the record turns.' },
+  ] as Still[],
+  model: { src: '/img/work/has-records/model.webp', w: 2400, h: 1350, alt: 'Blender render of the Rega Planar 6 RS with a HAS Records LP, its smoked dustcover raised and the Neo power supply beside it', caption: 'The Blender source: a Planar 6 RS, RB880 arm and Nd9 cartridge, 243 parts modeled from published dimensions.' } as Still,
+  pair: [
+    { src: '/img/work/has-records/cue.webp', w: 2400, h: 1350, alt: 'Low close-up of the tonearm lifted above the record, the stylus hovering over the grooves with its green light on', caption: 'Lifted for a hand cue, the platter still turning.' },
+    { src: '/img/work/has-records/lid.webp', w: 2400, h: 1350, alt: 'The turntable with its smoked dustcover closed over the spinning HAS Records LP', caption: 'Dustcover down, side A still playing.' },
+  ] as Still[],
+  app: { src: '/img/work/has-records/app.webp', w: 2400, h: 1350, alt: 'HAS Records running: a Rega Planar 6 RS with its dustcover raised and a HAS Records LP playing, with the side A track list, transport buttons and volume in the panel on the right', caption: 'The listening room: side A in the panel, the record playing beside it.' } as Still,
+  exploded: { src: '/img/work/has-records/exploded.webp', w: 2400, h: 1350, alt: 'Exploded Blender render: the dustcover, record, felt mat and glass platter floating in a stack above the bearing, the perforated brace and the plinth, with the tonearm and power supply in place', caption: 'Taken apart: dustcover, record and felt mat, glass platter, main bearing, brace and plinth.' } as Still,
+  og: { src: '/img/og/has-records.jpg', alt: 'HAS Records: a Rega Planar 6 RS playing a HAS Records LP, its stylus light glowing green' },
+};
+
+/** HAS Records as a tile (the /work grid): a 6 s loop (0.5 MB), not the film */
+export const recordsTile: WorkItem = {
+  title: records.title,
+  blurb: records.blurb,
+  tag: 'Unreal Engine',
+  href: `/work/${records.slug}`,
+  media: { video: '/video/has-records-tile.mp4', poster: '/img/work/has-records/tile-poster.webp' },
+};
