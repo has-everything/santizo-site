@@ -20,16 +20,17 @@ const tiles = new Map<string, WorkItem>([
 const picks: Record<string, string[]> = {
   // Motion and animation
   '/work/santizo-reel-2026': ['/work/van-gogh-the-bedroom', '/work/has-lp-19', '/work/star-trails'],
-  '/work/van-gogh-the-bedroom': ['/work/has-space', '/work/real-time-interactive-app', '/work/evidence-of-existence'],
   '/work/has-lp-19': ['/work/has-toyline', '/work/roboto', '/apps/has-lathe'],
-  '/work/has-toyline': ['/apps/splay', '/work/has-lp-19', '/work/roboto'],
-  '/work/has-space': ['/apps/has-gallery', '/work/van-gogh-the-bedroom', '/work/has-toyline'],
-  '/work/has-records': ['/work/van-gogh-the-bedroom', '/work/has-lp-19', '/apps/splay'],
   '/work/star-trails': ['/work/santizo-reel-2026', '/work/evidence-of-existence', '/work/visual-alternatives'],
   '/work/evidence-of-existence': ['/work/star-trails', '/work/van-gogh-the-bedroom', '/work/arrow-grid-system'],
   '/work/visual-alternatives': ['/work/real-time-interactive-app', '/work/roboto', '/work/star-trails'],
   '/work/real-time-interactive-app': ['/work/visual-alternatives', '/work/roboto', '/work/van-gogh-the-bedroom'],
   '/work/roboto': ['/work/has-toyline', '/work/real-time-interactive-app', '/work/visual-alternatives'],
+  // Interactive and real-time
+  '/work/has-toyline': ['/apps/splay', '/work/has-lp-19', '/work/roboto'],
+  '/work/has-records': ['/work/van-gogh-the-bedroom', '/work/has-lp-19', '/apps/splay'],
+  '/work/van-gogh-the-bedroom': ['/work/has-space', '/work/real-time-interactive-app', '/work/evidence-of-existence'],
+  '/work/has-space': ['/apps/has-gallery', '/work/van-gogh-the-bedroom', '/work/has-toyline'],
   // XR and interaction
   '/work/has-photo-booth': ['/work/hand-tracker', '/work/wrist-interaction', '/work/pinch-twist'],
   '/work/hand-tracker': ['/work/has-photo-booth', '/work/pinch-twist', '/work/3d-calculator'],

@@ -15,7 +15,7 @@ export const abs = (path: string) => origin + (path === '/' ? '/' : path.replace
 export interface OgImage { src: string; alt: string }
 export const defaultImage: OgImage = {
   src: '/img/og/santizo.png',
-  alt: 'santizo: Moving images, in three dimensions. Hector Augusto Santizo, creative technologist, Los Angeles.',
+  alt: 'santizo: Complex products, made clear in 3D. Hector Augusto Santizo, creative technologist, Los Angeles.',
 };
 
 const personId = () => abs('/') + '#person';

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Showreel from '../components/home/Showreel.astro';
 import Intro from '../components/home/Intro.astro';
+import Teams from '../components/home/Teams.astro';
 import FeaturedWork from '../components/home/FeaturedWork.astro';
 import XrStrip from '../components/home/XrStrip.astro';
 import Apps from '../components/home/Apps.astro';
@@ -13,8 +14,9 @@ import { person, website } from '../lib/seo';
   <Header overlay />
   <Showreel />
   <Intro />
+  <Teams />
   <FeaturedWork />
   <XrStrip />
   <Apps />
-  <Footer />
+  <Footer num="05" />
 </Base>

@@ -50,12 +50,27 @@ export const reel = {
 // technologist first, creative direction as a discipline rather than a title,
 // leadership in the present tense with UMG as the track record.
 export const intro = {
-  headline: 'Moving images, in three dimensions.',
+  headline: 'Complex products, made clear in 3D.',
   roles: 'Creative Technologist · 3D & Motion',
   paras: [
     'I’m Hector Santizo. I make complex things simple to see and simple to use: 3D animations that explain products, real-time experiences, and tools for creative people.',
     'I lead projects from the first sketch to launch, combining creative direction with hands-on 3D, motion, and development. Previously Director of Creative Services at Universal Music Group.',
   ],
+};
+
+// Home page "What I do for teams", between About and Featured work (the
+// owner's copy, Oct 2026). Four items: NumberedGrid runs them 1, 2, then 4 across.
+export const teams = {
+  title: 'What I do for teams',
+  items: [
+    { title: 'Product visualization', body: '3D animation that makes products easier to understand.' },
+    { title: 'Interactive experiences', body: 'Real-time 3D, configurators, spatial storytelling and XR.' },
+    { title: 'Custom creative tools', body: 'Tools that make complicated workflows simple.' },
+    { title: 'Concept to prototype', body: 'Turning ambitious ideas into working experiences.' },
+  ],
+  // TODO(owner): one line on whether you take projects, roles or both. It shows
+  // under the four items once it is set; empty, nothing shows.
+  note: '',
 };
 
 // Info's opening: the same positioning, a little fuller

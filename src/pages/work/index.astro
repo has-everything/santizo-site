@@ -1,5 +1,5 @@
 ---
-// Work: every video, in two groups. Each tile opens /work/<slug>.
+// Work: every project, in three groups. Each tile opens /work/<slug>.
 // Projects and their order live in src/data/work.ts.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
@@ -10,13 +10,13 @@ import WorkTile from '../../components/WorkTile.astro';
 import { projects, groups, tile, toylineTile, spaceTile, recordsTile } from '../../data/work';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
-// HAS Toyline, HAS Space and HAS Records have their own pages (no Vimeo film), so their tiles are added here, after HAS LP-19
 const motion = projects.filter((p) => p.group === 'motion').map((p) => tile(p));
-motion.splice(motion.findIndex((t) => t.href === '/work/has-lp-19') + 1, 0, toylineTile, spaceTile, recordsTile);
+// HAS Toyline, HAS Records and HAS Space have their own pages (no Vimeo film), so their tiles are added here, around Van Gogh · The Bedroom
+const interactive = [toylineTile, recordsTile, ...projects.filter((p) => p.group === 'interactive').map((p) => tile(p)), spaceTile];
 const xr = projects.filter((p) => p.group === 'xr');
 const count = (n: number) => String(n).padStart(2, '0');
 
-const description = 'Motion, real-time and XR work by Hector Augusto Santizo, 3D motion designer in Los Angeles.';
+const description = 'Motion, real-time and XR work by Hector Augusto Santizo, creative technologist in Los Angeles.';
 const schema = [
   { '@type': 'CollectionPage', name: 'Work', description, url: abs('/work'), author: author() },
   breadcrumbs([['Work', '/work']]),
@@ -37,6 +37,13 @@ const schema = [
     </div>
   </Section>
 
+  <Section id="interactive" label={groups.interactive.label} space="md">
+    <SectionHead num={groups.interactive.num} title={groups.interactive.label} aside={count(interactive.length)} />
+    <div class="grid-2">
+      {interactive.map((t) => <WorkTile item={t} size="cell" />)}
+    </div>
+  </Section>
+
   <Section id="xr" label={groups.xr.label}>
     <SectionHead num={groups.xr.num} title={groups.xr.label} aside={count(xr.length)} />
     <div class="grid-2">
@@ -44,7 +51,7 @@ const schema = [
     </div>
   </Section>
 
-  <Footer num="03" />
+  <Footer num="04" />
 </Base>
 
 <style>

@@ -1,4 +1,5 @@
 import type { Media } from './media';
+import { tools } from './apps';
 
 // A linked tile: what the home page, the XR strip and the /work page show.
 export interface WorkItem {
@@ -23,7 +24,7 @@ export interface Project {
   blurb: string;   // one line under the title
   tag?: string;    // short label on tiles
   focus: string[]; // shown as "Focus" on the project page
-  group: 'motion' | 'xr';
+  group: 'motion' | 'interactive' | 'xr';
   video: Video;
   // Optional, for the owner to fill in. Each shows on the page only when set.
   year?: string;
@@ -33,7 +34,8 @@ export interface Project {
 
 export const groups = {
   motion: { num: '01', label: 'Motion and animation' },
-  xr: { num: '02', label: 'XR and interaction' },
+  interactive: { num: '02', label: 'Interactive and real-time' },
+  xr: { num: '03', label: 'XR and interaction' },
 } as const;
 
 // Order within each group = order on /work (and the fallback for "Related", see related.ts).
@@ -41,29 +43,6 @@ export const groups = {
 export const projects: Project[] = [
   // Motion and animation
   { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Direction', 'Design', 'Animation'], group: 'motion', video: { vimeo: '1216889002' } },
-  {
-    slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'motion', video: { vimeo: '1230984635' },
-    // The owner's own write-up (Oct 2026)
-    tagline: 'Turning a painting into a place to explore.',
-    story: [
-      { title: 'Vision', paras: [
-        'What if you could step inside a painting instead of looking at it?',
-        'I rebuilt Vincent van Gogh’s *The Bedroom* as a room you can walk into, where curiosity leads to discovery.',
-      ] },
-      { title: 'Creative Direction', paras: [
-        'Not a copy of the painting in 3D, but a more personal way into it, and into the life behind it.',
-        'Every object holds something. The paintings on the walls tell their stories, everyday things give glimpses of his life, and a drawer opens onto a collection of his letters. You can also explore different versions of the original painting.',
-      ] },
-      { title: 'Execution', paras: [
-        'Built in Unreal Engine: the room, the light, the interactions and the storytelling.',
-        'Visitors move through the room at their own pace, exploring objects and uncovering what each one holds.',
-      ] },
-      { title: 'Outcome', paras: [
-        'Visitors stop looking at the painting and start exploring it.',
-        'An experiment in how real-time technology can open new ways into art, turning observation into discovery.',
-      ] },
-    ],
-  },
   {
     slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' },
     // The owner's own write-up (Oct 2026)
@@ -92,6 +71,31 @@ export const projects: Project[] = [
   { slug: 'visual-alternatives', title: 'Visual Alternatives', blurb: 'Audio-visual, in Unity', tag: 'Unity', focus: ['Audio-visual', 'Unity'], group: 'motion', video: { youtube: 'FrM8C7vHTow' } },
   { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'motion', video: { vimeo: '548921641' } },
   { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'motion', video: { vimeo: '1056096066' } },
+  // Interactive and real-time (with the one-off pages HAS Toyline, HAS Records
+  // and HAS Space, spliced in around it by work/index.astro)
+  {
+    slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'interactive', video: { vimeo: '1230984635' },
+    // The owner's own write-up (Oct 2026)
+    tagline: 'Turning a painting into a place to explore.',
+    story: [
+      { title: 'Vision', paras: [
+        'What if you could step inside a painting instead of looking at it?',
+        'I rebuilt Vincent van Gogh’s *The Bedroom* as a room you can walk into, where curiosity leads to discovery.',
+      ] },
+      { title: 'Creative Direction', paras: [
+        'Not a copy of the painting in 3D, but a more personal way into it, and into the life behind it.',
+        'Every object holds something. The paintings on the walls tell their stories, everyday things give glimpses of his life, and a drawer opens onto a collection of his letters. You can also explore different versions of the original painting.',
+      ] },
+      { title: 'Execution', paras: [
+        'Built in Unreal Engine: the room, the light, the interactions and the storytelling.',
+        'Visitors move through the room at their own pace, exploring objects and uncovering what each one holds.',
+      ] },
+      { title: 'Outcome', paras: [
+        'Visitors stop looking at the painting and start exploring it.',
+        'An experiment in how real-time technology can open new ways into art, turning observation into discovery.',
+      ] },
+    ],
+  },
   // XR and interaction
   {
     slug: 'has-photo-booth', title: 'HAS Photo Booth', blurb: 'MediaPipe, in the browser', focus: ['MediaPipe', 'Browser'], group: 'xr', video: { youtube: '1L2anMG2k-8' },
@@ -163,9 +167,9 @@ export const tile = (p: Project, { withTag = true } = {}): WorkItem => ({
 
 // ---------- Home page ----------
 
-// (01) Featured work: `featured`, at the end of this file (it uses the one-off tiles defined below).
+// (02) Featured work: `featured`, at the end of this file (it uses the one-off tiles defined below).
 
-// (02) XR and interaction: three wide clips in a row (all of them are on /xr).
+// (03) XR and interaction: three wide clips in a row (all of them are on /xr).
 export const xr = {
   statement: 'Hands as the controller: gesture, pinch and twist.',
   clips: ['wrist-interaction', '3d-calculator', 'pinch-twist'].map((s) => tile(project(s), { withTag: false })),
@@ -206,8 +210,9 @@ export const toyline = {
   blurb: 'A 3D assembly line, in three.js',
   tag: 'three.js · Interactive',
   role: 'Concept, Creative Direction, 3D Design, Development',
+  status: 'In development, not public yet',
   focus: ['three.js', 'Real-time 3D', 'Interactive'],
-  group: 'motion' as const,
+  group: 'interactive' as const,
   year: '2026',
   tagline: 'Watch a car get built, and see what it costs.',
   film: { video: '/video/has-toyline.mp4', poster: '/img/work/has-toyline/poster.webp' },
@@ -288,7 +293,7 @@ export const space = {
     ['Runs on', 'Mac and Windows'],
     ['Built with', 'three.js · Blender · Python'],
   ] as [string, string][],
-  group: 'motion' as const,
+  group: 'interactive' as const,
   tagline: 'Design. Material. Light.',
   hero: { src: '/img/work/has-space/hero.webp', w: 2400, h: 1029, alt: 'A HAS Space render: a limewash gallery room with a large framed Burning Man photograph centred over a stone plinth, a white ceramic vessel on the floor beside it, and a diagonal of sunlight', caption: '' } as Still,
   story: [
@@ -353,7 +358,7 @@ export const records = {
   role: 'Concept, Creative Direction, 3D Design, Development',
   focus: ['Unreal Engine', 'Blender', 'Interactive'],
   runsOn: 'Mac and Windows',
-  group: 'motion' as const,
+  group: 'interactive' as const,
   year: '2026',
   tagline: 'A turntable you can actually play.',
   film: { video: '/video/has-records.mp4', poster: '/img/work/has-records/poster.webp' },
@@ -414,19 +419,22 @@ export const recordsTile: WorkItem = {
 
 // ---------- Home page: featured work ----------
 
-// (01) Featured work. Order is layout: the first item runs full width, the
-// rest pair up in rows that alternate wide/narrow and narrow/wide. Here, after
-// the one-off pages, because it uses HAS Toyline's and HAS Space's tiles (owner's order, Oct 2026).
+// (02) Featured work. Order is layout: the first item runs full width, the
+// rest pair up in rows that alternate wide/narrow and narrow/wide, and a last
+// one on its own runs full width. Here, after the one-off pages, because it uses
+// their tiles (owner's order, Oct 2026: HAS Toyline, HAS Records, Splay,
+// HAS Space, Van Gogh · The Bedroom, HAS LP-19).
+const app = (title: string): WorkItem => {
+  const t = tools.find((x) => x.title === title);
+  if (!t) throw new Error(`No app "${title}" in tools (src/data/apps.ts)`);
+  return { ...t, tag: 'Free app', note: undefined };
+};
+
 export const featured: WorkItem[] = [
-  toylineTile,
-  tile(project('van-gogh-the-bedroom')),
+  // The tile's subtitle is the page's, without the full stop, like the other captions
+  { ...toylineTile, blurb: toyline.tagline.replace(/\.$/, '') },
+  recordsTile,
+  app('Splay'),
   spaceTile,
-  ...['real-time-interactive-app', 'has-lp-19', 'star-trails'].map((s) => tile(project(s))),
-  {
-    title: 'HAS Lathe',
-    blurb: 'A potter’s wheel for 3D models',
-    tag: 'Free app',
-    href: '/apps/has-lathe',
-    media: { art: 'lathe' },
-  },
+  ...['van-gogh-the-bedroom', 'has-lp-19'].map((s) => tile(project(s))),
 ];

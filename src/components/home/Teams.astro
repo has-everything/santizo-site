@@ -1,0 +1,18 @@
+---
+// (01) What I do for teams: four numbered cards, then an optional line on
+// availability. Copy lives in src/data/site.ts (`teams`).
+import { teams } from '../../data/site';
+import Section from '../Section.astro';
+import SectionHead from '../SectionHead.astro';
+import NumberedGrid from '../NumberedGrid.astro';
+---
+<Section id="teams" label={teams.title}>
+  <SectionHead num="01" title={teams.title} aside={String(teams.items.length).padStart(2, '0')} />
+  <NumberedGrid items={teams.items} cols={4} />
+  {/* TODO(owner): one line on whether you take projects, roles or both, in teams.note (src/data/site.ts) */}
+  {teams.note && <p class="note">{teams.note}</p>}
+</Section>
+
+<style>
+  .note { margin: 48px 0 0; font-size: 18px; line-height: 1.5; max-width: 46ch; }
+</style>

@@ -23,12 +23,13 @@ const group = groups[p.group];
 const specs: [string, string][] = [
   ['Role', p.role],
   ['Category', group.label],
+  ['Status', p.status],
   ['Focus', p.focus.join(' · ')],
   ['Year', p.year],
 ];
 
 const path = `/work/${p.slug}`;
-const description = `${p.title}: ${p.tagline.replace(/\.$/, '')}. A working 3D assembly line in three.js that builds the toy car you order and shows what it costs, by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const description = `${p.title}: ${p.tagline.replace(/\.$/, '')}. A working 3D assembly line in three.js that builds the toy car you order and shows what it costs, by Hector Augusto Santizo, creative technologist in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',

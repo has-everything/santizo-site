@@ -1,17 +1,20 @@
 ---
 // Numbered cards in a grid (Expertise, "What it does"): one column on phones,
 // two on tablets, three from 1100px, so six items always fill even rows.
-// Numbers come from the order: 01, 02, ...
+// `cols={4}` (the home page's four "What I do for teams" cards) runs four across
+// from 1100px instead. Numbers come from the order: 01, 02, ...
 interface Item { title: string; body: string; meta?: string }
 interface Props {
   items: Item[];
   /** Cap the body text width (used on project pages) */
   narrow?: boolean;
+  /** Columns from 1100px: 3 (default) or 4 */
+  cols?: 3 | 4;
 }
-const { items, narrow = false } = Astro.props;
+const { items, narrow = false, cols = 3 } = Astro.props;
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
-<div class="grid">
+<div class:list={['grid', { four: cols === 4 }]}>
   {items.map((it, i) => (
     <div class="cell">
       <p class="mono cap-sm muted num">{pad(i + 1)}</p>
@@ -26,6 +29,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
   .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px 24px; }
   @media (min-width: 760px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1100px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .cell { min-width: 0; border-top: 1px solid var(--rule); padding-top: 18px; }
   .num { margin: 0 0 14px; }
   h3 { margin: 0 0 8px; font-size: 24px; line-height: 1.2; font-weight: 500; letter-spacing: -0.012em; }

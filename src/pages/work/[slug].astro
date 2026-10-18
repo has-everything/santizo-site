@@ -31,7 +31,7 @@ const specs: [string, string][] = [
 const path = `/work/${p.slug}`;
 // Related: three picked in src/data/related.ts (else the next three in its group)
 const more = related(path, nextThree(projects.filter((x) => x.group === p.group).map((x) => `/work/${x.slug}`), path));
-const description = `${p.title}: ${(p.tagline ?? p.blurb).replace(/\.$/, '')}. ${group.label} by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const description = `${p.title}: ${(p.tagline ?? p.blurb).replace(/\.$/, '')}. ${group.label} by Hector Augusto Santizo, creative technologist in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',

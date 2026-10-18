@@ -19,10 +19,10 @@ import { related } from '../../data/related';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const group = groups[p.group];
-const specs: [string, string][] = [['Role', p.role], ...p.specs];
+const specs: [string, string][] = [['Role', p.role], ['Category', group.label], ...p.specs];
 
 const path = `/work/${p.slug}`;
-const description = `${p.title}: ${p.tagline} A desktop app for designing interiors, from floor plan to Blender render, by Hector Augusto Santizo, 3D motion designer in Los Angeles.`;
+const description = `${p.title}: ${p.tagline} A desktop app for designing interiors, from floor plan to Blender render, by Hector Augusto Santizo, creative technologist in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',

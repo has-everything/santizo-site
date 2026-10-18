@@ -53,7 +53,7 @@ export const tools: WorkItem[] = [
   },
 ];
 
-// (03) Apps on the home page: a short ruled list that points to /apps. Rows
+// (04) Apps on the home page: a short ruled list that points to /apps. Rows
 // are picked by title from `tools` above (same blurb and link), then has.tools.
 const row = (title: string) => {
   const t = tools.find((x) => x.title === title);
