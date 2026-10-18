@@ -12,7 +12,6 @@ const paths = [
   '/work/has-toyline',
   '/work/has-space',
   '/work/has-records',
-  '/xr',
   '/apps',
   ...appPages.map((a) => `/apps/${a.slug}`),
   '/burning-man',

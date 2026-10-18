@@ -23,7 +23,6 @@ export const site = {
 // Top bar links, left to right. Keep it short so it fits on a phone.
 export const nav = [
   { label: 'Work', href: '/work' },
-  { label: 'XR', href: '/xr' },
   { label: 'Apps', href: '/apps' },
   { label: 'Burning Man', href: '/burning-man' },
   { label: 'Info', href: '/info' },

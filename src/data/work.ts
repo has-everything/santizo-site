@@ -169,28 +169,22 @@ export const tile = (p: Project, { withTag = true } = {}): WorkItem => ({
 
 // (02) Featured work: `featured`, at the end of this file (it uses the one-off tiles defined below).
 
-// (03) XR and interaction: three wide clips in a row (all of them are on /xr).
+// (03) XR and interaction: three wide clips in a row (all of them are on /work).
 export const xr = {
   statement: 'Hands as the controller: gesture, pinch and twist.',
   clips: ['wrist-interaction', '3d-calculator', 'pinch-twist'].map((s) => tile(project(s), { withTag: false })),
 };
 
-// ---------- XR page (/xr) ----------
+// ---------- XR intro (/work, XR and interaction) ----------
 
-// Intro written from the owner's placeholder (AR, VR, mixed reality, code,
-// his tools). Order of `projects` is layout: the first runs full width, the
-// rest two per row, so keep the count odd (1 + pairs).
-export const xrPage = {
+// The intro of the XR section on /work. It opened the XR page, which became
+// that section in Oct 2026 (/xr redirects to /work#xr). Written from the
+// owner's placeholder (AR, VR, mixed reality, code); his tools list is verbatim.
+export const xrIntro = {
   lead: 'My lab for augmented, virtual and mixed reality, and the code behind them.',
   body: 'It starts with one question: what if your hands were the controller? Everything here is a working prototype, from pinch and twist gestures to dials, grids and a calculator you reach out and use.',
   covers: 'AR · VR · Mixed reality',
   tools: 'Unity · Unreal Engine · Cinema 4D · C# · Python · Xcode',
-  projects: [
-    'wrist-interaction',
-    '3d-calculator', 'pinch-twist',
-    'gauge-control', 'arrow-grid-system',
-    'hand-tracker', 'has-photo-booth',
-  ].map((s) => tile(project(s))),
 };
 
 // ---------- HAS Toyline (/work/has-toyline) ----------

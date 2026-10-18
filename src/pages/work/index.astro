@@ -1,5 +1,6 @@
 ---
-// Work: every project, in three groups. Each tile opens /work/<slug>.
+// Work: every project, in three groups. Each tile opens /work/<slug>. The XR
+// group opens with the intro that was the XR page's (/xr redirects here, to #xr).
 // Projects and their order live in src/data/work.ts.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
@@ -7,7 +8,8 @@ import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import WorkTile from '../../components/WorkTile.astro';
-import { projects, groups, tile, toylineTile, spaceTile, recordsTile } from '../../data/work';
+import SpecList from '../../components/project/SpecList.astro';
+import { projects, groups, tile, toylineTile, spaceTile, recordsTile, xrIntro } from '../../data/work';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const motion = projects.filter((p) => p.group === 'motion').map((p) => tile(p));
@@ -46,6 +48,16 @@ const schema = [
 
   <Section id="xr" label={groups.xr.label}>
     <SectionHead num={groups.xr.num} title={groups.xr.label} aside={count(xr.length)} />
+    <div class="xr-about">
+      <p class="xr-lead">{xrIntro.lead}</p>
+      <div class="xr-side">
+        <p class="muted">{xrIntro.body}</p>
+        <SpecList specs={[
+          ['Covers', xrIntro.covers],
+          ['Tools', xrIntro.tools],
+        ]} />
+      </div>
+    </div>
     <div class="grid-2">
       {xr.map((p) => <WorkTile item={tile(p)} size="cell" />)}
     </div>
@@ -57,4 +69,10 @@ const schema = [
 <style>
   h1 { margin: 0 0 clamp(24px, 3vw, 40px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
   .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
+
+  /* The XR intro, as it was on the XR page: the lead, then the why and the tools */
+  .xr-about { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; margin-bottom: 64px; }
+  .xr-lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 24ch; }
+  .xr-side { flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .xr-side p { margin: 0; font-size: 17px; line-height: 1.6; }
 </style>
