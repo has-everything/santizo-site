@@ -1,6 +1,6 @@
 ---
-// Info: who, where, what I do (the expertise grid lives here, not on home),
-// and how I work.
+// Info: who, where, the positioning, experience (companies from the owner's
+// resume), what I do (the expertise grid lives here, not on home), and how I work.
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -8,11 +8,12 @@ import Section from '../components/Section.astro';
 import SectionHead from '../components/SectionHead.astro';
 import NumberedGrid from '../components/NumberedGrid.astro';
 import SpecList from '../components/project/SpecList.astro';
-import { site, intro, howIWork } from '../data/site';
+import { site, intro, about, howIWork } from '../data/site';
 import { expertise } from '../data/expertise';
+import { experience } from '../data/experience';
 import { abs, person, breadcrumbs } from '../lib/seo';
 
-const description = 'About Hector Augusto Santizo, 3D motion designer and creative technologist in Los Angeles: background, expertise and how he works.';
+const description = 'About Hector Augusto Santizo, creative technologist in Los Angeles: experience at Sonance, Intuit and Universal Music Group, expertise and how he works.';
 const schema = [
   { '@type': 'ProfilePage', name: 'Info', description, url: abs('/info'), mainEntity: person() },
   breadcrumbs([['Info', '/info']]),
@@ -24,24 +25,45 @@ const schema = [
   <Section label="Info" space="sm">
     <h1>Info</h1>
     <div class="about">
-      <p class="lead">{intro.lead}</p>
+      <div class="main">
+        <p class="mono cap roles">{intro.roles}</p>
+        <p class="lead">{about.lead}</p>
+      </div>
       <div class="side">
+        {about.body.map((p) => <p>{p}</p>)}
         <SpecList specs={[
           ['Based in', site.region],
           ['Experience', expertise.aside],
+          ['Education', about.education],
           ['Email', site.email],
         ]} />
       </div>
     </div>
   </Section>
 
+  <Section id="experience" label="Experience">
+    <SectionHead num="01" title="Experience" aside={expertise.aside} />
+    <ol class="jobs">
+      {experience.map((j) => (
+        <li>
+          <p class="company">{j.company}</p>
+          <div class="what">
+            <p class="role">{j.role}</p>
+            <p class="note">{j.note}</p>
+          </div>
+          <p class="mono cap muted years">{j.years}</p>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
   <Section id="expertise" label="Expertise">
-    <SectionHead num="01" title="Expertise" aside={expertise.aside} />
+    <SectionHead num="02" title="Expertise" />
     <NumberedGrid items={expertise.items} />
   </Section>
 
   <Section id="how-i-work" label="How I work">
-    <SectionHead num="02" title="How I work" />
+    <SectionHead num="03" title="How I work" />
     <ol class="rules">
       {howIWork.map((line, i) => (
         <li><span class="mono cap-sm muted">{String(i + 1).padStart(2, '0')}</span><span>{line}</span></li>
@@ -50,15 +72,37 @@ const schema = [
     <a href="/burning-man" class="hl photos">Also: five years of playa dust. See the Burning Man photos →</a>
   </Section>
 
-  <Footer num="03" />
+  <Footer num="04" />
 </Base>
 
 <style>
   h1 { margin: 0 0 clamp(40px, 5vw, 72px); font-size: clamp(56px, 8.4vw, 136px); line-height: .9; letter-spacing: -0.05em; font-weight: 500; }
   .about { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
-  .lead { flex: 3 1 520px; min-width: 0; margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
+  .main { flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .roles { margin: 0; }
+  .lead { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; max-width: 26ch; }
   .side { flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
   .side p { margin: 0; font-size: 17px; line-height: 1.6; }
+  .side > p { max-width: 48ch; }
+
+  /* Experience: ruled rows, company | role and note | years */
+  .jobs { margin: 0; padding: 0; list-style: none; }
+  .jobs li {
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px;
+    padding: 20px 0; border-top: 1px solid var(--rule);
+  }
+  .jobs li:last-child { border-bottom: 1px solid var(--rule); }
+  .company { margin: 0; font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; }
+  .what { min-width: 0; }
+  .role { margin: 0 0 4px; font-size: 17px; line-height: 1.45; font-weight: 500; }
+  .note { margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 60ch; }
+  .years { margin: 0; white-space: nowrap; }
+  @media (min-width: 900px) {
+    /* Fixed years column, so the role column lines up from row to row */
+    .jobs li { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) 120px; gap: 24px; align-items: baseline; }
+    .years { text-align: right; }
+  }
+
   .rules { margin: 0; padding: 0; list-style: none; }
   .rules li { display: flex; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid var(--rule); font-size: clamp(24px, 2.6vw, 38px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 500; }
   .rules li:last-child { border-bottom: 1px solid var(--rule); }

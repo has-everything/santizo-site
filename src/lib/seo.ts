@@ -15,7 +15,7 @@ export const abs = (path: string) => origin + (path === '/' ? '/' : path.replace
 export interface OgImage { src: string; alt: string }
 export const defaultImage: OgImage = {
   src: '/img/og/santizo.png',
-  alt: 'santizo: Moving images, in three dimensions. Hector Augusto Santizo, 3D motion designer, Los Angeles.',
+  alt: 'santizo: Moving images, in three dimensions. Hector Augusto Santizo, creative technologist, Los Angeles.',
 };
 
 const personId = () => abs('/') + '#person';
@@ -27,14 +27,15 @@ export function person() {
     '@id': personId(),
     name: site.person,
     alternateName: 'HAS',
-    jobTitle: '3D motion designer and creative technologist',
+    jobTitle: 'Creative technologist',
     description: site.description,
     url: abs('/'),
     email: `mailto:${site.email}`,
     image: abs(defaultImage.src),
     address: { '@type': 'PostalAddress', addressLocality: 'Los Angeles', addressRegion: 'CA', addressCountry: 'US' },
     sameAs: [...footer.elsewhere.map((l) => l.href), 'https://has.tools'],
-    knowsAbout: ['3D animation', 'Motion design', 'Unity', 'Unreal Engine', 'Cinema 4D', 'XR', 'Hand tracking', 'Creative technology'],
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'California State University, Northridge' },
+    knowsAbout: ['Creative technology', 'Creative direction', 'Product visualization', '3D animation', 'Motion design', 'Unreal Engine', 'Unity', 'Cinema 4D', 'XR', 'Hand tracking'],
   };
 }
 

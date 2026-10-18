@@ -6,8 +6,10 @@ export const site = {
   person: 'Hector Augusto Santizo',
   title: 'Santizo · Hector Augusto Santizo',
   // Home page description in search results and link previews (other pages set their own)
-  description: 'Hector Augusto Santizo, 3D motion designer and creative technologist in Los Angeles. 3D animation, real-time and XR work, and free tools for creative people.',
-  role: '3D motion designer',
+  description: 'Hector Augusto Santizo, creative technologist in Los Angeles: creative direction, 3D films that explain products, real-time and XR work, and free creative tools.',
+  // Footer line and structured data (Oct 2026: creative technologist first,
+  // creative direction and 3D motion as the disciplines, see intro.roles)
+  role: 'Creative technologist',
   city: 'Los Angeles',
   email: 'hector@santizo.com',
   region: 'Los Angeles, California',
@@ -37,17 +39,33 @@ export const reel = {
   file: '',
   poster: '', // optional still shown while the file loads, e.g. '/img/reel-poster.jpg'
   title: 'Santizo Reel 2026',
-  credits: 'Art direction · Sim · Lighting',
+  credits: 'Direction · Design · Animation',
   // The reel's own page on this site (its project in src/data/work.ts), where it
   // plays with sound and controls. Play reel goes here on iPhones and iPads,
   // when a browser refuses sound on the hero, and without JavaScript.
   href: '/work/santizo-reel-2026',
 };
 
+// Home page About block. The owner's positioning (Oct 2026): creative
+// technologist first, creative direction as a discipline rather than a title,
+// leadership in the present tense with UMG as the track record.
 export const intro = {
   headline: 'Moving images, in three dimensions.',
-  // Also the opening line on Info
-  lead: 'I’m Hector Santizo, a 3D motion designer and creative technologist living in Los Angeles. For fifteen years I’ve worked where design, art, and technology meet, including a decade leading creative services at Universal Music Group.',
+  roles: 'Creative Technologist · Creative Direction · 3D & Motion',
+  paras: [
+    'I’m Hector Santizo. I make complex things simple to see and simple to use: 3D films that explain products, real-time experiences, and tools for creative people.',
+    'I lead each project from the first sketch to the final frame. Previously Director of Creative Services at Universal Music Group.',
+  ],
+};
+
+// Info's opening: the same positioning, a little fuller
+export const about = {
+  lead: 'I’m Hector Santizo, a creative technologist in Los Angeles. I make complex things simple to see and simple to use.',
+  body: [
+    'I make 3D films that explain products, real-time experiences, and tools for creative people, and I lead each project from the first sketch to the final frame.',
+    'Before this I spent a decade as Director of Creative Services at Universal Music Group, leading in-house teams and outside designers. Today I make product films and real-time visuals for Sonance, and HAS Tools, free creative tools that run in the browser.',
+  ],
+  education: 'BA Graphic Design, California State University, Northridge',
 };
 
 // The owner's five rules (manifesto.txt in SantizoOS), shown on Info under

@@ -1,13 +1,16 @@
-// (03) Expertise. Numbers (01, 02, ...) are added from the order.
+// (02) Expertise on Info. Numbers (01, 02, ...) are added from the order.
+// Keep it at 3 or 6 items (NumberedGrid fills even rows). Oct 2026: led by
+// creative direction and product work, from the owner's resume; the old
+// "Browser tools" and "AI" cards are merged into "Tools and AI".
 
 export const expertise = {
   aside: '15+ years',
   items: [
-    { title: '3D and design', body: 'Objects, spaces and product forms.', meta: 'Cinema 4D · Plasticity' },
+    { title: 'Creative direction', body: 'Concepts and visual direction, and leading the work with teams, partners and stakeholders.', meta: 'Concept · Art direction · Brand identity' },
+    { title: '3D and product', body: 'Product films, objects and spaces that make a product easy to understand.', meta: 'Cinema 4D · Redshift · Plasticity' },
     { title: 'Motion', body: 'Animation, edits and finishing.', meta: 'After Effects · Premiere' },
-    { title: 'Real-time', body: 'Interactive scenes and live visuals.', meta: 'Unity · Unreal Engine' },
+    { title: 'Real-time', body: 'Interactive scenes and live visuals.', meta: 'Unreal Engine · Unity' },
     { title: 'XR and interaction', body: 'Hands, gesture and spatial input.', meta: 'Hand tracking · MediaPipe · VR/AR' },
-    { title: 'Browser tools', body: 'Free creative tools that run in a browser tab.', meta: 'three.js · WebGPU' },
-    { title: 'AI', body: 'Part of how I design and prototype every day.', meta: 'Claude · Codex · Gemini' },
+    { title: 'Tools and AI', body: 'Free creative tools that run in a browser tab, and AI in how I design and prototype every day.', meta: 'has.tools · Claude · Codex · Gemini' },
   ],
 };

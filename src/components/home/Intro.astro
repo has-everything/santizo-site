@@ -1,13 +1,17 @@
 ---
-// About: the headline and who-I-am copy.
+// About: the headline, the positioning (roles, two short paragraphs) and the
+// companies line, which opens Experience on Info.
 import { intro } from '../../data/site';
+import { companies } from '../../data/experience';
 import Section from '../Section.astro';
 ---
 <Section id="about" label="About" space="lg">
   <div class="row">
     <h1>{intro.headline}</h1>
     <div class="copy">
-      <p>{intro.lead}</p>
+      <p class="mono cap roles">{intro.roles}</p>
+      {intro.paras.map((p) => <p>{p}</p>)}
+      <a class="mono cap hl companies" href="/info#experience">{companies.join(' · ')} →</a>
     </div>
   </div>
 </Section>
@@ -17,4 +21,6 @@ import Section from '../Section.astro';
   h1 { flex: 3 1 560px; min-width: 0; margin: 0; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; max-width: 12ch; }
   .copy { flex: 2 1 320px; min-width: 0; max-width: 46ch; display: flex; flex-direction: column; gap: 18px; }
   .copy p { margin: 0; font-size: 18px; line-height: 1.5; }
+  .copy .roles { font-size: 12px; line-height: 16px; }
+  .companies { display: inline-flex; align-items: center; min-height: 44px; margin-top: -4px; line-height: 1.5; }
 </style>
