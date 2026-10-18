@@ -54,7 +54,7 @@ export const intro = {
   roles: 'Creative Technologist · 3D & Motion',
   paras: [
     'I’m Hector Santizo. I make complex things simple to see and simple to use: 3D animations that explain products, real-time experiences, and tools for creative people.',
-    'I lead each project from the first sketch to launch, combining creative direction with hands-on 3D, motion and prototyping. Previously Director of Creative Services at Universal Music Group.',
+    'I lead projects from the first sketch to launch, combining creative direction with hands-on 3D, motion, and development. Previously Director of Creative Services at Universal Music Group.',
   ],
 };
 
@@ -62,7 +62,7 @@ export const intro = {
 export const about = {
   lead: 'I’m Hector Santizo, a creative technologist in Los Angeles. I make complex things simple to see and simple to use.',
   body: [
-    'I make 3D animations that explain products, real-time experiences, and tools for creative people. I lead each project from the first sketch to launch, combining creative direction with hands-on 3D, motion and prototyping.',
+    'I make 3D animations that explain products, real-time experiences, and tools for creative people. I lead projects from the first sketch to launch, combining creative direction with hands-on 3D, motion, and development.',
     'Before this I spent a decade as Director of Creative Services at Universal Music Group, leading in-house teams and outside designers. Today I create 3D product animations and real-time visuals for Sonance, and HAS Tools, free creative tools that run in the browser.',
   ],
   education: 'BA Graphic Design, California State University, Northridge',
