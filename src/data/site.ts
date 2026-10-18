@@ -51,7 +51,7 @@ export const reel = {
 // leadership in the present tense with UMG as the track record.
 export const intro = {
   headline: 'Moving images, in three dimensions.',
-  roles: 'Creative Technologist · Creative Direction · 3D & Motion',
+  roles: 'Creative Technologist · 3D & Motion',
   paras: [
     'I’m Hector Santizo. I make complex things simple to see and simple to use: 3D animations that explain products, real-time experiences, and tools for creative people.',
     'I lead each project from the first sketch to the final frame. Previously Director of Creative Services at Universal Music Group.',
@@ -81,7 +81,7 @@ export const howIWork = [
 export interface FooterLink { label: string; href: string }
 
 export const footer = {
-  headline: 'Have something that should move?',
+  headline: 'Got something complex? Let’s make it clear.',
   elsewhere: [
     { label: 'Instagram ↗', href: 'https://www.instagram.com/has_projects/' },
     { label: 'YouTube ↗', href: 'https://www.youtube.com/@has.studio' },
