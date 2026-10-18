@@ -1,8 +1,9 @@
 ---
 // HAS Space: a one-off work page (see `space` in src/data/work.ts), built like
-// HAS Toyline's: a still render in the film band (the app is a desktop beta,
-// there is no film), the role first in the specs, the case study, the figures
-// in story order, six "What it does" cards and three related pages.
+// HAS Toyline's, but it opens on a full-width 7:3 render instead of the film band
+// (the app is a desktop beta, there is no film, and a still needs no black bars):
+// the role first in the specs, the case study, the figures in story order, six
+// "What it does" cards and three related pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -44,8 +45,8 @@ const schema = [
     <span class="mono cap muted">Work / {group.label}</span>
   </div>
 
-  <section aria-label="Render" class="screen">
-    <div class="fit"><div class="film"><img class="fill" src={p.hero.src} width={p.hero.w} height={p.hero.h} alt={p.hero.alt} /></div></div>
+  <section aria-label="Render" class="hero">
+    <img class="fill" src={p.hero.src} width={p.hero.w} height={p.hero.h} alt={p.hero.alt} />
   </section>
 
   <Section label="Overview" space="sm">
@@ -99,11 +100,9 @@ const schema = [
 </Base>
 
 <style>
-  /* As on the other work pages: the picture edge to edge on a black band, sized
-     to fit on screen under the top bar and the crumbs */
-  .screen { background: #000000; }
-  .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
-  .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
+  /* The render edge to edge at its own 7:3, as wide as the window: no black bars,
+     no cropping (unlike the app heroes, it is not capped in height) */
+  .hero { position: relative; aspect-ratio: 7 / 3; background: #000000; overflow: hidden; }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
 
   .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
