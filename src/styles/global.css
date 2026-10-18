@@ -18,15 +18,17 @@
   --font-sans: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 
-  /* Layout (field.io-like, owner's call, Oct 2026): heroes at the top of a page
-     run the full window width (they sit outside .wrap); everything else sits in
-     a centred column, about 82% of the window on wide screens, at most 1440px,
-     and full width (less the gutters) up to 760px. Tiles keep tight gaps; text
-     keeps its own reading-width limits. --max: 100% puts the content edge to
-     edge again. */
+  /* Layout (matched to field.io, owner's call, Oct 2026): heroes at the top of
+     a page run the full window width (they sit outside .wrap); everything else
+     sits in a centred column with side margins of 4.32vw from 760px up (83px at
+     1920) and tiles 13px apart, so three across at 1920 are 576px each. The
+     column stops at 1754px (3 x 576 + 2 x 13), so bigger screens get wider
+     margins, not bigger tiles. Phones keep the thin gutters. Text keeps its own
+     reading-width limits. */
   --gutter: clamp(12px, 1.6vw, 24px);
-  --max: min(100%, max(760px, 82vw), 1440px);
-  --tile-gap: clamp(10px, 1.2vw, 20px);
+  --margin: var(--gutter);
+  --max: calc(1754px + 2 * var(--margin));
+  --tile-gap: 13px;
   --space-xl: clamp(96px, 11vw, 160px);
   --space-lg: clamp(80px, 9vw, 140px);
   --space-md: clamp(80px, 9vw, 128px);
@@ -71,7 +73,8 @@ ul.plain { list-style: none; margin: 0; padding: 0; }
 .muted { color: var(--muted); }
 
 /* Page container: centered, max width, side gutters */
-.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); box-sizing: border-box; }
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--margin); padding-right: var(--margin); box-sizing: border-box; }
+@media (min-width: 760px) { :root { --margin: 4.32vw; } }
 
 /* Media grids with a fixed column count, so big screens get bigger tiles, not more of them */
 .grid-2, .grid-3 { display: grid; grid-template-columns: 1fr; gap: 56px var(--tile-gap); }
