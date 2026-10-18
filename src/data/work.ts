@@ -119,7 +119,7 @@ export const tile = (p: Project, { withTag = true } = {}): WorkItem => ({
 
 // ---------- Home page ----------
 
-// (01) Featured work: `featured`, at the end of this file (it leads with HAS Toyline's tile, defined below).
+// (01) Featured work: `featured`, at the end of this file (it uses the one-off tiles defined below).
 
 // (02) XR and interaction: three wide clips in a row (all of them are on /xr).
 export const xr = {
@@ -372,10 +372,12 @@ export const recordsTile: WorkItem = {
 
 // (01) Featured work. Order is layout: the first item runs full width, the
 // rest pair up in rows that alternate wide/narrow and narrow/wide. Here, after
-// the one-off pages, because it leads with HAS Toyline's tile (owner's order, Oct 2026).
+// the one-off pages, because it uses HAS Toyline's and HAS Space's tiles (owner's order, Oct 2026).
 export const featured: WorkItem[] = [
   toylineTile,
-  ...['van-gogh-the-bedroom', 'roboto', 'real-time-interactive-app', 'has-lp-19', 'star-trails'].map((s) => tile(project(s))),
+  tile(project('van-gogh-the-bedroom')),
+  spaceTile,
+  ...['real-time-interactive-app', 'has-lp-19', 'star-trails'].map((s) => tile(project(s))),
   {
     title: 'HAS Lathe',
     blurb: 'A potter’s wheel for 3D models',
