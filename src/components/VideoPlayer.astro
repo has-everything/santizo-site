@@ -1,20 +1,57 @@
 ---
 // A watchable video (with sound and controls) for project pages. The visitor
 // presses play inside the player, which every browser allows with sound.
+// `sound` (Vimeo only) is for a video whose Vimeo settings autoplay it muted
+// with the controls hidden (HAS Records): it adds a Sound on / Sound off button
+// over the player, styled like the home page's Play reel. src/scripts/sound.ts
+// drives it; without JavaScript the button stays hidden.
 import type { Video } from '../data/work';
 
-interface Props { video: Video; title: string }
-const { video, title } = Astro.props;
+interface Props { video: Video; title: string; sound?: boolean }
+const { video, title, sound = false } = Astro.props;
 
 const src = 'vimeo' in video
   ? `https://player.vimeo.com/video/${video.vimeo}?title=0&byline=0&portrait=0&dnt=1&color=ff4f12`
   : `https://www.youtube-nocookie.com/embed/${video.youtube}?rel=0&modestbranding=1&playsinline=1`;
+const withSound = sound && 'vimeo' in video;
 ---
-<div class="player">
+<div class="player" data-sound={withSound ? '' : undefined}>
   <iframe src={src} title={title} allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  {withSound && (
+    <>
+      <div class="shade" aria-hidden="true"></div>
+      <button type="button" class="sound" data-sound-toggle aria-pressed="false" hidden>
+        <i aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="14" height="14">
+            <path class="cone" d="M2 6h3l4-3v10l-4-3H2z" />
+            <path class="waves" d="M11 5.6a3.4 3.4 0 0 1 0 4.8M12.9 3.7a6 6 0 0 1 0 8.6" />
+            <path class="mute" d="M11 6l4 4M15 6l-4 4" />
+          </svg>
+        </i><span>Sound on</span>
+      </button>
+    </>
+  )}
 </div>
+
+{withSound && <script>import '../scripts/sound';</script>}
 
 <style>
   .player { position: relative; aspect-ratio: 16 / 9; background: #000000; }
   iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Sound on / Sound off: the Play reel button (orange dot, white label) on a
+     shade like the reel's bottom bar. The icon shows what a click does. */
+  .shade { position: absolute; left: 0; right: 0; bottom: 0; height: min(140px, 45%); background: linear-gradient(to top, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)); pointer-events: none; }
+  .sound {
+    position: absolute; right: var(--gutter); bottom: clamp(4px, 1.6vw, 20px);
+    display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0;
+    border: 0; background: none; color: #ffffff; font: inherit; font-size: 15px; cursor: pointer;
+  }
+  .sound[hidden] { display: none; }
+  .sound:hover span { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .sound i { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
+  .sound svg { fill: none; stroke: #0b0b0c; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .sound .cone { fill: #0b0b0c; }
+  .sound .mute, .sound-on .sound .waves { display: none; }
+  .sound-on .sound .mute { display: inline; }
 </style>

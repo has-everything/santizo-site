@@ -122,9 +122,9 @@ const schema = [
 </Base>
 
 <style>
-  /* As on the other work pages: the film edge to edge on a black band, sized to
-     fit on screen under the top bar and the crumbs */
-  .screen { background: #000000; }
+  /* As on the other work pages: the film edge to edge on a band in the page's
+     color, sized to fit on screen under the top bar and the crumbs */
+  .screen { background: var(--bg); }
   .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
   .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }

@@ -1,7 +1,8 @@
 ---
 // HAS Records: a one-off work page (see `records` in src/data/work.ts), built
-// like HAS Toyline's, but its video plays in the Vimeo player, with sound and
-// controls, as on the other work pages; the role first in the specs, the case study, the figures, six "What it does"
+// like HAS Toyline's, but its video plays in the Vimeo player, which its Vimeo
+// settings autoplay muted with the controls hidden, so it has a Sound on button
+// (VideoPlayer's `sound`); the role first in the specs, the case study, the figures, six "What it does"
 // cards and three related pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
@@ -54,7 +55,7 @@ const schema = [
   </div>
 
   <section aria-label="Video" class="screen">
-    <div class="fit"><VideoPlayer video={p.video} title={p.title} /></div>
+    <div class="fit"><VideoPlayer video={p.video} title={p.title} sound /></div>
   </section>
 
   <Section label="Overview" space="sm">
@@ -122,9 +123,9 @@ const schema = [
 </Base>
 
 <style>
-  /* As on the other work pages: the video edge to edge on a black band, sized to
-     fit on screen under the top bar and the crumbs */
-  .screen { background: #000000; }
+  /* As on the other work pages: the video edge to edge on a band in the page's
+     color, sized to fit on screen under the top bar and the crumbs */
+  .screen { background: var(--bg); }
   .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
 
