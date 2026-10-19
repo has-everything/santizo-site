@@ -228,8 +228,8 @@ export const toyline = {
       'Every car, robot, machine and carton is made in code, with liveries, number roundels and wood grain painted in code too. Three cameras: an overview, one that rides along with a single car, and one that inspects any car you tap. On the money side, every figure on screen comes from one cost model, so tap any number and it shows how it was worked out.',
     ] },
     { title: 'Outcome', paras: [
-      'Two apps from one factory.',
-      'HAS Toyline, the line you order from, and Toyline Ledger, a course in what a toy costs to make and sell: 15 short lessons, 3 challenges, and a month you can run to watch the bank. Both run in the browser. Neither is public yet.',
+      'One factory, two ways in.',
+      'Order a car and watch the line build it, or switch on Ledger and learn what it costs to make and sell: 15 short lessons, 3 challenges, and a month you can run to watch the bank. It runs in the browser. Not public yet.',
     ] },
   ] as StoryBlock[],
   // Six cards, like "What it does" on the app pages
