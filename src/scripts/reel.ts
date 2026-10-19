@@ -11,6 +11,7 @@
 //   with sound and controls. A desktop browser that refuses goes there too.
 //   Setting reel.file keeps everyone on the hero.
 import type Player from '@vimeo/player';
+import { isIOS } from './ios';
 
 interface Driver { play(): void; stop(): void }
 
@@ -54,11 +55,6 @@ function setup(hero: HTMLElement) {
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) stop();
   }).observe(hero);
-}
-
-// iPhone, iPad (which reports itself as a Mac with touch), iPod: all WebKit
-function isIOS() {
-  return /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
 // `done` is called when the reel ends or the browser refuses to play it with sound.

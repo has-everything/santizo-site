@@ -344,8 +344,9 @@ export const spaceTile: WorkItem = {
 // Mac and Windows), so the page adds stills and features to its video.
 // A Rega Planar 6 RS modeled in Blender from published dimensions and played in
 // Unreal Engine: drop the needle anywhere on side A and hear that moment of the
-// song. Copy and stills from the project's case study package; the video is the
-// owner's Vimeo cut (37 s, Oct 2026), on the page, its tiles and the home page.
+// song. Copy and stills from the project's case study package. The page plays the
+// owner's newer Vimeo cut (`video`); its tiles and the home page keep the earlier
+// one (`tileVideo`), on the owner's call (Oct 2026).
 export const records = {
   slug: 'has-records',
   title: 'HAS Records',
@@ -356,7 +357,8 @@ export const records = {
   group: 'interactive' as const,
   year: '2026',
   tagline: 'A turntable you can actually play.',
-  video: { vimeo: '1237080035' },
+  video: { vimeo: '1237152596' },
+  tileVideo: { vimeo: '1237080035' },
   story: [
     { title: 'Vision', paras: [
       'I wanted to play a record, not just look at one.',
@@ -403,13 +405,13 @@ export const records = {
   og: { src: '/img/og/has-records.jpg', alt: 'HAS Records: a Rega Planar 6 RS playing a HAS Records LP, its stylus light glowing green' },
 };
 
-/** HAS Records as a tile (home, /work, Related): its Vimeo video as a muted loop, like the other Vimeo projects */
+/** HAS Records as a tile (home, /work, Related): its tile video as a muted loop, like the other Vimeo projects */
 export const recordsTile: WorkItem = {
   title: records.title,
   blurb: records.blurb,
   tag: 'Unreal Engine',
   href: `/work/${records.slug}`,
-  media: records.video,
+  media: records.tileVideo,
 };
 
 // ---------- Home page: featured work ----------

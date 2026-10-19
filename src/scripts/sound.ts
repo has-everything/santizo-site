@@ -1,15 +1,17 @@
 // Sound on / Sound off over a project video (VideoPlayer with `sound`). The
-// Vimeo embed autoplays muted with its controls hidden (the video's settings on
-// Vimeo), so this button is the only way to hear it.
+// video's Vimeo settings autoplay it muted, and the embed hides Vimeo's own
+// controls (controls=0), so this button is the only way to hear it.
 //
 // Sound on unmutes the video where it is, or plays it again from the top if it
 // has finished. Sound off mutes it and lets it keep playing. The label follows
 // what the player reports after every play, pause, end and volume change, so it
-// stays right when the browser refuses sound: iPhones and iPads are expected to
-// pause a video unmuted from the page (not yet tested on one), and the label goes
-// back to Sound on; Vimeo's own play button, tapped in the player, then plays it
-// with sound.
+// stays right if the browser refuses sound.
+//
+// iPhones and iPads refuse sound started from the page on a Vimeo embed (as on
+// the home reel), so there the button stays hidden and the player gets Vimeo's
+// own controls back: its Unmute button, tapped inside the player, works.
 import type Player from '@vimeo/player';
+import { isIOS } from './ios';
 
 document.querySelectorAll<HTMLElement>('[data-sound]').forEach(setup);
 
@@ -17,6 +19,10 @@ function setup(box: HTMLElement) {
   const iframe = box.querySelector('iframe')!;
   const toggle = box.querySelector<HTMLButtonElement>('[data-sound-toggle]')!;
   const label = toggle.querySelector('span')!;
+  if (isIOS()) {
+    iframe.src = iframe.src.replace('&controls=0', '');
+    return;
+  }
   let on = false;
   let player: Promise<Player> | undefined;
   const quiet = (p: Promise<unknown>) => p.catch(() => {});
@@ -54,4 +60,5 @@ function setup(box: HTMLElement) {
   });
 
   toggle.hidden = false;
+  box.querySelector<HTMLElement>('.shade')!.hidden = false;
 }
