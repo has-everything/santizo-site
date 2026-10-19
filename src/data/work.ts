@@ -229,7 +229,7 @@ export const toyline = {
     ] },
     { title: 'Outcome', paras: [
       'One factory, three tabs.',
-      'Order, where you spec a car and watch the line build it; Lesson, 14 short lessons and 3 challenges in what a toy costs to make and sell; and Ledger, a month you can run to watch the bank. It runs in the browser. Not public yet.',
+      'Order, where you spec a car and watch the line build it; Lesson, 15 short lessons and 3 challenges in what a toy costs to make and sell; and Ledger, a month you can run to watch the bank. It runs in the browser. Not public yet.',
     ] },
   ] as StoryBlock[],
   // Six cards, like "What it does" on the app pages
