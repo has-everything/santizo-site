@@ -2,9 +2,10 @@
 // A watchable video (with sound and controls) for project pages. The visitor
 // presses play inside the player, which every browser allows with sound.
 // `sound` (Vimeo only) is for a video whose Vimeo settings autoplay it muted
-// with the controls hidden (HAS Records): it adds a Sound on / Sound off button
-// over the player, styled like the home page's Play reel. src/scripts/sound.ts
-// drives it; without JavaScript the button stays hidden.
+// (HAS Records): it hides Vimeo's own controls and adds a Sound on / Sound off
+// button over the player, styled like the home page's Play reel.
+// src/scripts/sound.ts drives it; without JavaScript the button stays hidden,
+// and on iPhones and iPads it gives the player Vimeo's controls back.
 import type { Video } from '../data/work';
 
 interface Props { video: Video; title: string; sound?: boolean }
@@ -16,10 +17,10 @@ const src = 'vimeo' in video
 const withSound = sound && 'vimeo' in video;
 ---
 <div class="player" data-sound={withSound ? '' : undefined}>
-  <iframe src={src} title={title} allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  <iframe src={withSound ? `${src}&controls=0` : src} title={title} allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
   {withSound && (
     <>
-      <div class="shade" aria-hidden="true"></div>
+      <div class="shade" aria-hidden="true" hidden></div>
       <button type="button" class="sound" data-sound-toggle aria-pressed="false" hidden>
         <i aria-hidden="true">
           <svg viewBox="0 0 16 16" width="14" height="14">
