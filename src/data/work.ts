@@ -442,6 +442,7 @@ export const featured: WorkItem[] = [
   app('Splay'),
   spaceTile,
   ...['van-gogh-the-bedroom', 'has-lp-19'].map((s) => tile(project(s))),
-  // Its line drawing, not its Apps card
-  { ...app('HAS Lathe'), media: { art: 'lathe' } },
+  // An 8 s loop instead of its line drawing: a vessel on the wheel, turning from
+  // vase (celadon glaze) to bottle (terracotta) to bowl (brass), rendered in the app
+  { ...app('HAS Lathe'), media: { video: '/video/has-lathe-tile.mp4', poster: '/img/apps/lathe/tile-poster.webp' } },
 ];
