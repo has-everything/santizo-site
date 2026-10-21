@@ -9,7 +9,9 @@ interface Props {
   title: string;
   /** Add the "art" class so a parent .tile zooms it on hover */
   zoom?: boolean;
-  /** Load a Vimeo clip only as it nears the screen (false for the home reel, the first thing on screen) */
+  /** Load a clip only as it nears the screen (false for a hero, the first thing on screen: the home
+   *  reel, the HAS Toyline film). A self-hosted clip then shows its poster as a lazy image and plays
+   *  through src/scripts/lazy-video.ts. */
   lazy?: boolean;
 }
 const { media, title, zoom = true, lazy = true } = Astro.props;
@@ -18,6 +20,7 @@ const ART = { lathe: LatheTile };
 const vimeoSrc = (id: string) =>
   `https://player.vimeo.com/video/${id}?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1`;
 const Art = 'art' in media ? ART[media.art] : null;
+const videoType = (src: string) => (/\.webm(\?|$)/.test(src) ? 'video/webm' : 'video/mp4');
 ---
 {'vimeo' in media && (
   <div class:list={['vf', { art: zoom }]}>
@@ -29,11 +32,20 @@ const Art = 'art' in media ? ART[media.art] : null;
     <div class="yt"><img src={`https://i.ytimg.com/vi/${media.youtube}/hqdefault.jpg`} alt={`${title} thumbnail`} loading="lazy" decoding="async" /></div>
   </div>
 )}
-{'video' in media && (
+{'video' in media && !lazy && (
   <video class:list={['fill', { art: zoom }]} autoplay muted loop playsinline preload="metadata" poster={media.poster} aria-label={title}>
-    <source src={media.video} type={/\.webm(\?|$)/.test(media.video) ? 'video/webm' : 'video/mp4'} />
+    <source src={media.video} type={videoType(media.video)} />
   </video>
 )}
+{'video' in media && lazy && (
+  <>
+    {media.poster && <img class:list={['fill', { art: zoom }]} src={media.poster} alt="" loading="lazy" decoding="async" />}
+    <video class:list={['fill', { art: zoom }]} muted loop playsinline preload="none" aria-label={title} data-lazy-video>
+      <source src={media.video} type={videoType(media.video)} />
+    </video>
+  </>
+)}
+{'video' in media && lazy && <script>import '../scripts/lazy-video';</script>}
 {Art && <Art class={zoom ? 'art' : undefined} />}
 {'img' in media && (
   <img class:list={['fill', { art: zoom }]} src={media.img} alt={`${title} screenshot`} loading="lazy" decoding="async" />

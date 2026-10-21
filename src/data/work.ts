@@ -26,6 +26,8 @@ export interface Project {
   focus: string[]; // shown as "Focus" on the project page
   group: 'motion' | 'interactive' | 'xr';
   video: Video;
+  /** What its tile shows (home, /work, Related, the XR strip). Without it, the video as a muted Vimeo loop. */
+  tile?: Media;
   // Optional, for the owner to fill in. Each shows on the page only when set.
   year?: string;
   tagline?: string;     // the owner's one-liner under the title (else the blurb shows)
@@ -40,11 +42,17 @@ export const groups = {
 
 // Order within each group = order on /work (and the fallback for "Related", see related.ts).
 // Titles, tags and videos come from SantizoOS (santizo-os js/site-data.js).
+/** A tile loop served from this site: a short cut of the project's video at
+ * 1280x720, no sound, in public/video/<slug>-tile.mp4 with its first frame as
+ * public/img/work/<slug>/tile-poster.webp. It starts faster than a Vimeo embed,
+ * which loads a player in every tile (owner's call, Oct 2026). */
+const loop = (slug: string): Media => ({ video: `/video/${slug}-tile.mp4`, poster: `/img/work/${slug}/tile-poster.webp` });
+
 export const projects: Project[] = [
   // Motion and animation
-  { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Direction', 'Design', 'Animation'], group: 'motion', video: { vimeo: '1216889002' } },
+  { slug: 'santizo-reel-2026', title: 'Santizo Reel 2026', blurb: 'The 2026 reel', tag: 'Reel', focus: ['Direction', 'Design', 'Animation'], group: 'motion', video: { vimeo: '1216889002' }, tile: loop('santizo-reel-2026') },
   {
-    slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' },
+    slug: 'has-lp-19', title: 'HAS LP-19', blurb: 'Music printed as ridgelines', tag: 'Product design · 3D', focus: ['Product design', '3D'], group: 'motion', video: { vimeo: '1233222591' }, tile: loop('has-lp-19'),
     // The owner's own write-up (Oct 2026)
     tagline: 'Sound made physical.',
     story: [
@@ -66,15 +74,15 @@ export const projects: Project[] = [
       ] },
     ],
   },
-  { slug: 'star-trails', title: 'Star trails', blurb: 'Concept, art and animation', tag: 'Animation', focus: ['Concept', 'Art', 'Animation'], group: 'motion', video: { vimeo: '269102770' } },
-  { slug: 'evidence-of-existence', title: 'Evidence of Existence', blurb: '360 VR with particles', tag: '360 VR', focus: ['360 VR', 'Particles'], group: 'motion', video: { vimeo: '207575582' } },
+  { slug: 'star-trails', title: 'Star trails', blurb: 'Concept, art and animation', tag: 'Animation', focus: ['Concept', 'Art', 'Animation'], group: 'motion', video: { vimeo: '269102770' }, tile: loop('star-trails') },
+  { slug: 'evidence-of-existence', title: 'Evidence of Existence', blurb: '360 VR with particles', tag: '360 VR', focus: ['360 VR', 'Particles'], group: 'motion', video: { vimeo: '207575582' }, tile: loop('evidence-of-existence') },
   { slug: 'visual-alternatives', title: 'Visual Alternatives', blurb: 'Audio-visual, in Unity', tag: 'Unity', focus: ['Audio-visual', 'Unity'], group: 'motion', video: { youtube: 'FrM8C7vHTow' } },
-  { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'motion', video: { vimeo: '548921641' } },
-  { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'motion', video: { vimeo: '1056096066' } },
+  { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'motion', video: { vimeo: '548921641' }, tile: loop('real-time-interactive-app') },
+  { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'motion', video: { vimeo: '1056096066' }, tile: loop('roboto') },
   // Interactive and real-time (with the one-off pages HAS Toyline, HAS Records
   // and HAS Space, spliced in around it by work/index.astro)
   {
-    slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'interactive', video: { vimeo: '1230984635' },
+    slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'interactive', video: { vimeo: '1230984635' }, tile: loop('van-gogh-the-bedroom'),
     // The owner's own write-up (Oct 2026)
     tagline: 'Turning a painting into a place to explore.',
     story: [
@@ -143,11 +151,11 @@ export const projects: Project[] = [
       ] },
     ],
   },
-  { slug: 'wrist-interaction', title: 'Wrist Interaction', blurb: 'Tracked transforms', focus: ['Tracked transforms'], group: 'xr', video: { vimeo: '989005478' } },
-  { slug: '3d-calculator', title: '3D Calculator', blurb: 'Gesture math', focus: ['Gesture math'], group: 'xr', video: { vimeo: '1001763153' } },
-  { slug: 'gauge-control', title: 'Gauge Control', blurb: 'VR/AR dials', focus: ['VR/AR dials'], group: 'xr', video: { vimeo: '982232014' } },
-  { slug: 'arrow-grid-system', title: 'Arrow Grid System', blurb: 'VR interaction', focus: ['VR interaction'], group: 'xr', video: { vimeo: '990364072' } },
-  { slug: 'pinch-twist', title: 'Pinch Twist', blurb: 'Hand gesture', focus: ['Hand gesture'], group: 'xr', video: { vimeo: '990453573' } },
+  { slug: 'wrist-interaction', title: 'Wrist Interaction', blurb: 'Tracked transforms', focus: ['Tracked transforms'], group: 'xr', video: { vimeo: '989005478' }, tile: loop('wrist-interaction') },
+  { slug: '3d-calculator', title: '3D Calculator', blurb: 'Gesture math', focus: ['Gesture math'], group: 'xr', video: { vimeo: '1001763153' }, tile: loop('3d-calculator') },
+  { slug: 'gauge-control', title: 'Gauge Control', blurb: 'VR/AR dials', focus: ['VR/AR dials'], group: 'xr', video: { vimeo: '982232014' }, tile: loop('gauge-control') },
+  { slug: 'arrow-grid-system', title: 'Arrow Grid System', blurb: 'VR interaction', focus: ['VR interaction'], group: 'xr', video: { vimeo: '990364072' }, tile: loop('arrow-grid-system') },
+  { slug: 'pinch-twist', title: 'Pinch Twist', blurb: 'Hand gesture', focus: ['Hand gesture'], group: 'xr', video: { vimeo: '990453573' }, tile: loop('pinch-twist') },
 ];
 
 export const project = (slug: string) => {
@@ -162,7 +170,7 @@ export const tile = (p: Project, { withTag = true } = {}): WorkItem => ({
   blurb: p.blurb,
   tag: withTag ? p.tag : undefined,
   href: `/work/${p.slug}`,
-  media: p.video,
+  media: p.tile ?? p.video,
 });
 
 // ---------- Home page ----------
@@ -346,7 +354,7 @@ export const spaceTile: WorkItem = {
 // Unreal Engine: drop the needle anywhere on side A and hear that moment of the
 // song. Copy and stills from the project's case study package. The page plays the
 // owner's newer Vimeo cut (`video`); its tiles and the home page keep the earlier
-// one (`tileVideo`), on the owner's call (Oct 2026).
+// 15 s cut (`tile`, served from this site, whole), on the owner's call (Oct 2026).
 export const records = {
   slug: 'has-records',
   title: 'HAS Records',
@@ -358,7 +366,7 @@ export const records = {
   year: '2026',
   tagline: 'A turntable you can actually play.',
   video: { vimeo: '1237152596' },
-  tileVideo: { vimeo: '1237080035' },
+  tile: loop('has-records'), // Vimeo 1237080035
   story: [
     { title: 'Vision', paras: [
       'I wanted to play a record, not just look at one.',
@@ -405,13 +413,13 @@ export const records = {
   og: { src: '/img/og/has-records.jpg', alt: 'HAS Records: a Rega Planar 6 RS playing a HAS Records LP, its stylus light glowing green' },
 };
 
-/** HAS Records as a tile (home, /work, Related): its tile video as a muted loop, like the other Vimeo projects */
+/** HAS Records as a tile (home, /work, Related): its tile loop, like the other projects */
 export const recordsTile: WorkItem = {
   title: records.title,
   blurb: records.blurb,
   tag: 'Unreal Engine',
   href: `/work/${records.slug}`,
-  media: records.tileVideo,
+  media: records.tile,
 };
 
 // ---------- Home page: featured work ----------
