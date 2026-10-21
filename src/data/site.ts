@@ -36,7 +36,10 @@ export const reel = {
   // on iPhones too. When empty, Play reel unmutes the Vimeo loop (desktop), and
   // iPhones and iPads open the reel's page instead (href below).
   file: '',
-  poster: '', // optional still shown while the file loads, e.g. '/img/reel-poster.jpg'
+  // A still of the reel half a second in (its first frames are blank), shown
+  // over the hero until the reel plays, with a loading line under it. Re-export
+  // it if the reel's opening changes.
+  poster: '/img/reel-poster.webp',
   title: 'Santizo Reel 2026',
   credits: 'Direction · Design · Animation',
   // The reel's own page on this site (its project in src/data/work.ts), where it

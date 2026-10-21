@@ -2,14 +2,19 @@
 // Full-screen reel: the Vimeo loop, or a direct file when reel.file is set in
 // src/data/site.ts. Play reel / Stop live in src/scripts/reel.ts. Without
 // JavaScript, Play reel links to the reel's page (reel.href).
+// Until the Vimeo loop plays, a still of it (reel.poster) and a loading line
+// cover the black embed; reel.ts fades them out (.ready). A file uses the
+// still as its own poster.
 import { reel } from '../../data/site';
 import type { Media as MediaType } from '../../data/media';
 import Media from '../Media.astro';
 
 const media: MediaType = reel.file ? { video: reel.file, poster: reel.poster || undefined } : { vimeo: reel.vimeo };
+const cover = !reel.file && reel.poster;
 ---
 <section id="top" aria-label="Showreel" class="reel-hero" data-reel>
   <Media media={media} title={reel.title} zoom={false} lazy={false} />
+  {cover && <img class="cover" src={cover} alt="" decoding="async" fetchpriority="high" data-reel-cover />}
   <div class="shade-top" aria-hidden="true"></div>
 
   <div class="bar">
@@ -22,6 +27,12 @@ const media: MediaType = reel.file ? { video: reel.file, poster: reel.poster || 
     </a>
   </div>
   <span class="cue" aria-hidden="true"></span>
+  {cover && (
+    <>
+      <span class="loading" aria-hidden="true" data-reel-cover></span>
+      <noscript><style is:inline>[data-reel-cover] { display: none; }</style></noscript>
+    </>
+  )}
 </section>
 
 <script>
@@ -47,6 +58,16 @@ const media: MediaType = reel.file ? { video: reel.file, poster: reel.poster || 
   .reel i { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
   .reel i::after { content: ""; border-left: 8px solid #0b0b0c; border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
   .playing .reel i::after { width: 8px; height: 8px; border: 0; margin: 0; background: #0b0b0c; }
+
+  /* While the Vimeo loop loads: its still, and an orange line sweeping along the
+     bottom edge (gone after 20 s if the reel never plays). Both fade on .ready. */
+  .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity .6s ease; }
+  .loading { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; overflow: hidden; pointer-events: none; transition: opacity .3s ease; animation: settle .3s 20s forwards; }
+  .loading::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 30%; background: var(--accent); animation: sweep 1.4s cubic-bezier(.6, 0, .2, 1) infinite; }
+  .ready .cover, .ready .loading { opacity: 0; }
+  @keyframes sweep { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+  @keyframes settle { to { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .loading { display: none; } }
 
   /* Scroll cue */
   .cue { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); width: 1px; height: 44px; background: rgba(255, 255, 255, .35); overflow: hidden; }

@@ -37,6 +37,7 @@ function setup(hero: HTMLElement) {
   }
 
   const video = hero.querySelector('video');
+  if (!video) uncover(hero, hero.querySelector('iframe')!);
   // iOS can't unmute the Vimeo loop: leave the link alone, it opens the reel's page
   if (!video && isIOS()) return;
 
@@ -55,6 +56,22 @@ function setup(hero: HTMLElement) {
   new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) stop();
   }).observe(hero);
+}
+
+// Fade out the still and loading line over the Vimeo loop (Showreel.astro) once
+// it is half a second in, where the still was taken, so the hand-off doesn't
+// show. If Vimeo never plays (blocked, offline), the still stays.
+function uncover(hero: HTMLElement, iframe: HTMLIFrameElement) {
+  if (!hero.querySelector('[data-reel-cover]')) return;
+  import('@vimeo/player').then(({ default: VimeoPlayer }) => {
+    const p = new VimeoPlayer(iframe);
+    const check = ({ seconds }: { seconds: number }) => {
+      if (seconds < 0.5) return;
+      hero.classList.add('ready');
+      p.off('timeupdate', check);
+    };
+    p.on('timeupdate', check);
+  }, () => {});
 }
 
 // `done` is called when the reel ends or the browser refuses to play it with sound.
