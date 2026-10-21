@@ -439,7 +439,9 @@ export const featured: WorkItem[] = [
   // The tile's subtitle is the page's, without the full stop, like the other captions
   { ...toylineTile, blurb: toyline.tagline.replace(/\.$/, '') },
   recordsTile,
-  app('Splay'),
+  // A 7 s loop instead of its Apps card: Splay's own quadcopter demo exploding,
+  // holding, and coming back together, made with Splay's Render (no interface)
+  { ...app('Splay'), media: { video: '/video/splay-tile.mp4', poster: '/img/apps/splay/tile-poster.webp' } },
   spaceTile,
   ...['van-gogh-the-bedroom', 'has-lp-19'].map((s) => tile(project(s))),
   // An 8 s loop instead of its line drawing: a vessel on the wheel, turning from
