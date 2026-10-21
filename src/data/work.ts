@@ -439,9 +439,12 @@ export const featured: WorkItem[] = [
   // The tile's subtitle is the page's, without the full stop, like the other captions
   { ...toylineTile, blurb: toyline.tagline.replace(/\.$/, '') },
   recordsTile,
-  app('Splay'),
+  // An 8 s loop instead of its Apps card: the Splay speaker (341 parts) exploding
+  // and coming back together, rendered frame by frame with HAS Explode
+  { ...app('Splay'), media: { video: '/video/splay-tile.mp4', poster: '/img/apps/splay/tile-poster.webp' } },
   spaceTile,
   ...['van-gogh-the-bedroom', 'has-lp-19'].map((s) => tile(project(s))),
-  // Its line drawing, not its Apps card
-  { ...app('HAS Lathe'), media: { art: 'lathe' } },
+  // An 8 s loop instead of its line drawing: a vessel on the wheel, turning from
+  // vase (celadon glaze) to bottle (terracotta) to bowl (brass), rendered in the app
+  { ...app('HAS Lathe'), media: { video: '/video/has-lathe-tile.mp4', poster: '/img/apps/lathe/tile-poster.webp' } },
 ];
