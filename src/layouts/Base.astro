@@ -80,5 +80,14 @@ const indexable = site.indexable && !noindex;
   <script>
     import '../scripts/site';
   </script>
+
+  {import.meta.env.PROD && (
+    <>
+      <!-- StatCounter (project 2146371), invisible: counts visits, shows nothing on the page -->
+      <script is:inline>var sc_project = 2146371; var sc_invisible = 1; var sc_security = "98111557";</script>
+      <script is:inline async src="https://www.statcounter.com/counter/counter.js"></script>
+      <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/2146371/0/98111557/1/" alt="Web Analytics" referrerpolicy="no-referrer-when-downgrade"></a></div></noscript>
+    </>
+  )}
 </body>
 </html>

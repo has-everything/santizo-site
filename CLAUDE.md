@@ -100,6 +100,8 @@ Vercel project imported from this GitHub repo, Framework Preset **Astro**, all d
 
 Web Analytics: the snippet is in `Base.astro`. Turn it on in the Vercel project (Analytics tab).
 
+StatCounter (Oct 2026, owner's ask): the invisible counter for project 2146371, also in `Base.astro`, at the end of `<body>`. Like Vercel's, it is in production builds only, so `npm run dev` visits aren't counted.
+
 ## Launch (October 2026)
 
 1. Done in code: `site.indexable = true` in `src/data/site.ts`. That one switch drops noindex on every page but the 404, adds canonical URLs, points every absolute URL (canonical, link previews, JSON-LD, sitemap) at www.santizo.com, and adds the `Sitemap:` line to robots.txt.
