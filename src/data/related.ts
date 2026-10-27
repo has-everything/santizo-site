@@ -2,7 +2,7 @@
 // hand for what they share with the page they sit on (tools, subject, craft).
 // Keys and values are page paths. A page without an entry shows the next
 // three in its own list (see `nextThree`), so a new project never breaks.
-import { projects, tile, toyline, toylineTile, spaceTile, recordsTile, type WorkItem } from './work';
+import { projects, tile, toyline, toylineTile, spaceTile, recordsTile, floraTile, type WorkItem } from './work';
 import { tools } from './apps';
 
 // Every page that can appear as a related tile, by path. No tags (three across
@@ -12,6 +12,7 @@ const tiles = new Map<string, WorkItem>([
   ...projects.map((p) => tile(p, { withTag: false })).map((t) => [t.href, t] as const),
   [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.film.poster } }],
   [recordsTile.href, { ...recordsTile, tag: undefined }],
+  [floraTile.href, { ...floraTile, tag: undefined }],
   ...tools.map((t) => [t.href, { ...t, tag: undefined, note: undefined }] as const),
   // after `tools`, so HAS Space's tile shows its render, not its Apps card (the interface)
   [spaceTile.href, { ...spaceTile, tag: undefined }],
@@ -29,6 +30,7 @@ const picks: Record<string, string[]> = {
   // Interactive and real-time
   '/work/has-toyline': ['/apps/splay', '/work/has-lp-19', '/work/roboto'],
   '/work/has-records': ['/work/van-gogh-the-bedroom', '/work/has-lp-19', '/apps/splay'],
+  '/work/has-flora': ['/work/has-records', '/work/has-space', '/work/van-gogh-the-bedroom'],
   '/work/van-gogh-the-bedroom': ['/work/has-space', '/work/real-time-interactive-app', '/work/evidence-of-existence'],
   '/work/has-space': ['/apps/has-gallery', '/work/van-gogh-the-bedroom', '/work/has-toyline'],
   // XR and interaction

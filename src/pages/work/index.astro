@@ -9,12 +9,12 @@ import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import WorkTile from '../../components/WorkTile.astro';
 import SpecList from '../../components/project/SpecList.astro';
-import { projects, groups, tile, toylineTile, spaceTile, recordsTile, xrIntro } from '../../data/work';
+import { projects, groups, tile, toylineTile, spaceTile, recordsTile, floraTile, xrIntro } from '../../data/work';
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const motion = projects.filter((p) => p.group === 'motion').map((p) => tile(p));
-// HAS Toyline, HAS Records and HAS Space have their own pages (no Vimeo film), so their tiles are added here, around Van Gogh · The Bedroom
-const interactive = [toylineTile, recordsTile, ...projects.filter((p) => p.group === 'interactive').map((p) => tile(p)), spaceTile];
+// HAS Toyline, HAS Records, HAS Flora and HAS Space have their own pages (no Vimeo film), so their tiles are added here, around Van Gogh · The Bedroom
+const interactive = [toylineTile, recordsTile, floraTile, ...projects.filter((p) => p.group === 'interactive').map((p) => tile(p)), spaceTile];
 const xr = projects.filter((p) => p.group === 'xr');
 const count = (n: number) => String(n).padStart(2, '0');
 

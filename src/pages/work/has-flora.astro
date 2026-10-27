@@ -1,0 +1,140 @@
+---
+// HAS Flora: a one-off work page (see `flora` in src/data/work.ts), built like
+// HAS Records', with a looping cut of the owner's Unreal gallery clip instead of
+// a Vimeo player (no film on Vimeo yet), the role first in the specs, the case
+// study, the figures, six "What it does" cards and three related pages.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Section from '../../components/Section.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NumberedGrid from '../../components/NumberedGrid.astro';
+import Media from '../../components/Media.astro';
+import SpecList from '../../components/project/SpecList.astro';
+import Figure from '../../components/project/Figure.astro';
+import Related from '../../components/project/Related.astro';
+import Story from '../../components/project/Story.astro';
+import { flora as p, groups } from '../../data/work';
+import { related } from '../../data/related';
+import { abs, author, breadcrumbs } from '../../lib/seo';
+
+const group = groups[p.group];
+
+const specs: [string, string][] = [
+  ['Role', p.role],
+  ['Category', group.label],
+  ['Focus', p.focus.join(' · ')],
+  ['Weather', p.weather],
+  ['Runs in', p.runsIn],
+  ['Year', p.year],
+];
+
+const path = `/work/${p.slug}`;
+const description = `${p.title}: ${p.tagline} A real-time WebGL flower on live weather, staged in Unreal Engine, by Hector Augusto Santizo, creative technologist in Los Angeles.`;
+const schema = [
+  {
+    '@type': 'CreativeWork',
+    name: p.title,
+    description,
+    url: abs(path),
+    genre: group.label,
+    keywords: p.focus.join(', '),
+    dateCreated: p.year,
+    image: abs(p.og.src),
+    author: author(),
+  },
+  breadcrumbs([['Work', '/work'], [p.title, path]]),
+];
+---
+<Base title={`${p.title} · Santizo`} description={description} image={p.og} schema={schema}>
+  <Header />
+
+  <div class="crumbs">
+    <a href="/work" class="mono cap hl hl-44">← All work</a>
+    <span class="mono cap muted">Work / {group.label}</span>
+  </div>
+
+  <section aria-label="Video" class="screen">
+    <div class="fit"><div class="film"><Media media={p.film} title={p.title} zoom={false} lazy={false} /></div></div>
+  </section>
+
+  <Section label="Overview" space="sm">
+    <div class="overview">
+      <div class="name">
+        <h1>{p.title}</h1>
+        <p class="muted">{p.tagline}</p>
+      </div>
+      <div class="facts">
+        <SpecList specs={specs} />
+      </div>
+    </div>
+  </Section>
+
+  <Section label="About the project" space="md">
+    <Story blocks={p.story} />
+  </Section>
+
+  <Section label="Four skies" space="md">
+    <Figure num="01" caption={p.weathers.caption}>
+      <img class="fill" src={p.weathers.src} width={p.weathers.w} height={p.weathers.h} loading="lazy" decoding="async" alt={p.weathers.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="Close up" space="md">
+    <div class="pair">
+      {p.squares.map((s, i) => (
+        <Figure num={String(i + 2).padStart(2, '0')} caption={s.caption} ratio="1 / 1" half>
+          <img class="fill" src={s.src} width={s.w} height={s.h} loading="lazy" decoding="async" alt={s.alt} />
+        </Figure>
+      ))}
+    </div>
+  </Section>
+
+  <Section label="The flowers" space="md">
+    <Figure num="04" caption={p.flowers.caption}>
+      <img class="fill" src={p.flowers.src} width={p.flowers.w} height={p.flowers.h} loading="lazy" decoding="async" alt={p.flowers.alt} />
+    </Figure>
+  </Section>
+
+  <Section label="What it does">
+    <SectionHead num="01" title="What it does" aside={String(p.features.length).padStart(2, '0')} />
+    <NumberedGrid items={p.features} narrow />
+  </Section>
+
+  <Section label="In the room" space="md">
+    <div class="pair">
+      {p.rooms.map((s, i) => (
+        <Figure num={String(i + 5).padStart(2, '0')} caption={s.caption} half>
+          <img class="fill" src={s.src} width={s.w} height={s.h} loading="lazy" decoding="async" alt={s.alt} />
+        </Figure>
+      ))}
+    </div>
+  </Section>
+
+  <Section label="The app" space="lg">
+    <Figure num="07" caption={p.app.caption}>
+      <img class="fill" src={p.app.src} width={p.app.w} height={p.app.h} loading="lazy" decoding="async" alt={p.app.alt} />
+    </Figure>
+  </Section>
+
+  <Related items={related(path, [])} num="02" />
+
+  <Footer num="03" />
+</Base>
+
+<style>
+  /* As on the other work pages: the film edge to edge on a band in the page's
+     color, sized to fit on screen under the top bar and the crumbs */
+  .screen { background: var(--bg); }
+  .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
+  .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
+  .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
+
+  .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }
+  .name { flex: 3 1 520px; min-width: 0; }
+  h1 { margin: 0; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; }
+  .name p { margin: 16px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .facts { flex: 2 1 340px; min-width: 0; }
+
+  .pair { display: flex; flex-wrap: wrap; gap: 48px var(--tile-gap); }
+</style>
