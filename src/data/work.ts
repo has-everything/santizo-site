@@ -425,68 +425,70 @@ export const recordsTile: WorkItem = {
 // ---------- HAS Flora (/work/has-flora) ----------
 
 // A one-off page, like HAS Records: HAS Flora is the owner's real-time flower, a
-// single-page WebGL app (its file still titled "Saffron Crocus") that shows the
-// live weather where each flower grows, and he built two Unreal Engine rooms to
-// stage it: a gallery with a 4 x 4 video wall and a desk with one monitor. No
-// Vimeo film yet, so the page loops a self-hosted cut of the gallery clip (no
-// sound) and the tile an 8 s cut of the desk clip. The stills in
-// public/img/work/has-flora/ are the app's own output (weather, rain, snow,
-// flowers, app) and frames of his two clips (gallery, desk). Owner's calls
-// (Oct 2026): not on the home page, and the page never says it was made with AI.
-// Copy is a DRAFT for him to edit, written from the app; the role line is a
-// proposal for him to confirm.
+// single-page three.js app (has-flora_V3.html, on his T7 drive under HAS_Flora):
+// a flower grown in code from a species and a seed, moved by the live wind of any
+// place (Open-Meteo) through a physical stem, beside a data panel with that place's
+// time and weather. He built two Unreal Engine rooms to stage it: a gallery with a
+// 4 x 4 video wall and a desk with one monitor. No Vimeo film yet, so the page
+// loops a self-hosted cut of the gallery clip (no sound) and the tile an 8 s cut of
+// the desk clip. The stills in public/img/work/has-flora/ are the app's own output
+// (wind, closed, open, flowers, app; tools/flora/capture.mjs) and frames of his two
+// clips (gallery, desk). Owner's calls (Oct 2026): not on the home page, and the
+// page never says it was made with AI. Copy is a draft written from the app, for
+// him to edit; the role line is a proposal for him to confirm.
 export const flora = {
   slug: 'has-flora',
   title: 'HAS Flora',
-  blurb: 'A flower on live weather, in WebGL',
+  blurb: 'A flower in the live wind, in three.js',
   role: 'Concept, Creative Direction, Development, 3D Environments',
-  focus: ['WebGL', 'Live data', 'Unreal Engine'],
+  focus: ['three.js', 'Live data', 'Unreal Engine'],
   runsIn: 'The browser',
   weather: 'Live, from Open-Meteo',
   group: 'interactive' as const,
   year: '2026',
-  tagline: 'A flower that feels the weather where it grows.',
+  tagline: 'A flower that moves with the live wind, anywhere on earth.',
   film: { video: '/video/has-flora.mp4', poster: '/img/work/has-flora/poster.webp' },
   tile: loop('has-flora'),
   story: [
     { title: 'Vision', paras: [
       'A flower you can check like the weather.',
-      'Every flower here grows somewhere real, from Kyoto and Paris to Los Angeles, Seoul and Cusco, and it shows what the sky is doing there right now. Clear and warm, a California poppy opens. Rain or nightfall, it folds shut and holds the water. Nothing is a loop: the weather writes the next minute.',
+      'Pick any place on earth and the flower moves with the wind blowing there right now: its measured speed, its gusts and its direction. Beside it, a quiet panel keeps that place’s time and sky. Every flower grows from a seed, so no two are alike.',
     ] },
     { title: 'Creative Direction', paras: [
       'Soft, close and never quite in focus.',
-      'A macro lens rises from beside the bud to look down into the open flower, with a depth of field so shallow that nothing is razor sharp. The backdrop is three slow fields of colour taken from the flower itself, and it takes the sky’s light: greyer under cloud, warm at golden hour, deep blue at night. One quiet strip of controls floats at the bottom, and H hides it.',
+      'Pastel backdrops, a lens with a shallow depth of field, a little glow and grain. Memory lets each frame linger and drift, so the petals leave soft trails as they move. The data panel has no box, only type, IBM Plex Sans for words and Plex Mono for figures, and it drags anywhere and scales up to four times its size, big enough for a wall.',
     ] },
     { title: 'Execution', paras: [
-      'One shader, seventeen flowers, live weather.',
-      'Every flower is the same ray-marched shader with different numbers: petal count, length, curl, colour and heart. Live conditions for every place come from Open-Meteo and refresh every ten minutes, and the sun’s height comes from the date, latitude and longitude, so day and night are always real. Each flower answers in its own way: a California poppy shuts at night and under a heavy grey sky, a camellia stays open. Then I built two rooms in Unreal Engine, a gallery with a 4 x 4 video wall and a desk with a single monitor, to see it at the scale of a wall and of a desk.',
+      'Grown in code, moved by real wind.',
+      'Built in three.js, with no model files. Every petal is shaped in a shader, its length, width, curl, cup and ruffle opening from bud to bloom, and a species and a seed set the rest. The wind is physical: Open-Meteo’s live speed, gusts and direction push on the flower head, and a stem with real stiffness bends and springs back, so a still morning and a gale look nothing alike. Then I built two rooms in Unreal Engine, a gallery with a 4 x 4 video wall and a desk with a single monitor, to see it at the scale of a wall and of a desk.',
     ] },
     { title: 'Outcome', paras: [
-      'A live flower in the browser, and two rooms for it.',
-      'HAS Flora runs in the browser: 17 flowers, 13 places and the weather there, live or set by hand, from clear to snow, fog or a thunderstorm, at any time of day, with 17 backdrop moods and a PNG of any moment. The gallery and the desk are Unreal Engine scenes made to show it.',
+      'A living flower for any screen, and two rooms for it.',
+      'HAS Flora runs in the browser: 11 species and 99,999 seeds, any city you type, its live wind and weather, a bloom that opens and closes on its own cycle, and a PNG of any moment. Settings save to a file to load again. The gallery and the desk are Unreal Engine scenes made to show it.',
     ] },
   ] as StoryBlock[],
   features: [
-    { title: 'Seventeen flowers', body: 'From Kyoto, Paris, Los Angeles, Seoul and Peru, and a few from elsewhere. Each is the same shader with its own petals, curl, colour and heart.' },
-    { title: 'Live weather', body: 'Conditions for all 13 places from Open-Meteo, refreshed every ten minutes. The flower feels the sky where it grows, or anywhere you pick.' },
-    { title: 'The real sun', body: 'Dawn, golden hour and night come from the date, latitude and longitude, so the light always matches the place.' },
-    { title: 'Opens and closes', body: 'Each flower answers in its own way: some fold shut at night, in rain or snow, in the cold or under a grey sky; others stay open.' },
-    { title: 'Rain, frost and snow', body: 'Beads of rain on the petals, rime on a freezing morning, snow drifting past the lens and lightning in a storm. After rain, the petals dry slowly.' },
-    { title: 'Wind and lens', body: 'It leans and rocks with the real wind, and rain slants with it. Drag to orbit, scroll to zoom, and save any moment as a PNG.' },
+    { title: 'Grown from a seed', body: '11 species, from California poppy and lotus to peony and orchid, and 99,999 seeds. Petals, layers, width, curl, cup, ruffle and leaves are all yours to change.' },
+    { title: 'Live wind', body: 'Pick a place and its measured wind, gusts and direction move the flower, through a stem that bends and springs back like a real one.' },
+    { title: 'Any place on earth', body: '11 presets, from Wellington and Punta Arenas to Tromsø and Honolulu, or type the name of any city or town.' },
+    { title: 'The data panel', body: 'That place’s time and date, its sky, temperature, wind, humidity, cloud, rain, pressure, sunrise and sunset. Drag it anywhere and size it up to 4x.' },
+    { title: 'Opens and closes', body: 'The flower blooms and folds on its own cycle, anywhere from 6 to 90 seconds, or hold it at any point between bud and bloom.' },
+    { title: 'Memory and lens', body: 'Petals leave soft trails that linger and drift, with depth blur, glow, grain and Dream. Save any moment as a PNG.' },
   ],
   // Figures in page order. Figs. 01 to 04 and 07 are the app's own output, captured in a headless
-  // Chrome (Oct 2026) with its Weather, Time and Flower menus; Figs. 05 and 06 are frames of his Unreal clips.
-  weathers: { src: '/img/work/has-flora/weather.webp', w: 2400, h: 1350, alt: 'The same California poppy four times: open under a clear noon sky, open in warm golden-hour light, closed in the rain with rain streaking past, and closed at night against a deep blue backdrop', caption: 'One California poppy, four skies: clear noon, golden hour, rain and night.' } as Still,
+  // Chrome (Oct 2026, tools/flora/capture.mjs); Figs. 05 and 06 are frames of his Unreal clips.
+  // Fig. 01 is live data: the wind in each place when it was captured, on 27 October 2026.
+  winds: { src: '/img/work/has-flora/wind.webp', w: 2400, h: 1350, alt: 'The same orange California poppy in four places, each with its data panel: upright in Reykjavik at 1.5 m/s and in Los Angeles at 2.4 m/s, bent hard to one side in Punta Arenas at 7.1 m/s with gusts of 15.5, and blown over to face the lens in Oslo at 8.9 m/s', caption: 'One California poppy in four places’ live wind, 27 October 2026: Reykjavik 1.5 m/s, Los Angeles 2.4, Punta Arenas 7.1 with gusts of 15.5, Oslo 8.9.' } as Still,
   squares: [
-    { src: '/img/work/has-flora/rain.webp', w: 1360, h: 1360, alt: 'Close-up of a red camellia with its golden stamens, rain streaking across the lens', caption: 'A camellia in the rain. It stays open.' },
-    { src: '/img/work/has-flora/snow.webp', w: 1360, h: 1360, alt: 'Close-up of a yellow forsythia flower with snowflakes drifting in front of it, the nearest ones large and out of focus', caption: 'Forsythia on a snowy morning.' },
+    { src: '/img/work/has-flora/closed.webp', w: 1360, h: 1360, alt: 'A lily closed into an orange bud on its stem, against a peach and lilac backdrop', caption: 'A lily at the bottom of its cycle, closed.' },
+    { src: '/img/work/has-flora/open.webp', w: 1360, h: 1360, alt: 'The same lily fully open, its yellow petals curled back around long stamens', caption: 'The same lily at the top, open.' },
   ] as Still[],
-  flowers: { src: '/img/work/has-flora/flowers.webp', w: 2400, h: 1350, alt: 'Six of the flowers in studio light: a pale pink cherry blossom, a red camellia, a blue cornflower, an orange California poppy, a mauve Rose of Sharon and a magenta cantuta', caption: 'Cherry blossom and camellia from Kyoto, cornflower from Paris, California poppy from Los Angeles, Rose of Sharon from Seoul and cantuta from Peru.' } as Still,
+  flowers: { src: '/img/work/has-flora/flowers.webp', w: 2400, h: 1350, alt: 'Six of the flowers, each on its own pastel backdrop: a cream and blue poppy, a yellow lily, a sunflower, a pink orchid, a pink cosmos and a lavender peony', caption: 'Poppy, lily, sunflower, orchid, cosmos and peony, each grown from its own seed.' } as Still,
   rooms: [
     { src: '/img/work/has-flora/gallery.webp', w: 1920, h: 1080, alt: 'A dark gallery in Unreal Engine with a 4 x 4 video wall showing a pink lily, two visitors in silhouette, one standing and one sitting on the floor', caption: 'On a 4 x 4 video wall, in a gallery built in Unreal Engine.' },
     { src: '/img/work/has-flora/desk.webp', w: 1920, h: 1080, alt: 'A single monitor on a desk in Unreal Engine, showing a yellow and orange poppy on a pastel backdrop', caption: 'And on a desk, on a single monitor.' },
   ] as Still[],
-  app: { src: '/img/work/has-flora/app.webp', w: 2400, h: 1350, alt: 'HAS Flora running: a California poppy on a peach and pink backdrop, its name and origin top left, the live weather for Antelope Valley top right (clear, 13°C, wind from the southwest, catching the low sun), and the sliders and menus in a glass strip along the bottom', caption: 'The app: the California poppy in Antelope Valley at 7:50 in the morning, on live weather.' } as Still,
+  app: { src: '/img/work/has-flora/app.webp', w: 2400, h: 1350, alt: 'HAS Flora running: a lavender peony on a soft pink backdrop, the controls in a glass panel on the left (species, seed, shape, motion, time and lens sliders) and the live data for Los Angeles on the right (partly cloudy, 17°C, wind 1.9 m/s from the northeast, humidity, cloud, pressure, sunrise and sunset)', caption: 'The app: a peony on live weather in Los Angeles, the controls on the left, the data panel on the right.' } as Still,
   og: { src: '/img/og/has-flora.jpg', alt: 'HAS Flora: a pink lily on a 4 x 4 video wall in a dark gallery, two visitors watching' },
 };
 
@@ -494,7 +496,7 @@ export const flora = {
 export const floraTile: WorkItem = {
   title: flora.title,
   blurb: flora.blurb,
-  tag: 'WebGL · Unreal',
+  tag: 'three.js · Unreal',
   href: `/work/${flora.slug}`,
   media: flora.tile,
 };

@@ -30,7 +30,7 @@ const specs: [string, string][] = [
 ];
 
 const path = `/work/${p.slug}`;
-const description = `${p.title}: ${p.tagline} A real-time WebGL flower on live weather, staged in Unreal Engine, by Hector Augusto Santizo, creative technologist in Los Angeles.`;
+const description = `${p.title}: ${p.tagline} A real-time three.js flower moved by live wind data, staged in Unreal Engine, by Hector Augusto Santizo, creative technologist in Los Angeles.`;
 const schema = [
   {
     '@type': 'CreativeWork',
@@ -74,13 +74,13 @@ const schema = [
     <Story blocks={p.story} />
   </Section>
 
-  <Section label="Four skies" space="md">
-    <Figure num="01" caption={p.weathers.caption}>
-      <img class="fill" src={p.weathers.src} width={p.weathers.w} height={p.weathers.h} loading="lazy" decoding="async" alt={p.weathers.alt} />
+  <Section label="Live wind" space="md">
+    <Figure num="01" caption={p.winds.caption}>
+      <img class="fill" src={p.winds.src} width={p.winds.w} height={p.winds.h} loading="lazy" decoding="async" alt={p.winds.alt} />
     </Figure>
   </Section>
 
-  <Section label="Close up" space="md">
+  <Section label="Bud and bloom" space="md">
     <div class="pair">
       {p.squares.map((s, i) => (
         <Figure num={String(i + 2).padStart(2, '0')} caption={s.caption} ratio="1 / 1" half>
