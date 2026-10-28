@@ -488,7 +488,7 @@ export const flora = {
     { src: '/img/work/has-flora/gallery.webp', w: 1920, h: 1080, alt: 'A dark gallery in Unreal Engine with a 4 x 4 video wall showing a pink lily, two visitors in silhouette, one standing and one sitting on the floor', caption: 'On a 4 x 4 video wall, in a gallery built in Unreal Engine.' },
     { src: '/img/work/has-flora/desk.webp', w: 1920, h: 1080, alt: 'A single monitor on a desk in Unreal Engine, showing a yellow and orange poppy on a pastel backdrop', caption: 'And on a desk, on a single monitor.' },
   ] as Still[],
-  app: { src: '/img/work/has-flora/app.webp', w: 2400, h: 1350, alt: 'HAS Flora running: a lavender peony on a soft pink backdrop, the controls in a glass panel on the left (species, seed, shape, motion, time and lens sliders) and the live data for Los Angeles on the right (partly cloudy, 17°C, wind 1.9 m/s from the northeast, humidity, cloud, pressure, sunrise and sunset)', caption: 'The app: a peony on live weather in Los Angeles, the controls on the left, the data panel on the right.' } as Still,
+  app: { src: '/img/work/has-flora/app.webp', w: 2400, h: 1350, alt: 'HAS Flora running with its controls hidden: a lavender peony on a soft pink backdrop, and the live data for Los Angeles at twice its size on the right: 21:08 on Tuesday, 27 October 2026, partly cloudy, 18°C, wind 1.3 m/s from the northwest, gusts 2.3, humidity 82%, cloud 69%, pressure 1002 hPa, sunrise 07:08 and sunset 18:04', caption: 'The app with its controls hidden and the data panel at 2x: a peony on live weather in Los Angeles, at nine in the evening.' } as Still,
   og: { src: '/img/og/has-flora.jpg', alt: 'HAS Flora: a pink lily on a 4 x 4 video wall in a dark gallery, two visitors watching' },
 };
 

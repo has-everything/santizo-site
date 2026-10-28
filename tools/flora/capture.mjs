@@ -19,7 +19,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true, args:
 
 // One shot: a w x h viewport at scale s. `mode` is the app's own: 'bare' hides both panels (H),
 // 'solo' only the controls (Shift-H), '' shows both. `state` is merged into window.flora.state.
-async function shot(name, { w, h, s = 1.5, species, seed, place, mode = 'bare', state = {}, wait = 6000 }) {
+async function shot(name, { w, h, s = 1.5, species, seed, place, mode = 'bare', state = {}, keys = [], wait = 6000 }) {
   if (only && !name.startsWith(only)) return;
   const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: s });
   const page = await ctx.newPage();
@@ -28,6 +28,7 @@ async function shot(name, { w, h, s = 1.5, species, seed, place, mode = 'bare', 
   await page.goto(`file://${app}?${q}`, { waitUntil: 'load' });
   await page.evaluate(({ mode, state }) => { if (mode) document.body.classList.add(mode); Object.assign(window.flora.state, state); }, { mode, state });
   if (place) await page.waitForFunction(() => window.flora.state.weather, null, { timeout: 15000 });
+  for (const k of keys) await page.keyboard.press(k);   // the app's own shortcuts, e.g. T for the data panel's size
   await page.waitForTimeout(wait);
   await page.screenshot({ path: `${out}/${name}.png` });
   const wx = await page.evaluate(() => window.flora.state.weather);
@@ -49,8 +50,8 @@ await shot('bloom-open', { w: 680, h: 680, s: 2, species: 'lily', seed: 1234, st
 for (const [sp, seed] of [['poppy', 777], ['lily', 1234], ['sunflower', 1234], ['orchid', 1234], ['cosmos', 777], ['peony', 1234]]) {
   await shot(`sp-${sp}-${seed}`, { w: 534, h: 450, species: sp, seed, state: { auto: false, bloom: 1 } });
 }
-// Fig. 07: the app as it opens, both panels showing, on live weather in Los Angeles, caught at the
-// top of its own 24 s bloom cycle (fully open 12 s after the flower is made)
-await shot('app', { w: 1600, h: 900, species: 'peony', seed: 1234, place: 'Los Angeles, California', mode: '', wait: 11200 });
+// Fig. 07: the data panel on its own (Shift-H hides the controls) at 2x (T), on live weather in Los
+// Angeles, the peony caught at the top of its own 24 s bloom cycle (fully open 12 s after it is made)
+await shot('app', { w: 1600, h: 900, species: 'peony', seed: 1234, place: 'Los Angeles, California', mode: 'solo', keys: ['t'], wait: 11000 });
 
 await browser.close();
