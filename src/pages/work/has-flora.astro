@@ -1,15 +1,16 @@
 ---
 // HAS Flora: a one-off work page (see `flora` in src/data/work.ts), built like
-// HAS Records', with a looping cut of the owner's Unreal gallery clip instead of
-// a Vimeo player (no film on Vimeo yet), the role first in the specs, the case
-// study, the figures, six "What it does" cards and three related pages.
+// HAS Records', but its video, the owner's Unreal gallery clip, is a file served
+// from this site (a muted loop with a Sound on button: VideoPlayer's `sound`)
+// instead of a Vimeo player; the role first in the specs, the case study, the
+// figures, six "What it does" cards and three related pages.
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Section from '../../components/Section.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import NumberedGrid from '../../components/NumberedGrid.astro';
-import Media from '../../components/Media.astro';
+import VideoPlayer from '../../components/VideoPlayer.astro';
 import SpecList from '../../components/project/SpecList.astro';
 import Figure from '../../components/project/Figure.astro';
 import Related from '../../components/project/Related.astro';
@@ -55,7 +56,7 @@ const schema = [
   </div>
 
   <section aria-label="Video" class="screen">
-    <div class="fit"><div class="film"><Media media={p.film} title={p.title} zoom={false} lazy={false} /></div></div>
+    <div class="fit"><VideoPlayer video={p.film} title={p.title} sound /></div>
   </section>
 
   <Section label="Overview" space="sm">
@@ -123,11 +124,10 @@ const schema = [
 </Base>
 
 <style>
-  /* As on the other work pages: the film edge to edge on a band in the page's
+  /* As on the other work pages: the video edge to edge on a band in the page's
      color, sized to fit on screen under the top bar and the crumbs */
   .screen { background: var(--bg); }
   .fit { margin: 0 auto; width: min(100%, calc((100vh - 168px) * 16 / 9)); width: min(100%, calc((100svh - 168px) * 16 / 9)); }
-  .film { position: relative; aspect-ratio: 16 / 9; background: #000000; overflow: hidden; }
   .crumbs { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 24px var(--gutter) 16px; }
 
   .overview { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px 24px; }

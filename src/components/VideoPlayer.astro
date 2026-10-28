@@ -1,23 +1,32 @@
 ---
 // A watchable video (with sound and controls) for project pages. The visitor
 // presses play inside the player, which every browser allows with sound.
-// `sound` (Vimeo only) is for a video whose Vimeo settings autoplay it muted
-// (HAS Records): it hides Vimeo's own controls and adds a Sound on / Sound off
-// button over the player, styled like the home page's Play reel.
+// `sound` is for a video that autoplays muted: it adds a Sound on / Sound off
+// button over the player, styled like the home page's Play reel. On Vimeo
+// (HAS Records, whose Vimeo settings autoplay it muted) it also hides Vimeo's
+// own controls. A file served from this site (`{ file, poster }`, HAS Flora)
+// plays as a muted loop with no controls of its own.
 // src/scripts/sound.ts drives it; without JavaScript the button stays hidden,
-// and on iPhones and iPads it gives the player Vimeo's controls back.
+// and on iPhones and iPads a Vimeo player gets Vimeo's controls back.
 import type { Video } from '../data/work';
 
-interface Props { video: Video; title: string; sound?: boolean }
+/** A video file served from this site, e.g. `/video/has-flora.mp4` */
+export type FileVideo = { file: string; poster?: string };
+
+interface Props { video: Video | FileVideo; title: string; sound?: boolean }
 const { video, title, sound = false } = Astro.props;
 
 const src = 'vimeo' in video
   ? `https://player.vimeo.com/video/${video.vimeo}?title=0&byline=0&portrait=0&dnt=1&color=ff4f12`
-  : `https://www.youtube-nocookie.com/embed/${video.youtube}?rel=0&modestbranding=1&playsinline=1`;
-const withSound = sound && 'vimeo' in video;
+  : 'youtube' in video ? `https://www.youtube-nocookie.com/embed/${video.youtube}?rel=0&modestbranding=1&playsinline=1` : '';
+const withSound = sound && !('youtube' in video);
 ---
 <div class="player" data-sound={withSound ? '' : undefined}>
-  <iframe src={withSound ? `${src}&controls=0` : src} title={title} allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  {'file' in video ? (
+    <video src={video.file} poster={video.poster} autoplay muted loop playsinline preload="auto" aria-label={title}></video>
+  ) : (
+    <iframe src={withSound ? `${src}&controls=0` : src} title={title} allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  )}
   {withSound && (
     <>
       <div class="shade" aria-hidden="true" hidden></div>
@@ -38,7 +47,8 @@ const withSound = sound && 'vimeo' in video;
 
 <style>
   .player { position: relative; aspect-ratio: 16 / 9; background: #000000; }
-  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  iframe, video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  video { object-fit: cover; }
 
   /* Sound on / Sound off: the Play reel button (orange dot, white label) on a
      shade like the reel's bottom bar. The icon shows what a click does. */

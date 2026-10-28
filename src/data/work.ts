@@ -429,9 +429,9 @@ export const recordsTile: WorkItem = {
 // a flower grown in code from a species and a seed, moved by the live wind of any
 // place (Open-Meteo) through a physical stem, beside a data panel with that place's
 // time and weather. He built two Unreal Engine rooms to stage it: a gallery with a
-// 4 x 4 video wall and a desk with one monitor. No Vimeo film yet, so the page
-// loops a self-hosted cut of the gallery clip (no sound) and the tile an 8 s cut of
-// the desk clip. The stills in public/img/work/has-flora/ are the app's own output
+// 4 x 4 video wall and a desk with one monitor. The page plays the gallery clip
+// from this site, a muted loop with a Sound on button (it starts faster than a
+// Vimeo player would), and the tile an 8 s cut of the desk clip. The stills in public/img/work/has-flora/ are the app's own output
 // (wind, closed, open, flowers, app; tools/flora/capture.mjs) and frames of his two
 // clips (gallery, desk). Owner's calls (Oct 2026): not on the home page, and the
 // page never says it was made with AI. Copy is a draft written from the app, for
@@ -447,7 +447,8 @@ export const flora = {
   group: 'interactive' as const,
   year: '2026',
   tagline: 'A flower that moves with the live wind, anywhere on earth.',
-  film: { video: '/video/has-flora.mp4', poster: '/img/work/has-flora/poster.webp' },
+  // The gallery clip, with its sound, played by VideoPlayer with a Sound on button
+  film: { file: '/video/has-flora.mp4', poster: '/img/work/has-flora/poster.webp' },
   tile: loop('has-flora'),
   story: [
     { title: 'Vision', paras: [
