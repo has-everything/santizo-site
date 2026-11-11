@@ -75,12 +75,14 @@ export const projects: Project[] = [
     ],
   },
   { slug: 'star-trails', title: 'Star trails', blurb: 'Concept, art and animation', tag: 'Animation', focus: ['Concept', 'Art', 'Animation'], group: 'motion', video: { vimeo: '269102770' }, tile: loop('star-trails') },
+  // Rendered films only. Evidence of Existence stays here: it is a 74 s 360 film,
+  // not something you control (the XR group is working prototypes).
   { slug: 'evidence-of-existence', title: 'Evidence of Existence', blurb: '360 VR with particles', tag: '360 VR', focus: ['360 VR', 'Particles'], group: 'motion', video: { vimeo: '207575582' }, tile: loop('evidence-of-existence') },
-  { slug: 'visual-alternatives', title: 'Visual Alternatives', blurb: 'Audio-visual, in Unity', tag: 'Unity', focus: ['Audio-visual', 'Unity'], group: 'motion', video: { youtube: 'FrM8C7vHTow' } },
-  { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'motion', video: { vimeo: '548921641' }, tile: loop('real-time-interactive-app') },
-  { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'motion', video: { vimeo: '1056096066' }, tile: loop('roboto') },
-  // Interactive and real-time (with the one-off pages HAS Toyline, HAS Records
-  // and HAS Space, spliced in around it by work/index.astro)
+  // Interactive and real-time. The first one here is Van Gogh · The Bedroom:
+  // work/index.astro puts the one-off pages around it (HAS Toyline, HAS Records
+  // and HAS Flora before, HAS Space after), then the rest of this group, the
+  // earlier Unity pieces (in Motion and animation until Nov 2026, though each
+  // runs live in Unity).
   {
     slug: 'van-gogh-the-bedroom', title: 'Van Gogh · The Bedroom', blurb: 'Interactive, in Unreal Engine', tag: 'Unreal Engine', focus: ['Unreal Engine', 'Interactive'], group: 'interactive', video: { vimeo: '1230984635' }, tile: loop('van-gogh-the-bedroom'),
     // The owner's own write-up (Oct 2026)
@@ -104,6 +106,9 @@ export const projects: Project[] = [
       ] },
     ],
   },
+  { slug: 'visual-alternatives', title: 'Visual Alternatives', blurb: 'Audio-visual, in Unity', tag: 'Unity', focus: ['Audio-visual', 'Unity'], group: 'interactive', video: { youtube: 'FrM8C7vHTow' } },
+  { slug: 'real-time-interactive-app', title: 'Real-time interactive app', blurb: 'Unity, running live', tag: 'Unity', focus: ['Unity', 'Real-time'], group: 'interactive', video: { vimeo: '548921641' }, tile: loop('real-time-interactive-app') },
+  { slug: 'roboto', title: 'Roboto', blurb: 'Plasticity, Unity and C#', tag: 'Plasticity · Unity', focus: ['Plasticity', 'Unity', 'C#'], group: 'interactive', video: { vimeo: '1056096066' }, tile: loop('roboto') },
   // XR and interaction
   {
     slug: 'has-photo-booth', title: 'HAS Photo Booth', blurb: 'MediaPipe, in the browser', focus: ['MediaPipe', 'Browser'], group: 'xr', video: { youtube: '1L2anMG2k-8' },

@@ -13,8 +13,10 @@ import { projects, groups, tile, toylineTile, spaceTile, recordsTile, floraTile,
 import { abs, author, breadcrumbs } from '../../lib/seo';
 
 const motion = projects.filter((p) => p.group === 'motion').map((p) => tile(p));
-// HAS Toyline, HAS Records, HAS Flora and HAS Space have their own pages (no Vimeo film), so their tiles are added here, around Van Gogh · The Bedroom
-const interactive = [toylineTile, recordsTile, floraTile, ...projects.filter((p) => p.group === 'interactive').map((p) => tile(p)), spaceTile];
+// HAS Toyline, HAS Records, HAS Flora and HAS Space have their own pages (no entry in `projects`), so their tiles are
+// added here, around the group's first project, Van Gogh · The Bedroom. The rest of the group (the earlier Unity pieces) follows.
+const [first, ...rest] = projects.filter((p) => p.group === 'interactive').map((p) => tile(p));
+const interactive = [toylineTile, recordsTile, floraTile, first, spaceTile, ...rest];
 const xr = projects.filter((p) => p.group === 'xr');
 const count = (n: number) => String(n).padStart(2, '0');
 
@@ -29,7 +31,7 @@ const schema = [
 
   <Section label="Work" space="sm">
     <h1>Work</h1>
-    <p class="lead">Motion, real-time and XR. Every piece plays right here, with sound.</p>
+    <p class="lead">Motion, real-time and XR. Every piece has its own page.</p>
   </Section>
 
   <Section id="motion" label={groups.motion.label} space="md">

@@ -4,7 +4,9 @@
 export const site = {
   name: 'Santizo',
   person: 'Hector Augusto Santizo',
-  title: 'Santizo · Hector Augusto Santizo',
+  // The home page's title: the browser tab, search results and link previews
+  // (other pages are "<Page> · Santizo"). The name once, then what he does.
+  title: 'Hector Augusto Santizo · Creative Technologist, 3D & Motion',
   // Home page description in search results and link previews (other pages set their own)
   description: 'Hector Augusto Santizo, creative technologist in Los Angeles: creative direction, 3D animations that explain products, real-time and XR work, and free creative tools.',
   // Footer line and structured data (Oct 2026: creative technologist first,
