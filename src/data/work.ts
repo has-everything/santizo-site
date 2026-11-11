@@ -227,7 +227,13 @@ export const toyline = {
   group: 'interactive' as const,
   year: '2026',
   tagline: 'Watch a car get built, and see what it costs.',
-  film: { video: '/video/has-toyline.mp4', poster: '/img/work/has-toyline/poster.webp' },
+  // The film at the top of the page: a 59 s demo of the app in use, with its interface, a cursor
+  // and captions (order a Van, the line builds it, the money, the truck, a month). Made by
+  // tools/capture-demo.mjs in the HAS Toyline project, re-encoded for the web (1920x1080, 7.5 MB).
+  // Since Nov 2026; before that, a clean 33 s capture of one car on the line.
+  film: { video: '/video/has-toyline-demo.mp4', poster: '/img/work/has-toyline/demo-poster.webp' },
+  // A clean still of the factory (a frame of the earlier film), for the Related tiles
+  still: '/img/work/has-toyline/poster.webp',
   story: [
     { title: 'Vision', paras: [
       'I wanted to build a working assembly line in 3D. And why not watch a car get made?',
@@ -276,9 +282,11 @@ export const toyline = {
   og: { src: '/img/og/has-toyline.jpg', alt: 'HAS Toyline: a red wooden coupe boxed in a HAS Wheels carton' },
 };
 
-/** HAS Toyline as a tile (the /work grid). Not the 10 MB film, which starts
- * downloading as soon as /work opens: an 8 s cut of it at 1280 px (1.5 MB), from
- * 8 s in, where the bare birch car is painted, printed and gets its wheels. */
+/** HAS Toyline as a tile (the /work grid). Not the page's film, which would start
+ * downloading as soon as /work opens: an 8 s cut of the earlier, clean film at
+ * 1280 px (1.5 MB), where the bare birch car is painted, printed and gets its
+ * wheels. It stays the tile: the demo film has the interface and a caption band,
+ * which do not read at tile size. */
 export const toylineTile: WorkItem = {
   title: toyline.title,
   blurb: toyline.blurb,

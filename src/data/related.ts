@@ -10,7 +10,7 @@ import { tools } from './apps';
 // 10 MB capture, so a page doesn't download it just for the last row.
 const tiles = new Map<string, WorkItem>([
   ...projects.map((p) => tile(p, { withTag: false })).map((t) => [t.href, t] as const),
-  [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.film.poster } }],
+  [toylineTile.href, { ...toylineTile, tag: undefined, media: { img: toyline.still } }],
   [recordsTile.href, { ...recordsTile, tag: undefined }],
   [floraTile.href, { ...floraTile, tag: undefined }],
   ...tools.map((t) => [t.href, { ...t, tag: undefined, note: undefined }] as const),
