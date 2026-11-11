@@ -11,6 +11,7 @@ import SectionHead from '../../components/SectionHead.astro';
 import NumberedGrid from '../../components/NumberedGrid.astro';
 import Media from '../../components/Media.astro';
 import SpecList from '../../components/project/SpecList.astro';
+import PillLink from '../../components/project/PillLink.astro';
 import Figure from '../../components/project/Figure.astro';
 import Related from '../../components/project/Related.astro';
 import Story from '../../components/project/Story.astro';
@@ -62,6 +63,11 @@ const schema = [
       <div class="name">
         <h1>{p.title}</h1>
         <p class="muted">{p.tagline}</p>
+        {/* The app itself, at /toyline on this site: the two halves of the tagline, as on the app pages' buttons */}
+        <div class="ctas">
+          <PillLink href={p.app.build}>Build a car →</PillLink>
+          <PillLink href={p.app.course} variant="outline">Take the course →</PillLink>
+        </div>
       </div>
       <div class="facts">
         <SpecList specs={specs} />
@@ -133,6 +139,7 @@ const schema = [
   .name { flex: 3 1 520px; min-width: 0; }
   h1 { margin: 0; font-size: clamp(44px, 6.4vw, 104px); line-height: .95; letter-spacing: -0.045em; font-weight: 500; }
   .name p { margin: 16px 0 0; font-size: clamp(22px, 2.4vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
   .facts { flex: 2 1 340px; min-width: 0; }
 
   .pair { display: flex; flex-wrap: wrap; gap: 48px var(--tile-gap); }

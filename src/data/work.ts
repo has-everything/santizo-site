@@ -204,7 +204,8 @@ export const xrIntro = {
 
 // A one-off page, not in `projects`: there is no Vimeo or YouTube film yet, so
 // the page loops a self-hosted capture of the app and adds stills. When the
-// film is on Vimeo it can join `projects` like the others.
+// film is on Vimeo it can join `projects` like the others. Since Nov 2026 the
+// app itself is public, at /toyline on this site, and the page links to it.
 // Copy (Oct 2026): the owner's why, in his words (build a working line and watch
 // a car get made; then ask if it could teach cost and profit; a factory is a
 // spreadsheet you can see), shaped into the site's voice. DRAFT for him to edit;
@@ -217,7 +218,11 @@ export const toyline = {
   blurb: 'A 3D assembly line, in three.js',
   tag: 'three.js · Interactive',
   role: 'Concept, Creative Direction, 3D Design, Development',
-  status: 'In development, not public yet',
+  status: 'In development, open to try',
+  // The app itself, served by this site at /toyline (a copy in public/toyline, made by
+  // tools/toyline/sync.mjs). `build` opens its Order tab with the camera on the car, the
+  // short way in for a visitor; `course` opens it on the lessons.
+  app: { build: '/toyline/#order', course: '/toyline/' },
   focus: ['three.js', 'Real-time 3D', 'Interactive'],
   group: 'interactive' as const,
   year: '2026',
@@ -242,7 +247,7 @@ export const toyline = {
     ] },
     { title: 'Outcome', paras: [
       'One factory, three tabs.',
-      'Order, where you spec a car and watch the line build it; Lesson, 15 short lessons and 3 challenges in what a toy costs to make and sell; and Ledger, a month you can run to watch the bank. It runs in the browser. Not public yet.',
+      'Order, where you spec a car and watch the line build it; Lesson, 15 short lessons and 3 challenges in what a toy costs to make and sell; and Ledger, a month you can run to watch the bank. It runs in the browser, and you can open it from this page.',
     ] },
   ] as StoryBlock[],
   // Six cards, like "What it does" on the app pages
