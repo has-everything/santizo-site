@@ -3378,11 +3378,11 @@ document.querySelectorAll('#speeds button').forEach(b => b.onclick = () => {
 // keyboard: Space plays and pauses the line (back to the speed it had), F follows a car (again: back to the overview),
 // H hides every control so the factory fills the window
 let lastSpeed = 1, scrollKeep = 0;
-function toast(html) {
+function toast(html, ms = 1500) { // ms: how long it stays (a first-visit hint needs longer than a status note)
   const t = $('#toast'), hud = $('.hud-top');
   t.style.top = (hud.offsetParent ? hud.offsetTop + hud.offsetHeight + 10 : 16) + 'px'; // under the chips, however many rows they wrap to
   t.innerHTML = html; t.classList.add('on'); clearTimeout(toast.h);
-  toast.h = setTimeout(() => { t.classList.remove('on'); toast.h = setTimeout(() => { t.textContent = ''; }, 300); }, 1500); // faded notes leave the status region
+  toast.h = setTimeout(() => { t.classList.remove('on'); toast.h = setTimeout(() => { t.textContent = ''; }, 300); }, ms); // faded notes leave the status region
 }
 // the shortcuts never take a key from a focused control: Space presses the focused button, switch or summary, and
 // letters type into fields. They work when focus is on the page itself (body, canvas, stage, a heading focused by a
@@ -3578,6 +3578,10 @@ const BOOT_FIRST = order(cfg);
   booted = true; engineReady = true;
   for (const fn of pending.splice(0)) { try { fn(); } catch (e) { console.error('[engine] deferred call failed:', e); } }
   requestAnimationFrame(frame);
+  // Phones: the corner hint (#hint) is hidden from 820 px down, where it would sit on the car card. So the two
+  // gestures a finger has are said once, now that the scene is up, where toasts show and long enough to read.
+  // Any later toast simply replaces it.
+  if (matchMedia('(max-width: 820px)').matches) toast('Drag to look around · tap a car to inspect', 6000);
 })();
 
 /* ---------- engine API (docs/CONTRACTS.md) ---------- */
@@ -3687,7 +3691,7 @@ export const engine = {
   // a station picked somewhere other than the strip or the scene (a 3D tag, a lesson list): tell every listener
   tapStation(i, source = 'api') { emitE('stationTap', { station: clamp(i | 0, 0, 6), source }); },
   setBank(v) { bankValue = v === null || v === undefined || !Number.isFinite(+v) ? null : +v; dirty.hud = true; },
-  toast(html) { toast(html); },
+  toast(html, ms) { toast(html, ms); },
   note(text) { note(text); },
   // not in the contract: for scripted checks and the integrator's debugging only
   get __debug() { return { THREE, scene, camera, controls, ST, line, queue, lot, CRATE, rings, refreshHmi, stdCost }; }
