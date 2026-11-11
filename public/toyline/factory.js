@@ -2262,6 +2262,26 @@ function brandMark(x, X, Y, s, ink = '#F4F3EF') {
   x.font = `850 ${Math.round(s)}px Archivo, "Arial Black", sans-serif`; x.fillStyle = ink; x.fillText('Wheels', X + w + s * .16, Y + s * .04);
   const end = X + w + s * .16 + x.measureText('Wheels').width; x.restore(); return end;
 }
+// The HAS logo: the H, A and S of the HAS wordmark, as outlines (the first three paths of has.tools'
+// HAS_Tools_Logo_Black.svg). Drawn as paths, like everything else here, so no image file is loaded. In path units the
+// H stands from y 1.1 to y 50 and the three letters are 164.8 wide.
+const HAS_LOGO = { w: 164.8, top: 1.1, foot: 50, d: [
+  'M47.8,42.4h6.1v7.6h-21v-7.6h6.2v-12.5H14.8v12.5h6.1v7.6H0v-7.6h6.2V8.7H0V1.1h21v7.6h-6.1v13.5h24.3v-13.5h-6.2V1.1h21v7.6h-6.1v33.7Z',
+  'M116.9,50h-21.8v-7.6h7.2l-3.3-7.3h-21.6l-3.2,7.3h6.6v7.6h-20.6v-7.6h4.8l15.7-33.7h-7.2V1.1h18.9l19.1,41.3h5.5v7.6ZM88.1,11.4l-7.4,16.4h14.9l-7.5-16.4Z',
+  'M149.5,22.3c9.6,1.6,15.3,6,15.3,14.2s-6.8,14.5-17.9,14.5-12.4-2.4-15.7-6.1v5.1h-8.1v-16h8.1c4.1,5.8,7.6,9.1,15.6,9.1s9.1-2.4,9.1-6.2-1.8-5.7-7.7-6.6l-9.4-1.6c-9.8-1.5-14.5-6.6-14.5-14s6.8-14.8,18-14.8,11.1,1.7,14.4,5.3V1.1h7.4v14.5h-7.9c-2.4-4.3-6.1-8.1-13.5-8.1s-9.4,2.6-9.4,6.8,3,5.8,8.6,6.8l7.6,1.2Z'] };
+// "HAS" as the logo, then a word in Archivo on the same baseline and at the same cap height: X is the left edge, Y the
+// middle of the word's em. Returns the right edge. (brandMark, above, is the yellow HAS chip the cartons print.)
+function logoMark(x, X, Y, s, word, ink = '#1D2126') {
+  x.save(); x.textBaseline = 'middle'; x.textAlign = 'left';
+  x.font = `850 ${Math.round(s)}px Archivo, "Arial Black", sans-serif`;
+  const m = x.measureText('H'), capTop = Y - m.actualBoundingBoxAscent, foot = Y + m.actualBoundingBoxDescent, cap = foot - capTop;
+  const k = cap / (HAS_LOGO.foot - HAS_LOGO.top);
+  x.fillStyle = ink;
+  x.save(); x.translate(X, foot - HAS_LOGO.foot * k); x.scale(k, k); for (const d of HAS_LOGO.d) x.fill(new Path2D(d)); x.restore();
+  const wx = X + HAS_LOGO.w * k + cap * .34;
+  x.fillText(word, wx, Y);
+  const end = wx + x.measureText(word).width; x.restore(); return end;
+}
 function barcode(x, X, Y, w, h, seed) {
   let r = seed * 9301 + 49297;
   x.fillStyle = '#FFFFFF'; x.fillRect(X - 6, Y - 6, w + 12, h + 22); x.fillStyle = '#15181B';
@@ -2451,14 +2471,21 @@ function buildTruck() {
   const lining = new THREE.MeshStandardMaterial({ color: '#3A4047', roughness: .8 });
   const glass = new THREE.MeshPhysicalMaterial({ color: '#1A222B', roughness: .08, metalness: .2, clearcoat: 1 });
   const amber = new THREE.MeshStandardMaterial({ color: '#F2A71B', emissive: '#F2A71B', emissiveIntensity: .35, roughness: .3 });
-  // livery: HAS Wheels mark and three toy-car silhouettes over the yellow band
+  // livery: the HAS logo and "Wheels", and three toy-car silhouettes over the yellow band
   const lc = document.createElement('canvas'); lc.width = 2048; lc.height = 800;
   const x = lc.getContext('2d'), cw = lc.width, ch = lc.height;
   x.fillStyle = '#F1F2F2'; x.fillRect(0, 0, cw, ch);
   x.fillStyle = '#E9B100'; x.fillRect(0, ch - 120, cw, 70); x.fillStyle = '#1D2126'; x.fillRect(0, ch - 50, cw, 50);
-  brandMark(x, 420, 260, 190, '#1D2126');
-  [['coupe', '#D7322B', 1180], ['van', '#1E7F86', 1540], ['racer', '#E8B53A', 1850]].forEach(([k, col, ox]) => {
-    const G = bodyGeo(k), sc = 70, base = ch - 150, def = BODIES[k];
+  logoMark(x, 400, 260, 176, 'Wheels');
+  // the three cars are evenly spaced: the outer two keep their places and the middle one sits so the gap on each side of
+  // it is the same (the bodies differ in length, so equal centres crowded the long van against the racer)
+  const sc = 70, base = ch - 150;
+  const fleet = [['coupe', '#D7322B', 1180], ['van', '#1E7F86', 0], ['racer', '#E8B53A', 1850]].map(([k, col, ox]) => {
+    const G = bodyGeo(k), xs = G.poly.map(p => p.x); return { k, col, ox, G, lo: Math.min(...xs), hi: Math.max(...xs) };
+  });
+  fleet[1].ox = (fleet[0].ox + fleet[2].ox + (fleet[0].hi + fleet[2].lo - fleet[1].lo - fleet[1].hi) * sc) / 2;
+  fleet.forEach(({ k, col, ox, G }) => {
+    const def = BODIES[k];
     x.fillStyle = col; x.beginPath(); G.poly.forEach((p, i) => { const X = ox + p.x * sc, Y = base - p.y * sc; i ? x.lineTo(X, Y) : x.moveTo(X, Y); }); x.closePath(); x.fill();
     for (const wx of def.wheels) { x.fillStyle = '#1D2126'; x.beginPath(); x.arc(ox + wx * sc, base - WCY * sc, WR * sc, 0, 7); x.fill(); x.fillStyle = '#E1BF8F'; x.beginPath(); x.arc(ox + wx * sc, base - WCY * sc, WR * sc * .55, 0, 7); x.fill(); }
   });
